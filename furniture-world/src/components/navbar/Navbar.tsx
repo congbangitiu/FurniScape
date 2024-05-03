@@ -31,15 +31,19 @@ export const Navbar = (props: Props) => {
     const ButtonMenu = [
         {
             label: 'user',
-            icons: <UserOutlined />,
+            icons: <UserOutlined style={{ fontSize: '18px' }} />,
         },
         {
             label: 'search',
-            icons: <SearchOutlined />,
+            icons: <SearchOutlined style={{ fontSize: '18px' }} />,
         },
         {
             label: 'cart',
-            icons: <ShoppingCartOutlined />,
+            icons: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
+        },
+        {
+            label: 'logout',
+            icons: <LoginOutlined style={{ fontSize: '18px' }} />,
         },
     ];
 
@@ -53,14 +57,14 @@ export const Navbar = (props: Props) => {
     };
 
     return (
-        <Row gutter={16} style={{paddingTop: '4px'}} >
-            <Col className="navbar_logo" span={6}>
+        <Row gutter={16} style={{ paddingTop: '4px' }}>
+            <Col className="navbar_logo" span={4}>
                 <Link to="/">
                     <img src={assets.logo} alt="logo" width={180} style={{ marginLeft: '20px' }} />
                 </Link>
             </Col>
 
-            <Col className="navbar_navigation" span={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Col className="navbar_navigation" span={14} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Menu
                     style={{ fontSize: '16px', fontWeight: '600' }}
                     theme="light"
@@ -71,13 +75,16 @@ export const Navbar = (props: Props) => {
                 />
             </Col>
 
-            <Col className="navbar_button" span={6} style={{ display: 'flex', justifyContent: 'flex-end' , paddingRight: '20px'}}>
+            <Col
+                className="navbar_button"
+                span={6}
+                style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '20px' }}
+            >
                 <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                     <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
-                        <Button type="text" icon={<UserOutlined style={{ fontSize: '18px' }} />} size="large" />
-                        <Button type="text" icon={<SearchOutlined style={{ fontSize: '18px' }} />} size="large" />
-                        <Button type="text" icon={<ShoppingCartOutlined style={{ fontSize: '18px' }} />} size="large" />
-                        <Button type="text" icon={<LoginOutlined style={{ fontSize: '18px' }} />} size="large" />
+                        {ButtonMenu.map((button) => (
+                            <Button type="text" icon={button.icons} size="large" />
+                        ))}
                     </ConfigProvider>
                 </Flex>
 
