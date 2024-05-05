@@ -1,7 +1,9 @@
-import React from 'react';
+import { useState } from 'react';
+import { Image, Button, Row, theme } from 'antd';
 
-type Props = {};
 
-export const ShopPage = (props: Props) => {
-    return <div>Products Page</div>;
+export const ShopPage = () => {
+    return (
+        <section></section>
+    )
 };
