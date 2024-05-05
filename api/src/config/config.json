@@ -1,13 +1,12 @@
 {
   "development": {
-    "username": "sa",
-    "password": "123456",
-    "database": "CV_builder",
+    "username": "root",
+    "password": "1234",
+    "database": "furniscape",
 
+    "host": "localhost",
 
-    "host": "LAPTOP-9PG59IPR",
-
-    "dialect": "mssql",
+    "dialect": "mysql",
     "logging": false
   },
   "test": {

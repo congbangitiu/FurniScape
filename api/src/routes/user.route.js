@@ -1,7 +1,6 @@
 const express = require(`express`);
 const { test, updateUser, getUser } = require("../controllers/user.controller");
 const { verifyToken } = require("../utils/verifyToken");
-const { CV_tmpltDTB } = require("../middlewares/multerConfig");
 const router = express.Router();
 
 router.get("/test", test);
