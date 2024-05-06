@@ -4,19 +4,10 @@ const errorHandler = require("../utils/error");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
-function getSurname(fullname) {
-  // first word is surname for vietnamese name
-  return fullname.split(" ")[0];
-}
-
-function getFirstname(fullname) {
-  // last word is firstname for vietnamese name
-  return fullname.split(" ").slice(-1)[0];
-}
 
 const signup = async (req, res, next) => {
   try {
-    const { email, username, fullname, phone, password, role } = req.body;
+    const { email, username, fullname, phone, password, address, role } = req.body;
     // console.log(req.body);
     const hashPassword = bcryptjs.hashSync(password, 10);
     //console.log(email, username, password, role);
@@ -24,12 +15,11 @@ const signup = async (req, res, next) => {
       where: { email },
       defaults: { 
         name: username,
-        fullname: fullname,
-        firstname: getFirstname(fullname),
-        surname: getSurname(fullname),
+        fullname: fullname || username,
         phone: phone,
         password: hashPassword, 
-        role: role,
+        address: address,
+        role: role || "user",
       },
     });
     if (created) {
