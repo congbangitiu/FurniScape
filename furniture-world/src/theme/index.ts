@@ -4,6 +4,7 @@ export const customColors = {
     colorRedBadge: '#E97171',
     colorGreenBadgeColor: '#2EC1AC',
     colorOverlay: '#3A3A3A',
+    lightGrayColor: '#9F9F9F',
 };
 
 export const theme: ThemeConfig = {

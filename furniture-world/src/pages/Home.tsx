@@ -5,7 +5,7 @@ import Dining from '../assets/images/Dining.png';
 import Living from '../assets/images/Living.png';
 import Bedroom from '../assets/images/Bedroom.png';
 import Syltherine from '../assets/images/Syltherine.png';
-import { customColors } from './../theme/index ';
+import { customColors } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCodeCompare } from '@fortawesome/free-solid-svg-icons';
