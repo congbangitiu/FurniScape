@@ -15,7 +15,6 @@ const { TextArea } = Input;
 
 export const ContactPage = () => {
     const { token } = theme.useToken();
-   
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
@@ -52,7 +51,7 @@ export const ContactPage = () => {
                         fontSize: '16px',
                         fontWeight: '400',
                         margin: '10px 0 0 0',
-                        color: token.colorQuaternaryText,
+                        color: customColors.colorQuaternaryText,
                     }}
                 >
                     For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff
@@ -241,7 +240,7 @@ export const ContactPage = () => {
                                     style={{
                                         width: '200px',
                                         height: '50px',
-                                        border: `1px solid ${token.colorQuaternaryText}`,
+                                        border: `1px solid ${customColors.colorQuaternaryText}`,
                                         fontSize: '16px',
                                         fontWeight: '500',
                                     }}

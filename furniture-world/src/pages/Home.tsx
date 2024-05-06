@@ -187,7 +187,7 @@ export const HomePage = () => {
                     style={{
                         fontSize: '32px',
                         fontWeight: '700',
-                        color: token.colorTertiaryText,
+                        color: customColors.colorTertiaryText,
                         margin: '0',
                     }}
                 >
@@ -197,7 +197,7 @@ export const HomePage = () => {
                     style={{
                         fontSize: '20px',
                         fontWeight: '400',
-                        color: token.colorQuaternaryText,
+                        color: customColors.colorQuaternaryText,
                         margin: '0',
                     }}
                 >
@@ -267,7 +267,7 @@ export const HomePage = () => {
                     style={{
                         fontSize: '40px',
                         fontWeight: '700',
-                        color: token.colorTertiaryText,
+                        color: customColors.colorTertiaryText,
                         marginTop: '20px',
                     }}
                 >
@@ -332,7 +332,7 @@ export const HomePage = () => {
                                         style={{
                                             fontSize: '16px',
                                             fontWeight: '500',
-                                            color: token.colorQuaternaryText,
+                                            color: customColors.colorQuaternaryText,
                                             margin: '0',
                                         }}
                                     >
@@ -344,7 +344,7 @@ export const HomePage = () => {
                                             style={{
                                                 fontSize: '16px',
                                                 fontWeight: '400',
-                                                color: token.colorQuaternaryText,
+                                                color: customColors.colorQuaternaryText,
                                                 textDecoration: 'line-through',
                                             }}
                                         >
@@ -454,7 +454,14 @@ export const HomePage = () => {
                 </Button>
             </Flex>
             <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '70px' }}>
-                <Text style={{ fontSize: '20px', fontWeight: '600', margin: '0', color: token.colorQuaternaryText }}>
+                <Text
+                    style={{
+                        fontSize: '20px',
+                        fontWeight: '600',
+                        margin: '0',
+                        color: customColors.colorQuaternaryText,
+                    }}
+                >
                     Share your setup with
                 </Text>
                 <Text style={{ fontSize: '40px', fontWeight: '700', margin: '0px 0 20px 0' }}>
