@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Button, Row, theme } from 'antd';
+import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import Banner from '../assets/images/Banner.png';
 import Dining from '../assets/images/Dining.png';
 import Living from '../assets/images/Living.png';
@@ -27,18 +27,9 @@ import Image14 from '../assets/images/Image14.png';
 import Image15 from '../assets/images/Image15.png';
 import Image16 from '../assets/images/Image16.png';
 
+const { Text } = Typography;
+
 export const HomePage = () => {
-    const { token } = theme.useToken();
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-    const handleMouseEnter = (index: number) => {
-        setHoveredIndex(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredIndex(null);
-    };
-
     const products = [
         {
             name: 'Syltherine',
@@ -116,14 +107,30 @@ export const HomePage = () => {
         Image15,
         Image16,
     ];
+    const { token } = theme.useToken();
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [hoveredImages, setHoveredImages] = useState<boolean[]>(Array(images.length).fill(false));
+
+    const handleMouseEnter = (index: number) => {
+        setHoveredIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredIndex(null);
+    };
+
+    const setHoveredImage = (index: number, isHovered: boolean) => {
+        setHoveredImages((prev) => prev.map((hovered, i) => (i === index ? isHovered : hovered)));
+    };
 
     return (
-        <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ position: 'relative' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
+            <Flex style={{ position: 'relative' }}>
                 <Image style={{ width: '100vw' }} preview={{ mask: null }} src={Banner} alt="Banner" />
-                <div
+                <Flex
                     style={{
                         position: 'absolute',
+                        flexDirection: 'column',
                         backgroundColor: token.colorBgContainer,
                         width: '500px',
                         right: '100px',
@@ -132,40 +139,51 @@ export const HomePage = () => {
                         padding: '30px 50px',
                     }}
                 >
-                    <h4 style={{ fontSize: '16px', fontWeight: '600', letterSpacing: '3px' }}>New Arrival</h4>
-                    <h1 style={{ fontSize: '52px', fontWeight: '700', lineHeight: '65px', color: token.colorPrimary }}>
+                    <Text style={{ fontSize: '16px', fontWeight: '600', letterSpacing: '3px' }}>New Arrival</Text>
+                    <Text
+                        style={{
+                            fontSize: '52px',
+                            fontWeight: '700',
+                            lineHeight: '65px',
+                            color: token.colorPrimary,
+                            marginTop: '10px',
+                        }}
+                    >
                         Discover Our New Collection
-                    </h1>
-                    <p style={{ fontSize: '18px', fontWeight: '500', lineHeight: '24px' }}>
+                    </Text>
+                    <Text style={{ fontSize: '18px', fontWeight: '500', lineHeight: '24px', marginTop: '10px' }}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
                         mattis.
-                    </p>
+                    </Text>
                     <Button
+                        block
                         style={{
                             backgroundColor: token.colorPrimary,
                             color: '#FFF',
                             fontWeight: '700',
                             fontSize: '16px',
                             display: 'flex',
+                            justifyContent: 'center',
                             alignItems: 'center',
                             padding: '25px 72px',
-                            gap: '10px',
+                            marginTop: '40px',
+                            width: '50%',
                         }}
                     >
                         BUY NOW
                     </Button>
-                </div>
-            </div>
-            <div
+                </Flex>
+            </Flex>
+            <Flex
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    marginTop: '30px',
+                    marginTop: '50px',
                     width: '80%',
                 }}
             >
-                <h4
+                <Text
                     style={{
                         fontSize: '32px',
                         fontWeight: '700',
@@ -174,19 +192,19 @@ export const HomePage = () => {
                     }}
                 >
                     Browse The Range
-                </h4>
-                <p
+                </Text>
+                <Text
                     style={{
                         fontSize: '20px',
                         fontWeight: '400',
                         color: token.colorQuaternaryText,
-                        margin: '10px 0 0 0',
+                        margin: '0',
                     }}
                 >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-                <Row style={{ justifyContent: 'space-around', width: '100%' }}>
-                    <span
+                </Text>
+                <Row style={{ justifyContent: 'space-around', width: '100%', marginTop: '20px' }}>
+                    <Col
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -204,8 +222,8 @@ export const HomePage = () => {
                             }}
                         />
                         <p style={{ fontSize: '24px', fontWeight: '600' }}>Dining</p>
-                    </span>
-                    <span
+                    </Col>
+                    <Col
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -223,8 +241,8 @@ export const HomePage = () => {
                             }}
                         />
                         <p style={{ fontSize: '24px', fontWeight: '600' }}>Living</p>
-                    </span>
-                    <span
+                    </Col>
+                    <Col
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -242,28 +260,36 @@ export const HomePage = () => {
                             }}
                         />
                         <p style={{ fontSize: '24px', fontWeight: '600' }}>Bedroom</p>
-                    </span>
+                    </Col>
                 </Row>
 
-                <h4
+                <Text
                     style={{
                         fontSize: '40px',
                         fontWeight: '700',
                         color: token.colorTertiaryText,
+                        marginTop: '20px',
                     }}
                 >
                     Our Products
-                </h4>
+                </Text>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto auto', gap: '20px' }}>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'auto auto auto auto',
+                        gap: '20px',
+                        marginTop: '20px',
+                    }}
+                >
                     {products.map((product, index) => (
-                        <div
+                        <Flex
                             key={index}
                             style={{ position: 'relative' }}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <div
+                            <Col
                                 style={{
                                     padding: '25px',
                                     borderRadius: '10px',
@@ -279,7 +305,7 @@ export const HomePage = () => {
                                         mask: null,
                                     }}
                                 />
-                                <div
+                                <Col
                                     style={{
                                         position: 'absolute',
                                         top: '10px',
@@ -297,12 +323,12 @@ export const HomePage = () => {
                                     }}
                                 >
                                     -30%
-                                </div>
-                                <div
+                                </Col>
+                                <Col
                                     style={{ display: 'flex', flexDirection: 'column', gap: '5px', marginTop: '15px' }}
                                 >
-                                    <h4 style={{ fontSize: '24px', fontWeight: '600', margin: '0' }}>Syltherine</h4>
-                                    <p
+                                    <Text style={{ fontSize: '24px', fontWeight: '600' }}>Syltherine</Text>
+                                    <Text
                                         style={{
                                             fontSize: '16px',
                                             fontWeight: '500',
@@ -311,29 +337,25 @@ export const HomePage = () => {
                                         }}
                                     >
                                         Stylish cafe chair
-                                    </p>
+                                    </Text>
                                     <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <h4 style={{ fontSize: '20px', fontWeight: '600', margin: '0' }}>
-                                            Rp 2.500.000
-                                        </h4>
-                                        <p
+                                        <Text style={{ fontSize: '20px', fontWeight: '600' }}>Rp 2.500.000</Text>
+                                        <Text
                                             style={{
                                                 fontSize: '16px',
                                                 fontWeight: '400',
                                                 color: token.colorQuaternaryText,
                                                 textDecoration: 'line-through',
-                                                margin: '0',
                                             }}
                                         >
                                             Rp 3.500.000
-                                        </p>
+                                        </Text>
                                     </Row>
-                                </div>
-                            </div>
+                                </Col>
+                            </Col>
                             {hoveredIndex === index && (
-                                <div
+                                <Flex
                                     style={{
-                                        display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'center',
                                         alignItems: 'center',
@@ -364,49 +386,55 @@ export const HomePage = () => {
                                         Add to cart
                                     </Button>
                                     <Row style={{ width: '90%', justifyContent: 'space-around', marginTop: '20px' }}>
-                                        <span
+                                        <Row
                                             style={{
                                                 fontWeight: '600',
                                                 fontSize: '16px',
                                                 color: '#fff',
                                                 cursor: 'pointer',
                                                 transition: 'color 0.3s ease',
+                                                alignItems: 'center',
+                                                gap: '5px',
                                             }}
                                             onMouseEnter={(e) => (e.currentTarget.style.color = token.colorPrimary)}
                                             onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
                                         >
                                             <FontAwesomeIcon icon={faShareFromSquare} /> Share
-                                        </span>
-                                        <span
+                                        </Row>
+                                        <Row
                                             style={{
                                                 fontWeight: '600',
                                                 fontSize: '16px',
                                                 color: '#fff',
                                                 cursor: 'pointer',
                                                 transition: 'color 0.3s ease',
+                                                alignItems: 'center',
+                                                gap: '5px',
                                             }}
                                             onMouseEnter={(e) => (e.currentTarget.style.color = token.colorPrimary)}
                                             onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
                                         >
                                             <FontAwesomeIcon icon={faCodeCompare} /> Compare
-                                        </span>
-                                        <span
+                                        </Row>
+                                        <Row
                                             style={{
                                                 fontWeight: '600',
                                                 fontSize: '16px',
                                                 color: '#fff',
                                                 cursor: 'pointer',
                                                 transition: 'color 0.3s ease',
+                                                alignItems: 'center',
+                                                gap: '5px',
                                             }}
                                             onMouseEnter={(e) => (e.currentTarget.style.color = token.colorPrimary)}
                                             onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
                                         >
                                             <FontAwesomeIcon icon={faHeart} /> Like
-                                        </span>
+                                        </Row>
                                     </Row>
-                                </div>
+                                </Flex>
                             )}
-                        </div>
+                        </Flex>
                     ))}
                 </div>
                 <Button
@@ -424,12 +452,14 @@ export const HomePage = () => {
                 >
                     Show more
                 </Button>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '70px' }}>
-                <h4 style={{ fontSize: '20px', fontWeight: '600', margin: '0', color: token.colorQuaternaryText }}>
+            </Flex>
+            <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '70px' }}>
+                <Text style={{ fontSize: '20px', fontWeight: '600', margin: '0', color: token.colorQuaternaryText }}>
                     Share your setup with
-                </h4>
-                <h2 style={{ fontSize: '40px', fontWeight: '700', margin: '10px 0 20px 0' }}>#FurniScapeFurniture</h2>
+                </Text>
+                <Text style={{ fontSize: '40px', fontWeight: '700', margin: '0px 0 20px 0' }}>
+                    #FurniScapeFurniture
+                </Text>
                 <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(8, 2fr)', margin: '20px' }}>
                     {images.map((img, index) => (
                         <Image
@@ -438,14 +468,24 @@ export const HomePage = () => {
                             style={{
                                 objectFit: 'contain',
                                 cursor: 'pointer',
+                                transition: 'all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1)',
+                                transform: hoveredImages[index] ? 'scale(1.1)' : 'scale(1)',
                             }}
                             preview={{
                                 mask: null,
+                                style: {
+                                    objectFit: 'contain',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.1s cubic-bezier(0.15, 0.83, 0.66, 1)',
+                                    transform: hoveredImages[index] ? 'scale(1.1)' : 'scale(1)',
+                                },
                             }}
+                            onMouseEnter={() => setHoveredImage(index, true)}
+                            onMouseLeave={() => setHoveredImage(index, false)}
                         />
                     ))}
                 </div>
-            </div>
-        </section>
+            </Flex>
+        </Flex>
     );
 };

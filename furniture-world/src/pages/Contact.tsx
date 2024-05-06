@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import background from '../assets/images/background.png';
 import logo from '../assets/logo/logoImage.png';
 import { Flex, Row, Col, Typography, Form, Input, Button, theme } from 'antd';
@@ -14,6 +15,8 @@ const { TextArea } = Input;
 
 export const ContactPage = () => {
     const { token } = theme.useToken();
+   
+
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
             <Flex style={{ position: 'relative' }}>
