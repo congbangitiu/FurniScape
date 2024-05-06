@@ -6,6 +6,7 @@ import { CheckoutPage } from '../pages/Checkout';
 import { ContactPage } from '../pages/Contact';
 import { ProductDetailsPage } from '../pages/ProductDetail';
 import { AboutPage } from '../pages/About';
+import { ProfilePage } from './../pages/Profile';
 
 export const Router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const Router = createBrowserRouter([
             {
                 path: 'about',
                 element: <AboutPage />,
+            },
+            {
+                path: 'profile',
+                element: <ProfilePage />,
             },
         ],
     },

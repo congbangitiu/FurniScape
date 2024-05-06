@@ -1,12 +1,14 @@
+import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { Image, Menu, Col, Row, Button, Flex, ConfigProvider } from 'antd';
+import { Menu, Col, Row, Button, Flex, ConfigProvider } from 'antd';
 import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets';
 
 type Props = {};
 
 export const Navbar = (props: Props) => {
+    const [selectedKey, setSelectedKey] = useState<string | null>(null);
     const navigationMenu = [
         {
             label: 'Home',
@@ -30,27 +32,36 @@ export const Navbar = (props: Props) => {
         {
             label: 'user',
             icons: <UserOutlined style={{ fontSize: '18px' }} />,
+            key: '/profile',
         },
         {
             label: 'search',
             icons: <SearchOutlined style={{ fontSize: '18px' }} />,
+            key: '/search',
         },
         {
             label: 'cart',
             icons: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
+            key: '/cart',
         },
         {
             label: 'logout',
             icons: <LoginOutlined style={{ fontSize: '18px' }} />,
+            key: '/logout',
         },
     ];
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleOnclickMenu = (key: any) => {
-        if (key) {
-            navigate(key.key);
-        }
+        setSelectedKey(key.key); 
+        navigate(key.key);
+    };
+
+    const handleOnClickButton = (key: string) => {
+        setSelectedKey(null); 
+        navigate(key);
     };
 
     return (
@@ -67,7 +78,7 @@ export const Navbar = (props: Props) => {
                         style={{ fontSize: '16px', fontWeight: '600', backgroundColor: '#fff' }}
                         theme="light"
                         mode="horizontal"
-                        defaultSelectedKeys={['/']}
+                        selectedKeys={selectedKey ? [selectedKey] : [location.pathname]} 
                         items={navigationMenu}
                         onClick={handleOnclickMenu}
                     />
@@ -81,7 +92,14 @@ export const Navbar = (props: Props) => {
                     <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                         <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
                             {ButtonMenu.map((button) => (
-                                <Button key={button.label} type="text" icon={button.icons} size="large" />
+                                <Button
+                                    key={button.label}
+                                    type="text"
+                                    icon={button.icons}
+                                    size="large"
+                                    onClick={() => handleOnClickButton(button.key)}
+                                    style={location.pathname === button.key ? { color: '#B88E2F' } : undefined}
+                                />
                             ))}
                         </ConfigProvider>
                     </Flex>
@@ -91,3 +109,5 @@ export const Navbar = (props: Props) => {
         </>
     );
 };
+
+export default Navbar;

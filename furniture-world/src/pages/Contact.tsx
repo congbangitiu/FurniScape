@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import background from '../assets/images/background.png';
 import logo from '../assets/logo/logoImage.png';
-import { Flex, Row, Col, Typography, Form, Input, Button, theme } from 'antd';
+import { Flex, Row, Col, Typography, Form, Input, Button } from 'antd';
 import { customColors } from '../theme';
 import HighQuality from '../assets/images/HighQuality.png';
 import WarrantyProtection from '../assets/images/WarrantyProtection.png';
@@ -14,8 +13,6 @@ const { Text } = Typography;
 const { TextArea } = Input;
 
 export const ContactPage = () => {
-    const { token } = theme.useToken();
-
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
             <Flex style={{ position: 'relative' }}>
