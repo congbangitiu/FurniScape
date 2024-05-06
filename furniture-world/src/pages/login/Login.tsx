@@ -246,7 +246,7 @@ export const LoginPage = () => {
 
             <Col span="12">
                 <div className="imgDecor">
-                    <img src={assets.chairLogo} style={{backgroundColor: 'transparent', borderRadius: '20px', maxWidth: '600px', maxHeight: '900px'}}  alt="chair" />
+                    <img src={assets.decorImg} style={{backgroundColor: 'transparent', borderRadius: '20px', maxWidth: '600px', maxHeight: '900px'}}  alt="chair" />
                 </div>
             </Col>
         </Row>
