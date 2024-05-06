@@ -2,7 +2,7 @@
 export const HomePage = () => {
     return (
         <>
-            123
+            <div>123</div>
         </>
     )
 }

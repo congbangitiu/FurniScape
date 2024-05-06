@@ -6,6 +6,8 @@ import { CheckoutPage } from '../pages/Checkout';
 import { ContactPage } from '../pages/Contact';
 import { ProductDetailsPage } from '../pages/ProductDetail';
 import { AboutPage } from '../pages/About';
+import { LoginPage } from '../pages/login/Login';
+import { RegisterPage } from '../pages/login/Register';
 
 export const Router = createBrowserRouter([
     {
@@ -39,5 +41,13 @@ export const Router = createBrowserRouter([
                 element: <AboutPage />,
             },
         ],
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    {
+        path: 'register',
+        element: <RegisterPage />,
     },
 ]);
