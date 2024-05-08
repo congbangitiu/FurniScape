@@ -29,16 +29,17 @@ export const ContactPage = () => {
                 >
                     <img src={logo} alt="Logo" style={{ width: '80px', height: '80px' }} />
                     <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Contact</Text>
-                    <Row
+                    <Flex
                         style={{
                             fontSize: '16px',
                             fontWeight: '500',
                             alignItems: 'center',
+                            justifyContent: 'center',
                             gap: '10px',
                         }}
                     >
                         <b>Home</b> <FontAwesomeIcon icon={faGreaterThan} /> Contact{' '}
-                    </Row>
+                    </Flex>
                 </Flex>
             </Flex>
             <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
