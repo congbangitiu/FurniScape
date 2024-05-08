@@ -130,7 +130,7 @@ export const ProfilePage = () => {
                 <Flex style={{ gap: '20px', alignItems: 'center' }}>
                     <Image
                         src={Avatar}
-                        preview={false}
+                        preview={{ mask: null }}
                         style={{
                             width: '100px',
                             height: '100px',

@@ -1,6 +1,8 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { Button, Flex, Form, Typography, Input, theme } from 'antd';
+import { Button, Flex, Form, Typography, Input, Image, Row, theme } from 'antd';
 import { customColors } from '../../theme';
+import type { GetProp, UploadFile, UploadProps } from 'antd';
+import Avatar from '../../assets/images/avatar.jpg';
 
 const { Text } = Typography;
 
@@ -123,7 +125,57 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                             visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
                         />
                     </Form.Item>
-                    <Form.Item></Form.Item>
+                    <Form.Item
+                        label={
+                            <Text
+                                style={{
+                                    color: customColors.colorQuaternaryText,
+                                    fontWeight: 'bold',
+                                    fontSize: '16px',
+                                }}
+                            >
+                                Choose an avatar (optional)
+                            </Text>
+                        }
+                    >
+                        <Row style={{ alignItems: 'center', gap: '20px' }}>
+                            <Image
+                                src={Avatar}
+                                alt="Avatar"
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    borderRadius: '50px',
+                                    border: `2px solid ${token.colorPrimary}`,
+                                    objectFit: 'cover',
+                                    aspectRatio: '1 / 1',
+                                }}
+                                preview={{ mask: null }}
+                            />
+                            <Input
+                                type="file"
+                                name="photo"
+                                id="customFile"
+                                accept=".jpg, .png, .jpeg, .webp"
+                                style={{ display: 'none' }}
+                            />
+                            <label
+                                htmlFor="customFile"
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignSelf: 'center',
+                                    backgroundColor: token.colorPrimary,
+                                    color: '#fff',
+                                    padding: '10px 20px',
+                                    borderRadius: ' 5px',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                Upload photo
+                            </label>
+                        </Row>
+                    </Form.Item>
                     <Form.Item
                         label={
                             <Text
