@@ -124,7 +124,7 @@ export const HomePage = () => {
     };
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
                 <Image style={{ width: '100vw' }} preview={{ mask: null }} src={Banner} alt="Banner" />
                 <Flex

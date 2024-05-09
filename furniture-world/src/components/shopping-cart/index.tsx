@@ -30,7 +30,7 @@ export const ShoppingCart = (props: Props) => {
                     flexDirection: 'column',
                     gap: '30px',
                     marginTop: '30px',
-                    maxHeight: '400px',
+                    maxHeight: '300px',
                     overflowX: 'hidden',
                     overflowY: 'auto',
                 }}

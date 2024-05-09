@@ -3,7 +3,7 @@ import logo from '../assets/logo/logoImage.png';
 import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
 import { customColors } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGreaterThan} from '@fortawesome/free-solid-svg-icons';
+import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import './Checkout.css';
 import countryList from '../assets/data/countries.js';
 
@@ -18,7 +18,7 @@ export const CheckoutPage = () => {
     }));
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
                 <img style={{ width: '100vw' }} src={background} alt="" />
                 <Flex
@@ -360,7 +360,7 @@ export const CheckoutPage = () => {
                             justifyContent: 'center',
                             alignItems: 'center',
                             border: `2px solid ${token.colorPrimary}`,
-                            backgroundColor: 'transparent'
+                            backgroundColor: 'transparent',
                         }}
                     >
                         Place order

@@ -14,7 +14,7 @@ const { TextArea } = Input;
 
 export const ContactPage = () => {
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
                 <img style={{ width: '100vw' }} src={background} alt="" />
                 <Flex

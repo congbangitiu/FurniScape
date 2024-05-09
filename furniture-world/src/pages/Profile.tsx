@@ -125,7 +125,15 @@ export const ProfilePage = () => {
     ];
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', position: 'relative' }}>
+        <Flex
+            style={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100vw',
+                position: 'relative',
+                paddingTop: '50px',
+            }}
+        >
             <Flex style={{ width: '70%', justifyContent: 'space-between', alignItems: 'center', marginTop: '50px' }}>
                 <Flex style={{ gap: '20px', alignItems: 'center' }}>
                     <Image

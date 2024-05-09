@@ -4,7 +4,6 @@ import { Menu, Col, Row, Button, Flex, ConfigProvider } from 'antd';
 import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets';
-import { IoTriangleSharp } from 'react-icons/io5';
 import { ShoppingCart } from '../shopping-cart';
 import './style.css';
 
@@ -71,15 +70,6 @@ export const Navbar = (props: Props) => {
 
     return (
         <>
-            {showShoppingCart && (
-                <Flex
-                    className="shopping-cart"
-                    onMouseEnter={() => setShowShoppingCart(true)}
-                    onMouseLeave={() => setShowShoppingCart(false)}
-                >
-                    <ShoppingCart />
-                </Flex>
-            )}
             <Row
                 gutter={16}
                 style={{
@@ -89,6 +79,7 @@ export const Navbar = (props: Props) => {
                     width: '100%',
                     backgroundColor: '#fff',
                     top: '0',
+                    boxShadow: '0 0 10px rgba(0,0,0,0.2)',
                 }}
             >
                 <Col className="navbar_logo" span={4}>
@@ -131,7 +122,17 @@ export const Navbar = (props: Props) => {
                         </ConfigProvider>
                     </Flex>
                 </Col>
+                {showShoppingCart && (
+                    <Flex
+                        className="shopping-cart"
+                        onMouseEnter={() => setShowShoppingCart(true)}
+                        onMouseLeave={() => setShowShoppingCart(false)}
+                    >
+                        <ShoppingCart />
+                    </Flex>
+                )}
             </Row>
+
             <Outlet />
         </>
     );

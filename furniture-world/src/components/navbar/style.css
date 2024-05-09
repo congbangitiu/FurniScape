@@ -1,5 +1,4 @@
 .shopping-cart {
-    position: relative;
     width: 100%;
     z-index: 100;
     top: 60px;
@@ -13,7 +12,7 @@
     width: 30px;
     position: absolute;
     top: -20px;
-    right: 40px;
+    right: 55px;
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;
