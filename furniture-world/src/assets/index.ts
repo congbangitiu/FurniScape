@@ -5,4 +5,5 @@ export const assets: any = {
     facebookLogo: require('./logo/facebookLogo.png'),
     googleLogo: require('./logo/googleLogo.png'),
     decorImg: require('./logo/decorLogin.jpg'),
+    chairImg: require('./logo/chair.png')
 };

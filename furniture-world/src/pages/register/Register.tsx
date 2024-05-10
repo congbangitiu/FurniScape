@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Checkbox, Row, Col, DatePicker, Select } from 'antd';
 import {
     EyeTwoTone,
+    CalendarOutlined,
     EyeInvisibleOutlined,
     UserOutlined,
     LockOutlined,
@@ -12,53 +13,96 @@ import {
     MailOutlined,
 } from '@ant-design/icons';
 import { assets } from '../../assets';
-import './login.scss';
+import './register.scss';
 import { ButtonWithIcon } from '../../theme/customButton';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export interface IUserLoginData {
+export interface IUserRegisterData {
     username: string;
+    dateOfBirth: Date;
+    gender: string;
+    address: string;
+    email: string;
     password: string;
+    confirmPassword: string;
 }
 
-export const LoginPage = () => {
-    const [userData, setUserData] = useState<IUserLoginData>();
-    const [toggleRegister, setToggleRegister] = useState(true);
+export const RegisterPage = () => {
+    const [userData, setUserData] = useState<IUserRegisterData>();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const dispatch = useDispatch();
 
-    const onSubmit = (data: IUserLoginData) => {
+    const onSubmit = (data: IUserRegisterData) => {
+        if (data.password !== data.confirmPassword) {
+            alert('Password mismatch');
+        }
         console.log('Received values:', data);
-        // dispatch(userLogin(data));
     };
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
+
     return (
         <Row gutter={16} style={{ height: '100vh' }}>
             <Col span="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '90%' }}>
                     <Form
-                        name="login"
+                        name="register"
                         initialValues={{ remember: true }}
                         onFinish={onSubmit}
                         style={{ maxWidth: 350, margin: 'auto' }}
                     >
                         <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
-
                         <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input
                                 prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Username"
-                                size="large"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="dateOfBirth"
+                            rules={[{ required: true, message: 'Please select your date of birth!' }]}
+                        >
+                            <DatePicker size="large" />
+                        </Form.Item>
+
+                        <Form.Item name="gender" rules={[{ required: true, message: 'Please select your gender!' }]}>
+                            <Select placeholder="select your gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item
+                            name="phoneNumber"
+                            rules={[{ required: true, message: 'Please input a valid phone number!' }]}
+                        >
+                            <Input
+                                prefix={<PhoneOutlined className="" style={{ marginRight: '6px' }} />}
+                                placeholder="Phone Number"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="email" rules={[{ required: true, message: 'Please input a valid email!' }]}>
+                            <Input
+                                prefix={<MailOutlined className="" style={{ marginRight: '6px' }} />}
+                                placeholder="Email"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="Address" rules={[{ required: true, message: 'this field is required' }]}>
+                            <Input
+                                prefix={<HomeOutlined className="" style={{ marginRight: '6px' }} />}
+                                placeholder="Address"
                             />
                         </Form.Item>
 
                         <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
                             <Input.Password
-                                size="large"
                                 prefix={<LockOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Password"
                                 iconRender={(visible) =>
@@ -71,25 +115,31 @@ export const LoginPage = () => {
                             />
                         </Form.Item>
 
-                        <Form.Item>
-                            <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox>Remember me</Checkbox>
-                            </Form.Item>
-
-                            <a className="login-form-forgot" href="/">
-                                Forgot password
-                            </a>
+                        <Form.Item
+                            name="confirmPassword"
+                            rules={[{ required: true, message: 'Please input match with password above!' }]}
+                        >
+                            <Input.Password
+                                prefix={<LockOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
+                                placeholder="Confirm Password"
+                                iconRender={(visible) =>
+                                    visible ? (
+                                        <EyeTwoTone onClick={togglePasswordVisibility} />
+                                    ) : (
+                                        <EyeInvisibleOutlined onClick={togglePasswordVisibility} />
+                                    )
+                                }
+                            />
                         </Form.Item>
-
                         <Form.Item>
                             <Button type="primary" size="large" htmlType="submit" style={{ width: '100%' }}>
-                                Sign In
+                                Sign Up
                             </Button>
-                            Or <Link to="/register">Sign up now</Link>
+                            Or <Link to="/login">Sign in now</Link>
                         </Form.Item>
 
                         <div style={{ textAlign: 'center' }}>
-                            <p>Or Sign in with:</p>
+                            <p>Or Sign up with:</p>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <ButtonWithIcon
                                     type="primary"
