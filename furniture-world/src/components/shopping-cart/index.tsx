@@ -15,7 +15,7 @@ export const ShoppingCart = (props: Props) => {
     const PurchasedItems = [
         {
             image: image,
-            name: 'Asgaard sofa',
+            name: 'Asgaard sofa ',
             quantity: 1,
             price: '$250',
         },
