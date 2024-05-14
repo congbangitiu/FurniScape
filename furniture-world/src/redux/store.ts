@@ -8,3 +8,6 @@ export const store = configureStore({
         filter: filtersSlice.reducer,
     },
 });
+
+export type IRootState = ReturnType<typeof store.getState>;
+export type IAppDispatch = typeof store.dispatch;

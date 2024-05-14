@@ -13,5 +13,8 @@ export const theme: ThemeConfig = {
         Menu: {
             groupTitleFontSize: 18,
         },
+        Form: {
+            // marginLG: 14,
+        }
     },
 };

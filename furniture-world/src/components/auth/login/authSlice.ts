@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IUserLoginData } from '../../../pages/login/Login';
+import { IUserLoginData } from '../../../pages/signIn/SignIn';
 import { backendURL } from '../../../constant/api/backendURL';
 import { userLogin } from './authAction';
 

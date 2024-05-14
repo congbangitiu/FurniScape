@@ -1,37 +1,50 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, Checkbox, Row, Col, Alert } from 'antd';
 import {
     EyeTwoTone,
     EyeInvisibleOutlined,
     UserOutlined,
     LockOutlined,
     FacebookOutlined,
+    LoadingOutlined,
     GoogleOutlined,
     PhoneOutlined,
     HomeOutlined,
     MailOutlined,
 } from '@ant-design/icons';
+import { Spin } from 'antd';
 import { assets } from '../../assets';
-import './login.scss';
+import './signIn.scss';
 import { ButtonWithIcon } from '../../theme/customButton';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { userLogin } from '../../components/auth/login/authAction';
+import { IAppDispatch, IRootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '@reduxjs/toolkit/query';
 
 export interface IUserLoginData {
     username: string;
     password: string;
+    remember: boolean;
 }
 
-export const LoginPage = () => {
+export const SignInPage = () => {
     const [userData, setUserData] = useState<IUserLoginData>();
     const [toggleRegister, setToggleRegister] = useState(true);
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<IAppDispatch>();
+    const { loading, error, userLoginData } = useSelector((state: IRootState) => state.signIn);
+    const navigate = useNavigate();
 
     const onSubmit = (data: IUserLoginData) => {
         console.log('Received values:', data);
-        // dispatch(userLogin(data));
+        dispatch(userLogin(data));
     };
+
+    useEffect(() => {
+        if (userLoginData) navigate('/');
+    }, [userLoginData]);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -83,7 +96,12 @@ export const LoginPage = () => {
 
                         <Form.Item>
                             <Button type="primary" size="large" htmlType="submit" style={{ width: '100%' }}>
-                                Sign In
+                                {loading ? (
+                                    <Spin indicator={<LoadingOutlined style={{ fontSize: '14px' }} spin />} />
+                                ) : (
+                                    'Sign In'
+                                )}
+                                {error && <Alert type="warning" showIcon message="Wrong username or password" />}
                             </Button>
                             Or <Link to="/register">Sign up now</Link>
                         </Form.Item>
@@ -111,7 +129,7 @@ export const LoginPage = () => {
                 </div>
             </Col>
 
-            <Col span="12">
+            <Col style={{ display: 'flex' }} span="12">
                 <div className="gradientBackground">
                     <img
                         src={assets.chairImg}

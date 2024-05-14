@@ -1,7 +1,7 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { backendURL } from "../../../constant/api/backendURL";
-import { IUserLoginData } from "../../../pages/login/Login";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { backendURL } from '../../../constant/api/backendURL';
+import { IUserLoginData } from '../../../pages/signIn/SignIn';
 
 export const userLogin = createAsyncThunk('auth/login', async (userData: IUserLoginData, { rejectWithValue }) => {
     try {
@@ -21,4 +21,3 @@ export const userLogin = createAsyncThunk('auth/login', async (userData: IUserLo
         }
     }
 });
-

@@ -13,7 +13,7 @@ import {
     MailOutlined,
 } from '@ant-design/icons';
 import { assets } from '../../assets';
-import './register.scss';
+import './signUp.scss';
 import { ButtonWithIcon } from '../../theme/customButton';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ export interface IUserRegisterData {
     confirmPassword: string;
 }
 
-export const RegisterPage = () => {
+export const SignUpPage = () => {
     const [userData, setUserData] = useState<IUserRegisterData>();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const RegisterPage = () => {
     return (
         <Row gutter={16} style={{ height: '100vh' }}>
             <Col span="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ width: '90%' }}>
+                <div style={{ width: '90%', padding: '30px 0 30px 0' }}>
                     <Form
                         name="register"
                         initialValues={{ remember: true }}
@@ -59,31 +59,34 @@ export const RegisterPage = () => {
                             <Input
                                 prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Username"
+                                size="large"
                             />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                             name="dateOfBirth"
                             rules={[{ required: true, message: 'Please select your date of birth!' }]}
                         >
-                            <DatePicker size="large" />
+                            <DatePicker  placeholder='Date of birth'/>
                         </Form.Item>
 
                         <Form.Item name="gender" rules={[{ required: true, message: 'Please select your gender!' }]}>
-                            <Select placeholder="select your gender">
+                            <Select style={{width:'50%'}} placeholder="Select your gender">
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </Select>
-                        </Form.Item>
+                        </Form.Item> */}
 
                         <Form.Item
                             name="phoneNumber"
                             rules={[{ required: true, message: 'Please input a valid phone number!' }]}
                         >
                             <Input
+                                type="number"
                                 prefix={<PhoneOutlined className="" style={{ marginRight: '6px' }} />}
                                 placeholder="Phone Number"
+                                size="large"
                             />
                         </Form.Item>
 
@@ -91,6 +94,7 @@ export const RegisterPage = () => {
                             <Input
                                 prefix={<MailOutlined className="" style={{ marginRight: '6px' }} />}
                                 placeholder="Email"
+                                size="large"
                             />
                         </Form.Item>
 
@@ -98,6 +102,7 @@ export const RegisterPage = () => {
                             <Input
                                 prefix={<HomeOutlined className="" style={{ marginRight: '6px' }} />}
                                 placeholder="Address"
+                                size="large"
                             />
                         </Form.Item>
 
@@ -105,6 +110,7 @@ export const RegisterPage = () => {
                             <Input.Password
                                 prefix={<LockOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Password"
+                                size="large"
                                 iconRender={(visible) =>
                                     visible ? (
                                         <EyeTwoTone onClick={togglePasswordVisibility} />
@@ -122,6 +128,7 @@ export const RegisterPage = () => {
                             <Input.Password
                                 prefix={<LockOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Confirm Password"
+                                size="large"
                                 iconRender={(visible) =>
                                     visible ? (
                                         <EyeTwoTone onClick={togglePasswordVisibility} />
@@ -161,7 +168,7 @@ export const RegisterPage = () => {
                 </div>
             </Col>
 
-            <Col span="12">
+            <Col span="12" style={{ display: 'flex' }}>
                 <div className="gradientBackground">
                     <img
                         src={assets.chairImg}
