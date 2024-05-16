@@ -5,6 +5,7 @@ import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } fro
 import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets';
 import { ShoppingCart } from '../shopping-cart';
+import { Footer } from '../footer';
 import './style.css';
 
 type Props = {};
@@ -134,6 +135,8 @@ export const Navbar = (props: Props) => {
             </Row>
 
             <Outlet />
+
+            <Footer />
         </>
     );
 };

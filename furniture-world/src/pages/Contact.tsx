@@ -250,52 +250,6 @@ export const ContactPage = () => {
                     </Col>
                 </Row>
             </Flex>
-            <Flex
-                style={{
-                    width: '100vw',
-                    height: '200px',
-                    justifyContent: 'space-around',
-                    backgroundColor: '#FAF3EA',
-                    marginTop: '50px',
-                }}
-            >
-                <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={HighQuality} style={{ width: '60px', height: '60px' }} alt="" />
-                    <Flex style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: '25px', fontWeight: '600' }}>High Quality</Text>
-                        <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
-                            Crafted from top materials
-                        </Text>
-                    </Flex>
-                </Row>
-                <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={WarrantyProtection} style={{ width: '60px', height: '60px' }} alt="" />
-                    <Flex style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: '25px', fontWeight: '600' }}>Warranty Protection</Text>
-                        <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
-                            Over 2 years
-                        </Text>
-                    </Flex>
-                </Row>
-                <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={FreeShipping} style={{ width: '60px', height: '60px' }} alt="" />
-                    <Flex style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: '25px', fontWeight: '600' }}>Free Shipping</Text>
-                        <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
-                            Order over $150
-                        </Text>
-                    </Flex>
-                </Row>
-                <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={Support} style={{ width: '60px', height: '60px' }} alt="" />
-                    <Flex style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: '25px', fontWeight: '600' }}>24/7 Support</Text>
-                        <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
-                            Dedicated support
-                        </Text>
-                    </Flex>
-                </Row>
-            </Flex>
         </Flex>
     );
 };
