@@ -79,7 +79,7 @@ export const Footer = (props: Props) => {
                 <Flex style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text
                         style={{
-                            fontSize: '16px',
+                            fontSize: '18px',
                             fontWeight: '500',
                             color: customColors.colorQuaternaryText,
                         }}
@@ -134,7 +134,7 @@ export const Footer = (props: Props) => {
                 <Flex style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Text
                         style={{
-                            fontSize: '16px',
+                            fontSize: '18px',
                             fontWeight: '500',
                             color: customColors.colorQuaternaryText,
                         }}
@@ -178,7 +178,7 @@ export const Footer = (props: Props) => {
                 <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
                     <Text
                         style={{
-                            fontSize: '16px',
+                            fontSize: '18px',
                             fontWeight: '500',
                             color: customColors.colorQuaternaryText,
                         }}
