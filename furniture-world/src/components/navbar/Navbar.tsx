@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { assets } from '../../assets';
 import { icons } from 'antd/es/image/PreviewGroup';
-import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { LogoutOutlined, LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 type Props = {};
@@ -42,8 +42,12 @@ export const Navbar = (props: Props) => {
             icons: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
         },
         {
+            label: 'login',
+            icons: <LoginOutlined style={{ fontSize: '18px' }} onClick={() => navigate('/signIn')} />,
+        },
+        {
             label: 'logout',
-            icons: <LoginOutlined style={{ fontSize: '18px' }} />,
+            icons: <LogoutOutlined style={{ fontSize: '18px' }} />,
         },
     ];
 

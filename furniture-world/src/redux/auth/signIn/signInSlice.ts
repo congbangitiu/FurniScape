@@ -1,30 +1,39 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IUserLoginData } from '../../../pages/signIn/SignIn';
 import { backendURL } from '../../../constant/api/backendURL';
-import { userLogin } from './authAction';
+import { userLogin } from './signInAction';
+import { IUserSignInData } from '../../../pages/signIn/SignIn';
 
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 interface IUserLoginState {
-    userLoginData: IUserLoginData | null;
+    userSignInData: IUserSignInData | null;
     userToken: string | null;
     loading: boolean;
     error: Object | null;
 }
 
 const initialState: IUserLoginState = {
-    userLoginData: null,
+    userSignInData: null,
     userToken,
     loading: false,
     error: null,
 };
 
 export default createSlice({
-    name: 'authentication',
+    name: 'auth',
     initialState,
     reducers: {
-        signIn: (state, action) => {},
+        logOut: (state) => {
+            localStorage.removeItem('userToken');
+            state.loading = false;
+            state.error = null;
+            state.userSignInData = null;
+            state.userToken = null;
+        },
+        setCredentials: (state, { payload }) => {
+            state.userSignInData = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -34,7 +43,7 @@ export default createSlice({
             })
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.userLoginData = payload;
+                state.userSignInData = payload;
                 state.userToken = payload.userToken;
             })
             .addCase(userLogin.rejected, (state, { payload }) => {

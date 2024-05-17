@@ -15,14 +15,21 @@
     height: 100%;
 }
 
-.gradientBackground {
-    background: linear-gradient(-45deg, #b88e2f, #7c922d, #788031, #a07a23);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
-    height: 90%;
-    width: 90%;
-    border-radius: 20px;
-    margin: auto;
+// .gradientBackground {
+//     background: linear-gradient(-45deg, #b88e2f, #7c922d, #788031, #a07a23);
+//     background-size: 400% 400%;
+//     animation: gradient 10s ease infinite;
+//     height: 90%;
+//     width: 90%;
+//     border-radius: 20px;
+//     margin: auto;
+// }
+.backgroundSignIn {
+
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+
 }
 
 @keyframes gradient {

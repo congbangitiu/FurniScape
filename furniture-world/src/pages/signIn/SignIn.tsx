@@ -9,49 +9,60 @@ import {
     LoadingOutlined,
     GoogleOutlined,
     PhoneOutlined,
+    FacebookFilled,
     HomeOutlined,
     MailOutlined,
 } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { assets } from '../../assets';
-import './signIn.scss';
 import { ButtonWithIcon } from '../../theme/customButton';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { userLogin } from '../../components/auth/login/authAction';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
+import { userLogin } from 'src/redux/auth/signIn/signInAction';
+import './signIn.scss'
 
-export interface IUserLoginData {
+export interface IUserSignInData {
     username: string;
     password: string;
     remember: boolean;
 }
 
 export const SignInPage = () => {
-    const [userData, setUserData] = useState<IUserLoginData>();
-    const [toggleRegister, setToggleRegister] = useState(true);
-    const [passwordVisible, setPasswordVisible] = useState(false);
     const dispatch = useDispatch<IAppDispatch>();
-    const { loading, error, userLoginData } = useSelector((state: IRootState) => state.signIn);
+    const { loading, error, userData } = useSelector((state: IRootState) => state.auth);
     const navigate = useNavigate();
 
-    const onSubmit = (data: IUserLoginData) => {
+    const onSubmit = (data: IUserSignInData) => {
         console.log('Received values:', data);
         dispatch(userLogin(data));
     };
 
     useEffect(() => {
-        if (userLoginData) navigate('/');
-    }, [userLoginData]);
+        if (userData) navigate('/');
+    }, [userData]);
 
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    };
     return (
         <Row gutter={16} style={{ height: '100vh' }}>
-            <Col span="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Col style={{ display: 'flex' }} span="14">
+                <div className="backgroundSignIn">
+                    {/* <img
+                        src={assets.chairImg}
+                        style={{
+                            backgroundColor: 'transparent',
+                            borderRadius: '20px',
+                            maxWidth: '600px',
+                            maxHeight: '900px',
+                        }}
+                        alt="chair"
+                    /> */}
+                    <img src={assets.signInBG2} alt="" />
+                </div>
+            </Col>
+
+            <Col span="10" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ width: '90%' }}>
                     <Form
                         name="login"
@@ -74,24 +85,19 @@ export const SignInPage = () => {
                                 size="large"
                                 prefix={<LockOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
                                 placeholder="Password"
-                                iconRender={(visible) =>
-                                    visible ? (
-                                        <EyeTwoTone onClick={togglePasswordVisibility} />
-                                    ) : (
-                                        <EyeInvisibleOutlined onClick={togglePasswordVisibility} />
-                                    )
-                                }
                             />
                         </Form.Item>
 
                         <Form.Item>
-                            <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox>Remember me</Checkbox>
-                            </Form.Item>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Form.Item name="remember" valuePropName="checked" noStyle>
+                                    <Checkbox>Remember me</Checkbox>
+                                </Form.Item>
 
-                            <a className="login-form-forgot" href="/">
-                                Forgot password
-                            </a>
+                                <a className="login-form-forgot" href="/">
+                                    Forgot password
+                                </a>
+                            </div>
                         </Form.Item>
 
                         <Form.Item>
@@ -103,10 +109,10 @@ export const SignInPage = () => {
                                 )}
                                 {error && <Alert type="warning" showIcon message="Wrong username or password" />}
                             </Button>
-                            Or <Link to="/register">Sign up now</Link>
+                            Or <Link to="/signUp">Sign up now</Link>
                         </Form.Item>
 
-                        <div style={{ textAlign: 'center' }}>
+                        {/* <div style={{ textAlign: 'center' }}>
                             <p>Or Sign in with:</p>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <ButtonWithIcon
@@ -124,23 +130,32 @@ export const SignInPage = () => {
                                     Google
                                 </ButtonWithIcon>
                             </div>
+                        </div> */}
+                        <hr className="solid" style={{ width: '60%', color: 'red' }} />
+                        <div style={{ textAlign: 'center' }}>
+                            <p>Or Sign up with:</p>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                {/* <ButtonWithIcon
+                                    type="primary"
+                                    icon={<img src={assets.facebookLogo} />}
+                                    className="signUpWithButton"
+                                >
+                                    Facebook
+                                </ButtonWithIcon>
+                                <ButtonWithIcon
+                                    type="primary"
+                                    icon={<img src={assets.googleLogo} />}
+                                    style={{ width: '40%' }}
+                                >
+                                    Google
+                                </ButtonWithIcon> */}
+
+                                <FacebookFilled style={{ fontSize: '200%', margin: '0 10px 0 10px' }} />
+
+                                <GoogleOutlined style={{ fontSize: '200%', margin: '0 10px 0 10px' }} />
+                            </div>
                         </div>
                     </Form>
-                </div>
-            </Col>
-
-            <Col style={{ display: 'flex' }} span="12">
-                <div className="gradientBackground">
-                    <img
-                        src={assets.chairImg}
-                        style={{
-                            backgroundColor: 'transparent',
-                            borderRadius: '20px',
-                            maxWidth: '600px',
-                            maxHeight: '900px',
-                        }}
-                        alt="chair"
-                    />
                 </div>
             </Col>
         </Row>

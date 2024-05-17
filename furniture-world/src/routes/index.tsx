@@ -43,11 +43,11 @@ export const Router = createBrowserRouter([
         ],
     },
     {
-        path: '/login',
+        path: '/signIn',
         element: <SignInPage />,
     },
     {
-        path: '/register',
+        path: '/signUp',
         element: <SignUpPage />,
     },
 ]);

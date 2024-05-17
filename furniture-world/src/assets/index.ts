@@ -5,5 +5,13 @@ export const assets: any = {
     facebookLogo: require('./logo/facebookLogo.png'),
     googleLogo: require('./logo/googleLogo.png'),
     decorImg: require('./logo/decorLogin.jpg'),
-    chairImg: require('./logo/chair.png')
+    chairImg: require('./logo/chair.png'),
+    signUpBG: require('./images/signUpBG.jpg'),
+    signUpBG2: require('./images/signUpBG2.jpg'),
+    signUpBG3: require('./images/signUpBG3.jpg'),
+    signUpBG4: require('./images/signUpBG4.jpg'),
+    signUpBG6: require('./images/signUpBG6.jpg'),
+    signInBG: require('./images/signInBG.jpg'),
+    signInBG2: require('./images/signInBG2.jpg'),
+    signInBG3: require('./images/signInBG3.jpg'),
 };

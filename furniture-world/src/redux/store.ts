@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import filtersSlice from '../components/Filters/filtersSlice';
-import authSlice from '../components/auth/login/authSlice';
+import signInSlice from './auth/signIn/signInSlice';
+import authSlice from './auth/authSlice';
 
 export const store = configureStore({
     reducer: {
-        signIn: authSlice.reducer,
+        auth: authSlice.reducer,
         filter: filtersSlice.reducer,
     },
 });
