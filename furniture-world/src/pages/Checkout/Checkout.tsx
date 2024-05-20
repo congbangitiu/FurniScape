@@ -1,11 +1,10 @@
-import background from '../assets/images/background.png';
-import logo from '../assets/logo/logoImage.png';
+import { assets } from '../../assets';
 import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
-import { customColors } from '../theme';
+import { customColors } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import './Checkout.css';
-import countryList from '../assets/data/countries.js';
+import countryList from '../../assets/data/countries.js';
 
 const { Text } = Typography;
 
@@ -20,7 +19,7 @@ export const CheckoutPage = () => {
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={background} alt="" />
+                <img style={{ width: '100vw' }} src={assets.background} alt="" />
                 <Flex
                     style={{
                         position: 'absolute',
@@ -32,7 +31,7 @@ export const CheckoutPage = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    <img src={logo} alt="Logo" style={{ width: '80px', height: '80px' }} />
+                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
                     <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Checkout</Text>
                     <Flex
                         style={{

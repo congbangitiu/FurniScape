@@ -1,31 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
-import Banner from '../assets/images/Banner.png';
-import Dining from '../assets/images/Dining.png';
-import Living from '../assets/images/Living.png';
-import Bedroom from '../assets/images/Bedroom.png';
-import Syltherine from '../assets/images/Syltherine.png';
+import { assets } from '../assets';
 import { customColors } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCodeCompare } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import Image1 from '../assets/images/Image1.png';
-import Image2 from '../assets/images/Image2.png';
-import Image3 from '../assets/images/Image3.png';
-import Image4 from '../assets/images/Image4.png';
-import Image5 from '../assets/images/Image5.png';
-import Image6 from '../assets/images/Image6.png';
-import Image7 from '../assets/images/Image7.png';
-import Image8 from '../assets/images/Image8.png';
-import Image9 from '../assets/images/Image9.png';
-import Image10 from '../assets/images/Image10.png';
-import Image11 from '../assets/images/Image11.png';
-import Image12 from '../assets/images/Image12.png';
-import Image13 from '../assets/images/Image13.png';
-import Image14 from '../assets/images/Image14.png';
-import Image15 from '../assets/images/Image15.png';
-import Image16 from '../assets/images/Image16.png';
 
 const { Text } = Typography;
 
@@ -36,77 +17,78 @@ export const HomePage = () => {
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
         {
             name: 'Syltherine',
             description: 'Stylish cafe chair',
             price: 2500000,
             discount: 3500000,
-            image: Syltherine,
+            image: assets.syltherin,
         },
     ];
 
     const images = [
-        Image1,
-        Image2,
-        Image3,
-        Image4,
-        Image5,
-        Image6,
-        Image7,
-        Image8,
-        Image9,
-        Image10,
-        Image11,
-        Image12,
-        Image13,
-        Image14,
-        Image15,
-        Image16,
+        assets.image1,
+        assets.image2,
+        assets.image3,
+        assets.image4,
+        assets.image5,
+        assets.image6,
+        assets.image7,
+        assets.image8,
+        assets.image9,
+        assets.image10,
+        assets.image11,
+        assets.image12,
+        assets.image13,
+        assets.image14,
+        assets.image15,
+        assets.image16,
     ];
+
     const { token } = theme.useToken();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [hoveredImages, setHoveredImages] = useState<boolean[]>(Array(images.length).fill(false));
@@ -126,7 +108,7 @@ export const HomePage = () => {
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
-                <Image style={{ width: '100vw' }} preview={{ mask: null }} src={Banner} alt="Banner" />
+                <Image style={{ width: '100vw' }} preview={{ mask: null }} src={assets.banner} alt="Banner" />
                 <Flex
                     style={{
                         position: 'absolute',
@@ -152,26 +134,27 @@ export const HomePage = () => {
                         Discover Our New Collection
                     </Text>
                     <Text style={{ fontSize: '18px', fontWeight: '500', lineHeight: '24px', marginTop: '10px' }}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
-                        mattis.
+                        "Transforming Spaces, Creating Comfort – Discover Your Perfect Furniture with Us!"
                     </Text>
-                    <Button
-                        block
-                        style={{
-                            backgroundColor: token.colorPrimary,
-                            color: '#FFF',
-                            fontWeight: '700',
-                            fontSize: '16px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: '25px 72px',
-                            marginTop: '40px',
-                            width: '50%',
-                        }}
-                    >
-                        BUY NOW
-                    </Button>
+                    <Link to="/shop">
+                        <Button
+                            block
+                            style={{
+                                backgroundColor: token.colorPrimary,
+                                color: '#FFF',
+                                fontWeight: '700',
+                                fontSize: '16px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: '25px 72px',
+                                marginTop: '40px',
+                                width: '50%',
+                            }}
+                        >
+                            BUY NOW
+                        </Button>
+                    </Link>
                 </Flex>
             </Flex>
             <Flex
@@ -215,7 +198,7 @@ export const HomePage = () => {
                     >
                         <Image
                             style={{ borderRadius: '10px' }}
-                            src={Dining}
+                            src={assets.dining}
                             alt="Banner"
                             preview={{
                                 mask: null,
@@ -234,7 +217,7 @@ export const HomePage = () => {
                     >
                         <Image
                             style={{ borderRadius: '10px' }}
-                            src={Living}
+                            src={assets.living}
                             alt="Banner"
                             preview={{
                                 mask: null,
@@ -253,7 +236,7 @@ export const HomePage = () => {
                     >
                         <Image
                             style={{ borderRadius: '10px' }}
-                            src={Bedroom}
+                            src={assets.bedroom}
                             alt="Banner"
                             preview={{
                                 mask: null,
@@ -299,7 +282,7 @@ export const HomePage = () => {
                             >
                                 <Image
                                     style={{ borderRadius: '10px' }}
-                                    src={Syltherine}
+                                    src={assets.syltherine}
                                     alt="Banner"
                                     preview={{
                                         mask: null,
@@ -437,21 +420,23 @@ export const HomePage = () => {
                         </Flex>
                     ))}
                 </div>
-                <Button
-                    style={{
-                        backgroundColor: '#fff',
-                        color: token.colorPrimary,
-                        fontWeight: '600',
-                        fontSize: '16px',
-                        textAlign: 'center',
-                        width: '250px',
-                        height: '50px',
-                        marginTop: '50px',
-                        border: `2px solid ${token.colorPrimary}`,
-                    }}
-                >
-                    Show more
-                </Button>
+                <Link to="/shop">
+                    <Button
+                        style={{
+                            backgroundColor: '#fff',
+                            color: token.colorPrimary,
+                            fontWeight: '600',
+                            fontSize: '16px',
+                            textAlign: 'center',
+                            width: '250px',
+                            height: '50px',
+                            marginTop: '50px',
+                            border: `2px solid ${token.colorPrimary}`,
+                        }}
+                    >
+                        Show more
+                    </Button>
+                </Link>
             </Flex>
             <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '70px' }}>
                 <Text

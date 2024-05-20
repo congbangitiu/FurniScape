@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme } from 'antd';
+import { Image, Button, Flex, Row,  Typography, theme } from 'antd';
 import { customColors } from '../../theme';
-import image from '../../assets/images/Image1.png';
+import { assets } from '../../assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
@@ -14,37 +14,37 @@ export const ShoppingCart = (props: Props) => {
     const { token } = theme.useToken();
     const PurchasedItems = [
         {
-            image: image,
+            image: assets.image1,
             name: 'Asgaard sofa ',
             quantity: 1,
             price: '$250',
         },
         {
-            image: image,
+            image: assets.image1,
             name: 'Odin Coffee Table',
             quantity: 2,
             price: '$120',
         },
         {
-            image: image,
+            image: assets.image1,
             name: 'Thor Recliner Chair',
             quantity: 1,
             price: '$180',
         },
         {
-            image: image,
+            image: assets.image1,
             name: 'Loki Bookshelf',
             quantity: 3,
             price: '$75',
         },
         {
-            image: image,
+            image: assets.image1,
             name: 'Freya Dining Set',
             quantity: 1,
             price: '$500',
         },
         {
-            image: image,
+            image: assets.image1,
             name: 'Heimdall Wardrobe',
             quantity: 1,
             price: '$350',

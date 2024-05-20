@@ -1,11 +1,6 @@
-import background from '../assets/images/background.png';
-import logo from '../assets/logo/logoImage.png';
+import { assets } from '../assets';
 import { Flex, Row, Col, Typography, Form, Input, Button } from 'antd';
 import { customColors } from '../theme';
-import HighQuality from '../assets/images/HighQuality.png';
-import WarrantyProtection from '../assets/images/WarrantyProtection.png';
-import FreeShipping from '../assets/images/FreeShipping.png';
-import Support from '../assets/images/Support.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faLocationDot, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,7 +11,7 @@ export const ContactPage = () => {
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
             <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={background} alt="" />
+                <img style={{ width: '100vw' }} src={assets.background} alt="" />
                 <Flex
                     style={{
                         position: 'absolute',
@@ -27,7 +22,7 @@ export const ContactPage = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <img src={logo} alt="Logo" style={{ width: '80px', height: '80px' }} />
+                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
                     <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Contact</Text>
                     <Flex
                         style={{

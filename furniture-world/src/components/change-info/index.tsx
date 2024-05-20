@@ -2,7 +2,7 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import { Button, Flex, Form, Typography, Input, Image, Row, theme } from 'antd';
 import { customColors } from '../../theme';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import Avatar from '../../assets/images/avatar.jpg';
+import { assets } from '../../assets';
 
 const { Text } = Typography;
 
@@ -140,7 +140,7 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                     >
                         <Row style={{ alignItems: 'center', gap: '20px' }}>
                             <Image
-                                src={Avatar}
+                                src={assets.avatar}
                                 alt="Avatar"
                                 style={{
                                     width: '50px',

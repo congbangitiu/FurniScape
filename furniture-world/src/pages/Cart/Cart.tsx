@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Flex, Row, Col, Typography, Image, Button, Table, theme } from 'antd';
-import { customColors } from '../theme';
+import { customColors } from '../../theme';
 import type { TableColumnsType } from 'antd';
 import type { ThHTMLAttributes, TdHTMLAttributes, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import background from '../assets/images/background.png';
-import logo from '../assets/logo/logoImage.png';
-import photo from '../assets/images/Image1.png';
+import { assets } from '../../assets';
 
 import './Cart.css';
 
@@ -20,10 +18,10 @@ export const CartPage = () => {
     const [shippingFee, setShippingFee] = useState(50);
 
     const data = [
-        { key: '1', image: photo, name: 'Product 1', category: 'Category A', quantity: 1, price: 50 },
-        { key: '2', image: photo, name: 'Product 2', category: 'Category B', quantity: 1, price: 70 },
-        { key: '3', image: photo, name: 'Product 3', category: 'Category C', quantity: 1, price: 40 },
-        { key: '4', image: photo, name: 'Product 4', category: 'Category D', quantity: 1, price: 90 },
+        { key: '1', image: assets.image1, name: 'Product 1', category: 'Category A', quantity: 1, price: 50 },
+        { key: '2', image: assets.image1, name: 'Product 2', category: 'Category B', quantity: 1, price: 70 },
+        { key: '3', image: assets.image1, name: 'Product 3', category: 'Category C', quantity: 1, price: 40 },
+        { key: '4', image: assets.image1, name: 'Product 4', category: 'Category D', quantity: 1, price: 90 },
     ];
 
     const [numberItems, setNumberItems] = useState<number[]>(new Array(data.length).fill(1));
@@ -160,7 +158,7 @@ export const CartPage = () => {
             }}
         >
             <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={background} alt="" />
+                <img style={{ width: '100vw' }} src={assets.background} alt="" />
                 <Flex
                     style={{
                         position: 'absolute',
@@ -171,7 +169,7 @@ export const CartPage = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <img src={logo} alt="Logo" style={{ width: '80px', height: '80px' }} />
+                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
                     <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Cart</Text>
                     <Flex
                         style={{

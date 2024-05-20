@@ -2,11 +2,10 @@ import { useState, ChangeEvent } from 'react';
 import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme } from 'antd';
 import type { ThHTMLAttributes, TdHTMLAttributes } from 'react';
 import type { TableColumnsType } from 'antd';
-import Avatar from '../assets/images/avatar.jpg';
 import { customColors } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
-import photo from '../assets/images/Image1.png';
+import { assets } from '../assets';
 import { ChangeInformation } from '../components/change-info';
 
 const { Text } = Typography;
@@ -30,7 +29,7 @@ export const ProfilePage = () => {
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={photo}
+                    src={assets.image1}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
@@ -44,7 +43,7 @@ export const ProfilePage = () => {
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={photo}
+                    src={assets.image1}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
@@ -58,7 +57,7 @@ export const ProfilePage = () => {
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={photo}
+                    src={assets.image1}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
@@ -72,7 +71,7 @@ export const ProfilePage = () => {
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={photo}
+                    src={assets.image1}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
@@ -137,7 +136,7 @@ export const ProfilePage = () => {
             <Flex style={{ width: '70%', justifyContent: 'space-between', alignItems: 'center', marginTop: '50px' }}>
                 <Flex style={{ gap: '20px', alignItems: 'center' }}>
                     <Image
-                        src={Avatar}
+                        src={assets.avatar}
                         preview={{ mask: null }}
                         style={{
                             width: '100px',
@@ -199,20 +198,25 @@ export const ProfilePage = () => {
                     onChange={handleInputChange}
                     value={query}
                 ></Input>
-                <Flex
-                    style={{
-                        backgroundColor: token.colorPrimary,
-                        width: '25px',
-                        height: '25px',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: '100px',
-                        cursor: 'pointer',
-                    }}
-                    onClick={handleClearSearch}
-                >
-                    <FontAwesomeIcon icon={faXmark} style={{ color: '#fff', fontSize: '16px', fontWeight: '400' }} />
-                </Flex>
+                {query && (
+                    <Flex
+                        style={{
+                            backgroundColor: token.colorPrimary,
+                            width: '25px',
+                            height: '25px',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '100px',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handleClearSearch}
+                    >
+                        <FontAwesomeIcon
+                            icon={faXmark}
+                            style={{ color: '#fff', fontSize: '16px', fontWeight: '400' }}
+                        />
+                    </Flex>
+                )}
             </Flex>
             <Flex style={{ width: '70%', marginTop: '50px', flexDirection: 'column' }}>
                 <Text style={{ fontSize: '30px', fontWeight: '500' }}>Purchase History</Text>

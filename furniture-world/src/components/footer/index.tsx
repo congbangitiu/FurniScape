@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Flex, Row, Col, Typography, Input, Button, Image, theme } from 'antd';
+import { Flex, Row, Typography, Input, Button, Image, theme } from 'antd';
 import { customColors } from '../../theme';
-import HighQuality from '../../assets/images/HighQuality.png';
-import WarrantyProtection from '../../assets/images/WarrantyProtection.png';
-import FreeShipping from '../../assets/images/FreeShipping.png';
-import Support from '../../assets/images/Support.png';
-import Logo from '../../assets/logo/logoImage.png';
+import { assets } from '../../assets';
 import './style.css';
 
 type Props = {};
@@ -25,7 +21,7 @@ export const Footer = (props: Props) => {
                 }}
             >
                 <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={HighQuality} style={{ width: '60px', height: '60px' }} alt="" />
+                    <img src={assets.highQuality} style={{ width: '60px', height: '60px' }} alt="" />
                     <Flex style={{ flexDirection: 'column' }}>
                         <Text style={{ fontSize: '25px', fontWeight: '600' }}>High Quality</Text>
                         <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
@@ -34,7 +30,7 @@ export const Footer = (props: Props) => {
                     </Flex>
                 </Row>
                 <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={WarrantyProtection} style={{ width: '60px', height: '60px' }} alt="" />
+                    <img src={assets.warrantyProtection} style={{ width: '60px', height: '60px' }} alt="" />
                     <Flex style={{ flexDirection: 'column' }}>
                         <Text style={{ fontSize: '25px', fontWeight: '600' }}>Warranty Protection</Text>
                         <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
@@ -43,7 +39,7 @@ export const Footer = (props: Props) => {
                     </Flex>
                 </Row>
                 <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={FreeShipping} style={{ width: '60px', height: '60px' }} alt="" />
+                    <img src={assets.freeShipping} style={{ width: '60px', height: '60px' }} alt="" />
                     <Flex style={{ flexDirection: 'column' }}>
                         <Text style={{ fontSize: '25px', fontWeight: '600' }}>Free Shipping</Text>
                         <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
@@ -52,7 +48,7 @@ export const Footer = (props: Props) => {
                     </Flex>
                 </Row>
                 <Row style={{ gap: '10px', alignItems: 'center' }}>
-                    <img src={Support} style={{ width: '60px', height: '60px' }} alt="" />
+                    <img src={assets.support} style={{ width: '60px', height: '60px' }} alt="" />
                     <Flex style={{ flexDirection: 'column' }}>
                         <Text style={{ fontSize: '25px', fontWeight: '600' }}>24/7 Support</Text>
                         <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.lightGrayColor }}>
@@ -63,7 +59,7 @@ export const Footer = (props: Props) => {
             </Flex>
             <Flex style={{ justifyContent: 'space-around', padding: '30px 0' }}>
                 <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
-                    <Image src={Logo} alt="" preview={false} style={{ width: '80px' }} />
+                    <Image src={assets.logoImage} alt="" preview={false} style={{ width: '80px' }} />
                     <Text style={{ fontSize: '24px', fontWeight: '700' }}>FurniScape</Text>
                     <Text
                         style={{
