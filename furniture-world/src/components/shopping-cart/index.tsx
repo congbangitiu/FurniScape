@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Button, Flex, Row,  Typography, theme } from 'antd';
+import { Image, Button, Flex, Row, Typography, theme } from 'antd';
 import { customColors } from '../../theme';
 import { assets } from '../../assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,47 +9,17 @@ import './style.css';
 
 type Props = {};
 const { Text } = Typography;
+type ShoppingCartProps = {
+    PurchasedItems: Array<{
+        image: string;
+        name: string;
+        quantity: number;
+        price: string;
+    }>;
+};
 
-export const ShoppingCart = (props: Props) => {
+export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
     const { token } = theme.useToken();
-    const PurchasedItems = [
-        {
-            image: assets.image1,
-            name: 'Asgaard sofa ',
-            quantity: 1,
-            price: '$250',
-        },
-        {
-            image: assets.image1,
-            name: 'Odin Coffee Table',
-            quantity: 2,
-            price: '$120',
-        },
-        {
-            image: assets.image1,
-            name: 'Thor Recliner Chair',
-            quantity: 1,
-            price: '$180',
-        },
-        {
-            image: assets.image1,
-            name: 'Loki Bookshelf',
-            quantity: 3,
-            price: '$75',
-        },
-        {
-            image: assets.image1,
-            name: 'Freya Dining Set',
-            quantity: 1,
-            price: '$500',
-        },
-        {
-            image: assets.image1,
-            name: 'Heimdall Wardrobe',
-            quantity: 1,
-            price: '$350',
-        },
-    ];
 
     return (
         <Flex

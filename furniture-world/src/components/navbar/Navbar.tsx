@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { Menu, Col, Row, Button, Flex, ConfigProvider } from 'antd';
+import { Menu, Col, Row, Button, Flex, ConfigProvider, theme } from 'antd';
 import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets';
@@ -11,6 +11,7 @@ import './style.css';
 type Props = {};
 
 export const Navbar = (props: Props) => {
+    const { token } = theme.useToken();
     const [selectedKey, setSelectedKey] = useState<string | null>(null);
     const [showShoppingCart, setShowShoppingCart] = useState(false);
 
@@ -69,6 +70,45 @@ export const Navbar = (props: Props) => {
         navigate(key);
     };
 
+    const PurchasedItems = [
+        {
+            image: assets.image1,
+            name: 'Asgaard sofa ',
+            quantity: 1,
+            price: '$250',
+        },
+        {
+            image: assets.image1,
+            name: 'Odin Coffee Table',
+            quantity: 2,
+            price: '$120',
+        },
+        {
+            image: assets.image1,
+            name: 'Thor Recliner Chair',
+            quantity: 1,
+            price: '$180',
+        },
+        {
+            image: assets.image1,
+            name: 'Loki Bookshelf',
+            quantity: 3,
+            price: '$75',
+        },
+        {
+            image: assets.image1,
+            name: 'Freya Dining Set',
+            quantity: 1,
+            price: '$500',
+        },
+        {
+            image: assets.image1,
+            name: 'Heimdall Wardrobe',
+            quantity: 1,
+            price: '$350',
+        },
+    ];
+
     return (
         <>
             <Row
@@ -108,17 +148,39 @@ export const Navbar = (props: Props) => {
                     <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                         <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
                             {ButtonMenu.map((button) => (
-                                <Button
-                                    className="icon-button"
-                                    key={button.label}
-                                    type="text"
-                                    icon={button.icons}
-                                    size="large"
-                                    onClick={() => handleOnClickButton(button.key)}
-                                    onMouseEnter={() => button.label === 'cart' && setShowShoppingCart(true)}
-                                    onMouseLeave={() => button.label === 'cart' && setShowShoppingCart(false)}
-                                    style={location.pathname === button.key ? { color: '#B88E2F' } : undefined}
-                                />
+                                <>
+                                    <Button
+                                        className="icon-button"
+                                        key={button.label}
+                                        type="text"
+                                        icon={button.icons}
+                                        size="large"
+                                        onClick={() => handleOnClickButton(button.key)}
+                                        onMouseEnter={() => button.label === 'cart' && setShowShoppingCart(true)}
+                                        onMouseLeave={() => button.label === 'cart' && setShowShoppingCart(false)}
+                                        style={location.pathname === button.key ? { color: '#B88E2F' } : undefined}
+                                    />
+                                    {button.label === 'cart' && PurchasedItems.length > 0 && (
+                                        <Flex
+                                            style={{
+                                                position: 'absolute',
+                                                top: '8px',
+                                                right: '88px',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                width: '15px',
+                                                height: '15px',
+                                                backgroundColor: token.colorPrimary,
+                                                color: '#fff',
+                                                fontSize: '10px',
+                                                fontWeight: '500',
+                                                borderRadius: '50px',
+                                            }}
+                                        >
+                                            {PurchasedItems.length}
+                                        </Flex>
+                                    )}
+                                </>
                             ))}
                         </ConfigProvider>
                     </Flex>
@@ -129,7 +191,7 @@ export const Navbar = (props: Props) => {
                         onMouseEnter={() => setShowShoppingCart(true)}
                         onMouseLeave={() => setShowShoppingCart(false)}
                     >
-                        <ShoppingCart />
+                        <ShoppingCart PurchasedItems={PurchasedItems} />
                     </Flex>
                 )}
             </Row>

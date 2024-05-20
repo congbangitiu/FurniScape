@@ -31,4 +31,6 @@
     }
 }
 
-
+.icon-button {
+    position: relative;
+}
