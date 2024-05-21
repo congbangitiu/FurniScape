@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../../assets';
+import { Banner } from '../../components/banner';
 
 import './Cart.css';
 
@@ -157,33 +158,7 @@ export const CartPage = () => {
                 paddingTop: '50px',
             }}
         >
-            <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={assets.background} alt="" />
-                <Flex
-                    style={{
-                        position: 'absolute',
-                        top: '25%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
-                    <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Cart</Text>
-                    <Flex
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '10px',
-                        }}
-                    >
-                        <b>Home</b> <FontAwesomeIcon icon={faGreaterThan} /> Cart{' '}
-                    </Flex>
-                </Flex>
-            </Flex>
+            <Banner title="Card" />
             <Flex style={{ width: '70%', gap: '30px', marginTop: '50px' }}>
                 <Col style={{ width: '70%' }}>
                     <Table

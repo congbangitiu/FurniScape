@@ -1,10 +1,8 @@
-import { assets } from '../../assets';
 import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
 import { customColors } from '../../theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 import './Checkout.css';
 import countryList from '../../assets/data/countries.js';
+import { Banner } from '../../components/banner';
 
 const { Text } = Typography;
 
@@ -18,34 +16,7 @@ export const CheckoutPage = () => {
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
-            <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={assets.background} alt="" />
-                <Flex
-                    style={{
-                        position: 'absolute',
-                        top: '25%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}
-                >
-                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
-                    <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Checkout</Text>
-                    <Flex
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '10px',
-                        }}
-                    >
-                        <b>Home</b> <FontAwesomeIcon icon={faGreaterThan} /> Checkout{' '}
-                    </Flex>
-                </Flex>
-            </Flex>
+            <Banner title="Checkout" />
             <Text style={{ fontSize: '30px', fontWeight: '500', marginTop: '20px' }}>Billing details</Text>
             <Flex style={{ marginTop: '40px', width: '70%' }}>
                 <Form layout="vertical" style={{ width: '70%' }}>

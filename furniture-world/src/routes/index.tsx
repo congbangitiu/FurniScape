@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Navbar } from '../components/navbar/Navbar';
 import { HomePage } from '../pages/Home';
-import { ShopPage } from '../pages/Shop';
+import { ShopPage } from '../pages/Shop/Shop';
 import { CheckoutPage } from '../pages/Checkout/Checkout';
 import { ContactPage } from '../pages/Contact';
 import { ProductDetailsPage } from '../pages/ProductDetail';
@@ -21,12 +21,10 @@ export const Router = createBrowserRouter([
             {
                 path: 'shop',
                 element: <ShopPage />,
-                children: [
-                    {
-                        path: 'products/productDetails',
-                        element: <ProductDetailsPage />,
-                    },
-                ],
+            },
+            {
+                path: 'shop/products/:id',
+                element: <ProductDetailsPage />,
             },
             {
                 path: 'contact',
