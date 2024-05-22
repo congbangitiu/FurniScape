@@ -5,9 +5,8 @@ import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../../assets';
 import { customColors } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCodeCompare } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faShareFromSquare, faCodeCompare} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const { Text } = Typography;
 
