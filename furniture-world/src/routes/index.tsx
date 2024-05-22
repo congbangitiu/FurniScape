@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Navbar } from '../components/navbar/Navbar';
 import { HomePage } from '../pages/Home';
-import { ProductsPage } from '../pages/Products';
+import { ShopPage } from '../pages/Shop';
 import { CheckoutPage } from '../pages/Checkout';
 import { ContactPage } from '../pages/Contact';
 import { ProductDetailsPage } from '../pages/ProductDetail';
+import { AboutPage } from '../pages/About';
 
 export const Router = createBrowserRouter([
     {
@@ -16,8 +17,8 @@ export const Router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: 'products',
-                element: <ProductsPage />,
+                path: 'shop',
+                element: <ShopPage />,
                 children: [
                     {
                         path: 'products/productDetails',
@@ -32,6 +33,10 @@ export const Router = createBrowserRouter([
             {
                 path: 'checkout',
                 element: <CheckoutPage />,
+            },
+            {
+                path: 'about',
+                element: <AboutPage />,
             },
         ],
     },
