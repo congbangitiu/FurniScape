@@ -16,7 +16,7 @@ export const Footer = (props: Props) => {
                     width: '100vw',
                     height: '200px',
                     justifyContent: 'space-around',
-                    backgroundColor: '#FAF3EA',
+                    backgroundColor: customColors.colorBgSecondary,
                     marginTop: '50px',
                 }}
             >

@@ -25,7 +25,16 @@ export const assets: any = {
     dining: require('./images/homepage/Dining.png'),
     living: require('./images/homepage/Living.png'),
     syltherine: require('./images/homepage/Syltherine.png'),
-    //profile
+    // product-details-page
+    asgaardSofa1: require('./images/product-details-page/AsgaardSofa1.png'),
+    asgaardSofa2: require('./images/product-details-page/AsgaardSofa2.png'),
+    asgaardSofa3: require('./images/product-details-page/AsgaardSofa3.png'),
+    asgaardSofa4: require('./images/product-details-page/AsgaardSofa4.png'),
+    asgaardSofa5: require('./images/product-details-page/AsgaardSofa5.png'),
+    // description
+    asgaardSofa6: require('./images/description/AsgaardSofa6.png'),
+    asgaardSofa7: require('./images/description/AsgaardSofa7.png'),
+    // profile
     avatar: require('./images/avatar.jpg'),
     // footer
     freeShipping: require('./images/footer/FreeShipping.png'),

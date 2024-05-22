@@ -4,7 +4,7 @@ import { HomePage } from '../pages/Home';
 import { ShopPage } from '../pages/Shop/Shop';
 import { CheckoutPage } from '../pages/Checkout/Checkout';
 import { ContactPage } from '../pages/Contact';
-import { ProductDetailsPage } from '../pages/ProductDetail';
+import { ProductDetailsPage } from '../pages/ProductDetail/ProductDetail';
 import { AboutPage } from '../pages/About';
 import { ProfilePage } from './../pages/Profile';
 import { CartPage } from '../pages/Cart/Cart';

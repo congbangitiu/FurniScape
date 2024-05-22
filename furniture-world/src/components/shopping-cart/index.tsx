@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image, Button, Flex, Row, Typography, theme } from 'antd';
 import { customColors } from '../../theme';
-import { assets } from '../../assets';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './style.css';

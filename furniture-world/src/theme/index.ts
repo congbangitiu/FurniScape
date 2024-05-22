@@ -8,6 +8,8 @@ export const customColors = {
     colorSecondaryText: '#E97171',
     colorTertiaryText: '#3A3A3A',
     colorQuaternaryText: '#898989',
+    colorBgSecondary: '#F9F1E7',
+    colorYellow: '#FFC700',
 };
 
 export const theme: ThemeConfig = {
