@@ -8,9 +8,9 @@ export const store = configureStore({
         auth: authSlice.reducer,
         filter: filtersSlice.reducer,
     },
-    middleware: getDefaultMiddleware() => {
-        getDefaultMiddleware().concat()
-    }
+    // middleware: getDefaultMiddleware() => {
+    //     getDefaultMiddleware().concat()
+    // }
 });
 
 export type IRootState = ReturnType<typeof store.getState>;

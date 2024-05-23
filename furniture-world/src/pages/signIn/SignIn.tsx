@@ -22,7 +22,7 @@ import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
 import { userLogin } from 'src/redux/auth/signIn/signInAction';
-import './signIn.scss'
+import './signIn.scss';
 
 export interface IUserSignInData {
     username: string;
@@ -70,7 +70,9 @@ export const SignInPage = () => {
                         onFinish={onSubmit}
                         style={{ maxWidth: 350, margin: 'auto' }}
                     >
-                        <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
+                        <Link to="/">
+                            <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
+                        </Link>
 
                         <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input

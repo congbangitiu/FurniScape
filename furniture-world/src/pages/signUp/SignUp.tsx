@@ -64,7 +64,10 @@ export const SignUpPage = () => {
                 </div>
             </Col>
 
-            <Col span="10" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' ,overflowX: 'hidden'}}>
+            <Col
+                span="10"
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflowX: 'hidden' }}
+            >
                 <div style={{ width: '90%', padding: '30px 0 30px 0' }}>
                     <Form
                         name="register"
@@ -72,7 +75,9 @@ export const SignUpPage = () => {
                         onFinish={onSubmit}
                         style={{ maxWidth: 350, margin: 'auto' }}
                     >
-                        <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
+                        <Link to="/">
+                            <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
+                        </Link>
                         <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input
                                 prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
