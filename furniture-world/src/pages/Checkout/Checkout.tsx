@@ -1,8 +1,9 @@
 import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
 import { customColors } from '../../theme';
-import './Checkout.css';
+import './Checkout.scss';
 import countryList from '../../assets/data/countries.js';
 import { Banner } from '../../components/banner';
+import { CustomInputCheckout } from 'src/theme/customInput';
 
 const { Text } = Typography;
 
@@ -25,16 +26,7 @@ export const CheckoutPage = () => {
                             <Text style={{ color: '#000', fontWeight: 'bold', fontSize: '16px' }}>Your full name</Text>
                         }
                     >
-                        <Input
-                            placeholder="David"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -43,16 +35,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="David"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -97,16 +80,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout placeholder="This field is optional" />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -121,16 +95,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout placeholder="This field is optional" />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -145,16 +110,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout placeholder="This is field is optional" />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -169,16 +125,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout placeholder="This is field is optional" />
                     </Form.Item>
                     <Form.Item
                         label={
@@ -193,16 +140,7 @@ export const CheckoutPage = () => {
                             </Text>
                         }
                     >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
+                        <CustomInputCheckout placeholder="This is field is optional" />
                     </Form.Item>
                 </Form>
                 <Flex
