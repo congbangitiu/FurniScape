@@ -3,6 +3,10 @@ import { Flex, Row, Typography, Input, Button, Image, theme } from 'antd';
 import { customColors } from '../../theme';
 import { assets } from '../../assets';
 import './style.css';
+import { TypeIcon } from 'antd/es/message/PurePanel';
+import { CustomTypographyFooter } from 'src/theme/customTypography';
+import { CustomInputFooter } from 'src/theme/customInput';
+import { CustomButtonFooter } from 'src/theme/customButton';
 
 type Props = {};
 const { Text } = Typography;
@@ -57,7 +61,7 @@ export const Footer = (props: Props) => {
                     </Flex>
                 </Row>
             </Flex>
-            <Flex style={{ justifyContent: 'space-around', padding: '30px 0' }}>
+            <Flex style={{ justifyContent: 'space-around', padding: '48px 0' }}>
                 <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
                     <Image src={assets.logoImage} alt="" preview={false} style={{ width: '80px' }} />
                     <Text style={{ fontSize: '24px', fontWeight: '700' }}>FurniScape</Text>
@@ -82,49 +86,17 @@ export const Footer = (props: Props) => {
                     >
                         Links
                     </Text>
-                    <Link
-                        to="/"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Home
+                    <Link to="/" className="link">
+                        <CustomTypographyFooter> Home</CustomTypographyFooter>
                     </Link>
-                    <Link
-                        to="/shop"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Shop
+                    <Link to="/shop" className="link">
+                        <CustomTypographyFooter>Shop</CustomTypographyFooter>
                     </Link>
-                    <Link
-                        to="/about"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        About
+                    <Link to="/about" className="link">
+                        <CustomTypographyFooter>About</CustomTypographyFooter>
                     </Link>
-                    <Link
-                        to="/contact"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Contact
+                    <Link to="/contact">
+                        <CustomTypographyFooter>Contact</CustomTypographyFooter>
                     </Link>
                 </Flex>
                 <Flex style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -137,39 +109,16 @@ export const Footer = (props: Props) => {
                     >
                         Help
                     </Text>
-                    <Link
-                        to="/"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Payment Options
+                    <Link to="/" className="link">
+                        <CustomTypographyFooter>Payment options</CustomTypographyFooter>
                     </Link>
-                    <Link
-                        to="/"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Returns
+                    <Link to="/" className="link">
+                        <CustomTypographyFooter>Return</CustomTypographyFooter>
                     </Link>
-                    <Link
-                        to="/"
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            color: '#000',
-                        }}
-                        className="link"
-                    >
-                        Privacy Policies
+                    <Link to="/" className="link">
+                        <CustomTypographyFooter>Privacy policy</CustomTypographyFooter>
                     </Link>
+               
                 </Flex>
                 <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
                     <Text
@@ -182,11 +131,11 @@ export const Footer = (props: Props) => {
                         Newsletter
                     </Text>
                     <Flex style={{ marginTop: '20px', gap: '10px' }}>
-                        <Input
+                        <CustomInputFooter
                             placeholder="Enter your email address"
-                            style={{ backgroundColor: 'transparent', borderColor: token.colorPrimary }}
+                            // style={{ backgroundColor: 'transparent', borderColor: token.colorPrimary }}
                         />
-                        <Button>Subcribe</Button>
+                        <CustomButtonFooter style={{marginLeft:'10px'}}>Subcribe</CustomButtonFooter>
                     </Flex>
                 </Flex>
             </Flex>

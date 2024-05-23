@@ -158,7 +158,7 @@ export const CartPage = () => {
                 paddingTop: '50px',
             }}
         >
-            <Banner title="Card" />
+            <Banner title="Cart" />
             <Flex style={{ width: '70%', gap: '30px', marginTop: '50px' }}>
                 <Col style={{ width: '70%' }}>
                     <Table
