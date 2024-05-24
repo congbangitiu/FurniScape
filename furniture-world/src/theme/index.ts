@@ -1,5 +1,5 @@
 import { ThemeConfig } from 'antd';
-import { ButtonConfig } from 'antd/es/config-provider/context';
+import { ButtonConfig, MenuConfig } from 'antd/es/config-provider/context';
 
 export const customColors = {
     colorRedBadge: '#E97171',
@@ -18,7 +18,8 @@ export const theme: ThemeConfig = {
     token: {
         // fontFamily: 'BlinkMacSystemFont',
         colorPrimary: '#B88E2F',
-        colorBgContainer: '#FFF3E3',
+        // colorFillSecondary: '#FFF3E3',
+        // colorBgContainer: '#FFF3E3',
         colorPrimaryText: '#000000',
         colorPrimaryTextHover: '#9F9F9F',
     },
@@ -26,8 +27,14 @@ export const theme: ThemeConfig = {
         Menu: {
             groupTitleFontSize: 18,
         },
-        // Button: {
-        //     borderRadius: 0,
-        // },
+        Pagination: {
+            itemSize: 38,
+            itemActiveBg: '#FFF3E3',
+        }
     },
+    
 };
+
+export const menuConfig: MenuConfig = {
+    
+}

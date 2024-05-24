@@ -1,6 +1,6 @@
 import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
 import { customColors } from '../../theme';
-import './Checkout.css';
+import './Checkout.scss';
 import countryList from '../../assets/data/countries.js';
 import { Banner } from '../../components/banner';
 

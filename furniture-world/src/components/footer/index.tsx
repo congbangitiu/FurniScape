@@ -82,6 +82,7 @@ export const Footer = (props: Props) => {
                             fontSize: '18px',
                             fontWeight: '500',
                             color: customColors.colorQuaternaryText,
+                            marginBottom: '10px',
                         }}
                     >
                         Links
@@ -105,6 +106,7 @@ export const Footer = (props: Props) => {
                             fontSize: '18px',
                             fontWeight: '500',
                             color: customColors.colorQuaternaryText,
+                            marginBottom: '10px',
                         }}
                     >
                         Help
@@ -118,7 +120,9 @@ export const Footer = (props: Props) => {
                     <Link to="/" className="link">
                         <CustomTypographyFooter>Privacy policy</CustomTypographyFooter>
                     </Link>
-               
+                    <Link to="/" className="link">
+                        <CustomTypographyFooter>Store</CustomTypographyFooter>
+                    </Link>
                 </Flex>
                 <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
                     <Text
@@ -135,7 +139,7 @@ export const Footer = (props: Props) => {
                             placeholder="Enter your email address"
                             // style={{ backgroundColor: 'transparent', borderColor: token.colorPrimary }}
                         />
-                        <CustomButtonFooter style={{marginLeft:'10px'}}>Subcribe</CustomButtonFooter>
+                        <CustomButtonFooter style={{ marginLeft: '10px' }}>Subcribe</CustomButtonFooter>
                     </Flex>
                 </Flex>
             </Flex>

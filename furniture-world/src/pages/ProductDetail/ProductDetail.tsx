@@ -7,7 +7,7 @@ import { assets } from '../../assets';
 import { Description } from '../../components/description';
 import { Reviews } from '../../components/reviews';
 import { RatingForm } from '../../components/rating-form';
-import './style.css';
+import './style.scss';
 
 const { Text } = Typography;
 

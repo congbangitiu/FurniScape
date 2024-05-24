@@ -48,17 +48,7 @@ export const SignInPage = () => {
         <Row gutter={16} style={{ height: '100vh' }}>
             <Col style={{ display: 'flex' }} span="14">
                 <div className="backgroundSignIn">
-                    {/* <img
-                        src={assets.chairImg}
-                        style={{
-                            backgroundColor: 'transparent',
-                            borderRadius: '20px',
-                            maxWidth: '600px',
-                            maxHeight: '900px',
-                        }}
-                        alt="chair"
-                    /> */}
-                    <img src={assets.signInBG2} alt="" />
+                    <img src={assets.signInSignUpBG} alt="" />
                 </div>
             </Col>
 
@@ -114,44 +104,10 @@ export const SignInPage = () => {
                             Or <Link to="/signUp">Sign up now</Link>
                         </Form.Item>
 
-                        {/* <div style={{ textAlign: 'center' }}>
-                            <p>Or Sign in with:</p>
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <ButtonWithIcon
-                                    type="primary"
-                                    icon={<img src={assets.facebookLogo} />}
-                                    className="signUpWithButton"
-                                >
-                                    Facebook
-                                </ButtonWithIcon>
-                                <ButtonWithIcon
-                                    type="primary"
-                                    icon={<img src={assets.googleLogo} />}
-                                    style={{ width: '40%' }}
-                                >
-                                    Google
-                                </ButtonWithIcon>
-                            </div>
-                        </div> */}
                         <hr className="solid" style={{ width: '60%', color: 'red' }} />
                         <div style={{ textAlign: 'center' }}>
                             <p>Or Sign up with:</p>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                {/* <ButtonWithIcon
-                                    type="primary"
-                                    icon={<img src={assets.facebookLogo} />}
-                                    className="signUpWithButton"
-                                >
-                                    Facebook
-                                </ButtonWithIcon>
-                                <ButtonWithIcon
-                                    type="primary"
-                                    icon={<img src={assets.googleLogo} />}
-                                    style={{ width: '40%' }}
-                                >
-                                    Google
-                                </ButtonWithIcon> */}
-
                                 <FacebookFilled style={{ fontSize: '200%', margin: '0 10px 0 10px' }} />
 
                                 <GoogleOutlined style={{ fontSize: '200%', margin: '0 10px 0 10px' }} />

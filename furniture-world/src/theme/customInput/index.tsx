@@ -7,3 +7,8 @@ export const CustomInputFooter = styled(Input)({
     borderRadius: 0,
     backgroundColor: 'transparent',
 })
+
+
+export const CustomInputWithoutBG = styled(Input)({
+    backgroundColor: 'transparent',
+})

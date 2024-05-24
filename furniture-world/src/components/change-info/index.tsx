@@ -1,8 +1,10 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { Button, Flex, Form, Typography, Input, Image, Row, theme } from 'antd';
+import { Button, Flex, Form, Typography, Input, Image, Row, theme, Upload } from 'antd';
 import { customColors } from '../../theme';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { assets } from '../../assets';
+import { CustomInputWithoutBG } from 'src/theme/customInput';
 
 const { Text } = Typography;
 
@@ -89,6 +91,7 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                             </Text>
                         }
                     >
+                        {/* <CustomInputWithoutBG placeholder='Enter your email here' size='large'></CustomInputWithoutBG> */}
                         <Input
                             placeholder="Enter your email here"
                             style={{
@@ -152,7 +155,7 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                                 }}
                                 preview={{ mask: null }}
                             />
-                            <Input
+                            {/* <Input
                                 type="file"
                                 name="photo"
                                 id="customFile"
@@ -173,7 +176,10 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                                 }}
                             >
                                 Upload photo
-                            </label>
+                            </label> */}
+                            <Upload>
+                                <Button icon={<UploadOutlined />}>Change Avatar</Button>
+                            </Upload>
                         </Row>
                     </Form.Item>
                     <Form.Item
@@ -205,31 +211,32 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
 
                 <Flex style={{ justifyContent: 'center', gap: '100px', marginTop: '20px' }}>
                     <Button
+                        size="large"
                         type="primary"
                         style={{
-                            width: '100px',
-                            height: '50px',
-                            border: `2px solid ${token.colorPrimary}`,
-                            backgroundColor: '#fff',
-                            color: token.colorPrimary,
-                            boxShadow: `0 0 10px 0px ${token.colorPrimary}`,
-                            fontSize: '16px',
+                            // width: '100px',
+                            // height: '50px',
+                            // fontSize: '16px',
+                            fontWeight: '500',
+                        }}
+                    >
+                        Change
+                    </Button>
+                    <Button
+                        size="large"
+                        style={{
+                            // width: '100px',
+                            // height: '50px',
+                            // border: `2px solid ${token.colorPrimary}`,
+                            // backgroundColor: '#fff',
+                            // color: token.colorPrimary,
+                            // boxShadow: `0 0 10px 0px ${token.colorPrimary}`,
+                            // fontSize: '16px',
                             fontWeight: '500',
                         }}
                         onClick={() => setIsChangeInfo(false)}
                     >
                         Cancel
-                    </Button>
-                    <Button
-                        type="primary"
-                        style={{
-                            width: '100px',
-                            height: '50px',
-                            fontSize: '16px',
-                            fontWeight: '500',
-                        }}
-                    >
-                        Change
                     </Button>
                 </Flex>
             </Form>

@@ -43,7 +43,7 @@ export const HomePage = () => {
                     style={{
                         position: 'absolute',
                         flexDirection: 'column',
-                        backgroundColor: token.colorBgContainer,
+                        backgroundColor: '#FFF3E3',
                         width: '500px',
                         right: '100px',
                         top: '25%',

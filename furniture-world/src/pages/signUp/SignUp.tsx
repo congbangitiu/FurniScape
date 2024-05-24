@@ -60,7 +60,7 @@ export const SignUpPage = () => {
                         }}
                         alt="chair"
                     /> */}
-                    <img src={assets.signInBG2} alt="img" />
+                    <img src={assets.signInSignUpBG} alt="img" />
                 </div>
             </Col>
 

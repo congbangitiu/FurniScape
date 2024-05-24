@@ -4,7 +4,7 @@ import { Banner } from '../../components/banner';
 import { Products } from '../../components/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import './style.css';
+import './style.scss';
 
 const { Text } = Typography;
 
@@ -69,6 +69,7 @@ export const ShopPage = () => {
             </Row>
             <Products />
             <Pagination
+            style={{marginTop: '40px'}}
                 showSizeChanger={false}
                 onChange={handlePageChange}
                 defaultCurrent={1}
