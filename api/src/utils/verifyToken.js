@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const errorHandler = require("./error");
-const { User } = require("../models");
+const { User, Product } = require("../models");
 
 const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token || req.headers["authorization"];
@@ -39,4 +39,15 @@ const verifyAdmin = (req, res, next) => {
   });
 }
 
-module.exports = { verifyToken , verifyAdmin};
+const getUserId = (jwtToken) => {
+  return jwt.verify(jwtToken, process.env.JWT_SECRET).id;
+};
+
+const getProduct = async (productId) => {
+  return await Product.findByPk(productId);
+};
+
+module.exports = {verifyToken , verifyAdmin, 
+                  getUserId, getProduct,
+                  
+                };
