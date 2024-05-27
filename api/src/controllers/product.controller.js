@@ -27,4 +27,13 @@ const addProducts = async (req, res, next) => {
     }
 };
 
-module.exports = { addProduct , addProducts};
+const getProducts = async (req, res, next) => {
+    try {
+        const products = await Product.findAll();
+        return res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { addProduct , addProducts, getProducts};
