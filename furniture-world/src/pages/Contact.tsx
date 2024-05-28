@@ -3,6 +3,7 @@ import { Flex, Row, Col, Typography, Form, Input, Button } from 'antd';
 import { customColors } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faLocationDot, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
+import { Banner } from 'src/components/banner';
 
 const { Text } = Typography;
 const { TextArea } = Input;
@@ -10,33 +11,7 @@ const { TextArea } = Input;
 export const ContactPage = () => {
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
-            <Flex style={{ position: 'relative' }}>
-                <img style={{ width: '100vw' }} src={assets.background} alt="" />
-                <Flex
-                    style={{
-                        position: 'absolute',
-                        top: '25%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
-                    <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>Contact</Text>
-                    <Flex
-                        style={{
-                            fontSize: '16px',
-                            fontWeight: '500',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '10px',
-                        }}
-                    >
-                        <b>Home</b> <FontAwesomeIcon icon={faGreaterThan} /> Contact{' '}
-                    </Flex>
-                </Flex>
-            </Flex>
+            <Banner title="Contact" />
             <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
                 <Text style={{ fontSize: '36px', fontWeight: '600' }}>Get In Touch With Us</Text>
                 <Text

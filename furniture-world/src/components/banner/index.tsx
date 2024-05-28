@@ -2,8 +2,7 @@ import { Flex, Typography } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { assets } from '../../assets';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
-
-const { Text } = Typography;
+import Title from 'antd/es/skeleton/Title';
 
 type BannerProps = {
     title: string;
@@ -24,7 +23,7 @@ export const Banner = ({ title }: BannerProps) => {
                 }}
             >
                 <img src={assets.logoImage} alt="Logo" style={{ width: '80px', height: '80px' }} />
-                <Text style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>{title}</Text>
+                <Typography style={{ fontSize: '50px', fontWeight: '500', margin: '10px 0' }}>{title}</Typography>
                 <Flex
                     style={{
                         fontSize: '16px',
@@ -34,7 +33,7 @@ export const Banner = ({ title }: BannerProps) => {
                         gap: '10px',
                     }}
                 >
-                    <b>Home</b> <FontAwesomeIcon icon={faGreaterThan} /> {title}{' '}
+                    <Typography>Home</Typography> <FontAwesomeIcon icon={faGreaterThan} /> <Typography>{title}</Typography>
                 </Flex>
             </Flex>
         </Flex>

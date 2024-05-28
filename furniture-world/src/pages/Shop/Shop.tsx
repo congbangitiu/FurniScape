@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex, Row, Typography, Input, Select, theme } from 'antd';
+import { Flex, Row, Typography, Input, Select, theme, Pagination, PaginationProps } from 'antd';
 import { Banner } from '../../components/banner';
 import { Products } from '../../components/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,10 +12,15 @@ export const ShopPage = () => {
     const { token } = theme.useToken();
     const pages = [1, 2, 3, 4, 5, 6];
     const [activePage, setActivePage] = useState<number>(1);
+    const [totalNumberItems, setTotalNumberItems] = useState<number>(100);
 
-    const handlePageClick = (newPage: number) => {
-        const updatedPage = Math.max(1, Math.min(newPage, pages.length));
-        setActivePage(updatedPage);
+    // const handlePageClick = (newPage: number) => {
+    //     const updatedPage = Math.max(1, Math.min(newPage, pages.length));
+    //     setActivePage(updatedPage);
+    // };
+
+    const handlePageChange: PaginationProps['onChange'] = (page: number) => {
+        setActivePage(page);
     };
 
     return (
@@ -63,7 +68,14 @@ export const ShopPage = () => {
                 </Row>
             </Row>
             <Products />
-            <Flex style={{ gap: '40px', marginTop: '50px' }}>
+            <Pagination
+                showSizeChanger={false}
+                onChange={handlePageChange}
+                defaultCurrent={1}
+                current={activePage}
+                total={totalNumberItems}
+            />
+            {/* <Flex style={{ gap: '40px', marginTop: '50px' }}>
                 <Flex
                     style={{
                         width: '40px',
@@ -122,7 +134,7 @@ export const ShopPage = () => {
                 >
                     <FontAwesomeIcon icon={faChevronRight} />
                 </Flex>
-            </Flex>
+            </Flex> */}
         </Flex>
     );
 };
