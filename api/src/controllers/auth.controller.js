@@ -54,7 +54,7 @@ const signin = async (req, res, next) => {
 const transporter = nodemailer.createTransport({
   service: "hotmail",
   auth: {
-    user: "onlinecvpr@hotmail.com",
+    user: "FurniScape@hotmail.com",
     pass: "123asdASD",
   },
 });
@@ -70,7 +70,7 @@ const forgotpassword = async (req, res, next) => {
     const link = `<a href=localhost:3000/resetpassword/${validUser.id}/${token}>ResetPassword</a>`;
 
     const resetmail = {
-      from: "onlinecvpr@hotmail.com",
+      from: "FurniScape@hotmail.com",
       to: validUser.email,
       subject: "Reset password request",
       text: "Your password can be reset by clicking Reset password link below, the link will be expired after 15m\nIf you did not request, please ignore this email.",
