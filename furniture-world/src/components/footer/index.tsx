@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Flex, Row, Typography, Input, Button, Image, theme } from 'antd';
 import { customColors } from '../../theme';
 import { assets } from '../../assets';
-import './style.css';
 import { TypeIcon } from 'antd/es/message/PurePanel';
 import { CustomTypographyFooter } from 'src/theme/customTypography';
 import { CustomInputFooter } from 'src/theme/customInput';

@@ -10,7 +10,7 @@ export const userSignUp = createAsyncThunk('auth/signUp', async (userData: IUser
                 'content-type': 'application/json',
             },
         };
-        axios.post(`${backendURL}/v1/user/signUp`, userData, config);
+        axios.post(`${backendURL}/user/signUp`, userData, config);
     } catch (error: any) {
         if (error.response && error.response.message) return rejectWithValue(error.response.message);
         else return rejectWithValue(error.response);

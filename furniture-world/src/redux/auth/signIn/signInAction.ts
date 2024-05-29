@@ -11,7 +11,7 @@ export const userLogin = createAsyncThunk('auth/signIn', async (userData: IUserS
                 'content-type': 'application/json',
             },
         };
-        const { data } = await axios.post(`${backendURL}/v1/user/signIn`, userData, config);
+        const { data } = await axios.post(`${backendURL}/user/signIn`, userData, config);
         localStorage.setItem('userToken', data?.userToken);
         return data;
     } catch (err: any) {
