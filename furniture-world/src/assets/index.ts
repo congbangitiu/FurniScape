@@ -40,6 +40,13 @@ export const assets: any = {
     // description
     asgaardSofa6: require('./images/description/AsgaardSofa6.png'),
     asgaardSofa7: require('./images/description/AsgaardSofa7.png'),
+    // about
+    company: require('./images/aboutpage/company.png'),
+    commitment: require('./images/aboutpage/commitment.jpg'),
+    GiaBao: require('./images/aboutpage/GiaBao.png'),
+    CongBang: require('./images/aboutpage/CongBang.png'),
+    MinhVu: require('./images/aboutpage/MinhVu.png'),
+    MinhHuy: require('./images/aboutpage/MinhHuy.jpg'),
     // profile
     avatar: require('./images/avatar.jpg'),
     // footer
