@@ -11,6 +11,9 @@ import './style.scss';
 import MenuItem from 'antd/es/menu/MenuItem';
 import { CustomNavbarBadge } from 'src/theme/customeBadge';
 import { CustomNavbarButton } from 'src/theme/customButton';
+import { useSelector } from 'react-redux';
+import { RootState } from '@reduxjs/toolkit/query';
+import { IRootState } from 'src/redux/store';
 
 const PurchasedItems = [
     {
@@ -52,7 +55,6 @@ const PurchasedItems = [
 ];
 
 export const Navbar = () => {
-    const [userLogin, setUserLogin] = useState(false);
     const ButtonMenu = [
         {
             label: 'user',
@@ -80,6 +82,8 @@ export const Navbar = () => {
             path: '/signUp',
         },
     ];
+
+    const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
 
     const navigate = useNavigate();
 
@@ -136,14 +140,16 @@ export const Navbar = () => {
                 >
                     <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                         <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
-                            <Badge>
-                                <Button
-                                    icon={ButtonMenu[0].icon}
-                                    style={{ background: 'transparent', border: 0 }}
-                                    size="large"
-                                    onClick={() => handleOnClickButton(ButtonMenu[0].path)}
-                                />
-                            </Badge>
+                            {isAuthenticated && (
+                                <Badge>
+                                    <Button
+                                        icon={ButtonMenu[0].icon}
+                                        style={{ background: 'transparent', border: 0 }}
+                                        size="large"
+                                        onClick={() => handleOnClickButton(ButtonMenu[0].path)}
+                                    />
+                                </Badge>
+                            )}
 
                             <Badge>
                                 <Button
@@ -177,7 +183,7 @@ export const Navbar = () => {
                                 />
                             </Badge>
 
-                            {userLogin && (
+                            {isAuthenticated && (
                                 <Badge>
                                     <Button
                                         icon={ButtonMenu[4].icon}

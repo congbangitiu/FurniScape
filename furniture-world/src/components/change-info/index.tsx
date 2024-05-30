@@ -1,10 +1,9 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import { Button, Flex, Form, Typography, Input, Image, Row, theme, Upload } from 'antd';
-import { customColors } from '../../theme';
+import { customColors } from 'src/theme';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { assets } from '../../assets';
-import { CustomInputWithoutBG } from 'src/theme/customInput';
+import { assets } from 'src/assets';
 
 const { Text } = Typography;
 

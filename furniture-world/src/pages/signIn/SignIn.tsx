@@ -21,7 +21,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
-import { userLogin } from 'src/redux/auth/signIn/signInAction';
+import { userLogin } from 'src/redux/api/authApi';
 import './signIn.scss';
 
 export interface IUserSignInData {

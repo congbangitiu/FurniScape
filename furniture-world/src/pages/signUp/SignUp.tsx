@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IAppDispatch, IRootState } from '../../redux/store';
-import { userSignUp } from 'src/redux/auth/signUp/signUpAction';
+import { userSignUp } from 'src/redux/api/authApi';
 
 export interface IUserSignUpData {
     username: string;
@@ -39,7 +39,11 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data: IUserSignUpData) => {
-        dispatch(userSignUp(data));
+        dispatch(userSignUp(data))
+        // .then((action)=> {
+        //     localStorage.setItem('accessToken', action.payload.token);
+        //     navigate('/')
+        // })
     };
 
     useEffect(() => {

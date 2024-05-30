@@ -1,7 +1,6 @@
-import { configureStore  } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import filtersSlice from '../components/Filters/filtersSlice';
-import signInSlice from './auth/signIn/signInSlice';
-import authSlice from './auth/authSlice';
+import authSlice from './api/authSlice';
 import { authApi } from 'src/constant/api/userAuthentication';
 import shoppingCartSlice from './shoppingCart/shoppingCartSlice';
 

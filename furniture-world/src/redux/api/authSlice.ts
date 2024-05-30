@@ -1,21 +1,20 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { userLogin } from './signIn/signInAction';
-import { userSignUp } from './signUp/signUpAction';
 import { IRootState } from '../store';
+import { UserForgotPassword, authApi, userLogin, userSignUp } from './authApi';
 
-const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+const accessToken = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : null;
 
-interface IUserLoginState {
+interface IUserState {
     userData: any | null;
-    userToken: string | null;
+    accessToken: string | null;
     loading: boolean;
     error: Object | null;
 }
 
-const initialState: IUserLoginState = {
+const initialState: IUserState = {
     userData: null,
-    userToken,
+    accessToken,
     loading: false,
     error: null,
 };
@@ -25,11 +24,11 @@ export default createSlice({
     initialState,
     reducers: {
         logOut: (state) => {
-            localStorage.removeItem('userToken');
+            localStorage.removeItem('accessToken');
             state.loading = false;
             state.error = null;
             state.userData = null;
-            state.userToken = null;
+            state.accessToken = null;
         },
         setCredentials: (state, { payload }) => {
             state.userData = payload;
@@ -45,7 +44,7 @@ export default createSlice({
             .addCase(userLogin.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.userData = payload;
-                state.userToken = payload.userToken;
+                state.accessToken = payload.accessToken;
             })
             .addCase(userLogin.rejected, (state, { payload }) => {
                 state.loading = false;
@@ -63,7 +62,8 @@ export default createSlice({
                 state.loading = false;
                 state.error = payload ? payload : null;
             });
+        // Forgot password
     },
 });
 
-// export const currentToken = (state: IRootState) => state.auth.userToken
+// export const currentToken = (state: IRootState) => state.authaccessToken.
