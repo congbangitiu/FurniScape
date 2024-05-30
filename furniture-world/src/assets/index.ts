@@ -1,7 +1,13 @@
 export const assets: any = {
     logo: require('./logo/logo.png'),
-    logoImage: require('./logo/logoImage.png'),
+    loginLogo: require('./logo/loginLogo.png'),
     faviconLogo: require('./logo/faviconLogo.png'),
+    facebookLogo: require('./logo/facebookLogo.png'),
+    googleLogo: require('./logo/googleLogo.png'),
+    decorImg: require('./logo/decorLogin.jpg'),
+    chairImg: require('./logo/chair.png'),
+    signInSignUpBG: require('./images/signInSignUpBG.jpg'),
+    logoImage: require('./logo/logoImage.png'),
     background: require('./images/background.png'),
     // homepage
     banner: require('./images/Banner.png'),
@@ -34,6 +40,13 @@ export const assets: any = {
     // description
     asgaardSofa6: require('./images/description/AsgaardSofa6.png'),
     asgaardSofa7: require('./images/description/AsgaardSofa7.png'),
+    // about
+    company: require('./images/aboutpage/company.png'),
+    commitment: require('./images/aboutpage/commitment.jpg'),
+    GiaBao: require('./images/aboutpage/GiaBao.png'),
+    CongBang: require('./images/aboutpage/CongBang.png'),
+    MinhVu: require('./images/aboutpage/MinhVu.png'),
+    MinhHuy: require('./images/aboutpage/MinhHuy.jpg'),
     // profile
     avatar: require('./images/avatar.jpg'),
     // footer

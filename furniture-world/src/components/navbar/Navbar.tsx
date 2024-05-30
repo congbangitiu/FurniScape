@@ -1,121 +1,104 @@
-import React, { useState } from 'react';
+import { Image, Menu, Col, Row, Button, Flex, ConfigProvider, theme, Badge, Dropdown, MenuProps, Popover } from 'antd';
+import React, { Component, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
-import { Menu, Col, Row, Button, Flex, ConfigProvider, theme } from 'antd';
-import { LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets';
+import { icons } from 'antd/es/image/PreviewGroup';
+import { LogoutOutlined, LoginOutlined, UserOutlined, SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart } from '../shopping-cart';
 import { Footer } from '../footer';
-import './style.css';
+import './style.scss';
+import MenuItem from 'antd/es/menu/MenuItem';
+import { CustomNavbarBadge } from 'src/theme/customeBadge';
+import { CustomNavbarButton } from 'src/theme/customButton';
+import { useSelector } from 'react-redux';
+import { RootState } from '@reduxjs/toolkit/query';
+import { IRootState } from 'src/redux/store';
 
-type Props = {};
+const PurchasedItems = [
+    {
+        image: assets.image1,
+        name: 'Asgaard sofa ',
+        quantity: 1,
+        price: '$250',
+    },
+    {
+        image: assets.image1,
+        name: 'Odin Coffee Table',
+        quantity: 2,
+        price: '$120',
+    },
+    {
+        image: assets.image1,
+        name: 'Thor Recliner Chair',
+        quantity: 1,
+        price: '$180',
+    },
+    {
+        image: assets.image1,
+        name: 'Loki Bookshelf',
+        quantity: 3,
+        price: '$75',
+    },
+    {
+        image: assets.image1,
+        name: 'Freya Dining Set',
+        quantity: 1,
+        price: '$500',
+    },
+    {
+        image: assets.image1,
+        name: 'Heimdall Wardrobe',
+        quantity: 1,
+        price: '$350',
+    },
+];
 
-export const Navbar = (props: Props) => {
-    const { token } = theme.useToken();
-    const [selectedKey, setSelectedKey] = useState<string | null>(null);
-    const [showShoppingCart, setShowShoppingCart] = useState(false);
-
-    const navigationMenu = [
-        {
-            label: 'Home',
-            key: '/',
-        },
-        {
-            label: 'Shop',
-            key: '/shop',
-        },
-        {
-            label: 'About',
-            key: '/about',
-        },
-        {
-            label: 'Contact',
-            key: '/contact',
-        },
-    ];
-
+export const Navbar = () => {
     const ButtonMenu = [
         {
             label: 'user',
-            icons: <UserOutlined style={{ fontSize: '18px' }} />,
-            key: '/profile',
+            icon: <UserOutlined style={{ fontSize: '18px' }} />,
+            path: '/profile',
         },
         {
             label: 'search',
-            icons: <SearchOutlined style={{ fontSize: '18px' }} />,
-            key: '/search',
+            icon: <SearchOutlined style={{ fontSize: '18px' }} />,
+            path: '/search',
         },
         {
             label: 'cart',
-            icons: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
-            key: '/cart',
+            icon: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
+            path: '/cart',
         },
         {
-            label: 'logout',
-            icons: <LoginOutlined style={{ fontSize: '18px' }} />,
-            key: '/logout',
+            label: 'signIn',
+            icon: <LoginOutlined style={{ fontSize: '18px' }} onClick={() => navigate('/signIn')} />,
+            path: '/signIn',
+        },
+        {
+            label: 'signOut',
+            icon: <LogoutOutlined style={{ fontSize: '18px' }} />,
+            path: '/signUp',
         },
     ];
+
+    const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
 
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const handleOnclickMenu = (key: any) => {
-        setSelectedKey(key.key);
-        navigate(key.key);
+    const handleOnClickButton = (path: string) => {
+        navigate(path);
     };
-
-    const handleOnClickButton = (key: string) => {
-        setSelectedKey(null);
-        navigate(key);
-    };
-
-    const PurchasedItems = [
-        {
-            image: assets.image1,
-            name: 'Asgaard sofa ',
-            quantity: 1,
-            price: '$250',
-        },
-        {
-            image: assets.image1,
-            name: 'Odin Coffee Table',
-            quantity: 2,
-            price: '$120',
-        },
-        {
-            image: assets.image1,
-            name: 'Thor Recliner Chair',
-            quantity: 1,
-            price: '$180',
-        },
-        {
-            image: assets.image1,
-            name: 'Loki Bookshelf',
-            quantity: 3,
-            price: '$75',
-        },
-        {
-            image: assets.image1,
-            name: 'Freya Dining Set',
-            quantity: 1,
-            price: '$500',
-        },
-        {
-            image: assets.image1,
-            name: 'Heimdall Wardrobe',
-            quantity: 1,
-            price: '$350',
-        },
-    ];
 
     return (
         <>
             <Row
                 gutter={16}
                 style={{
-                    paddingTop: '4px',
+                    padding: '8px 0 0px 0',
                     position: 'fixed',
+                    margin: '0',
                     zIndex: '50',
                     width: '100%',
                     backgroundColor: '#fff',
@@ -123,21 +106,31 @@ export const Navbar = (props: Props) => {
                     boxShadow: '0 0 10px rgba(0,0,0,0.2)',
                 }}
             >
-                <Col className="navbar_logo" span={4}>
+                <Col className="navbar_logo" span={6}>
                     <Link to="/">
-                        <img src={assets.logo} alt="logo" width={180} style={{ marginLeft: '20px' }} />
+                        <img src={assets.logo} alt="logo" width={180} style={{ padding: '0 0 4px 20px' }} />
                     </Link>
                 </Col>
 
-                <Col className="navbar_navigation" span={14} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Col className="navbar_navigation" span={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     <Menu
                         style={{ fontSize: '16px', fontWeight: '600', backgroundColor: '#fff' }}
                         theme="light"
                         mode="horizontal"
-                        selectedKeys={selectedKey ? [selectedKey] : [location.pathname]}
-                        items={navigationMenu}
-                        onClick={handleOnclickMenu}
-                    />
+                    >
+                        <MenuItem key={1} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                            <Link to="/">Home</Link>
+                        </MenuItem>
+                        <MenuItem key={2} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                            <Link to="/shop">Shop</Link>
+                        </MenuItem>
+                        <MenuItem key={3} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                            <Link to="/about">About</Link>
+                        </MenuItem>
+                        <MenuItem key={4} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                            <Link to="contact">Contact</Link>
+                        </MenuItem>
+                    </Menu>
                 </Col>
 
                 <Col
@@ -147,53 +140,62 @@ export const Navbar = (props: Props) => {
                 >
                     <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                         <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
-                            {ButtonMenu.map((button) => (
-                                <>
+                            {isAuthenticated && (
+                                <Badge>
                                     <Button
-                                        className="icon-button"
-                                        key={button.label}
-                                        type="text"
-                                        icon={button.icons}
+                                        icon={ButtonMenu[0].icon}
+                                        style={{ background: 'transparent', border: 0 }}
                                         size="large"
-                                        onClick={() => handleOnClickButton(button.key)}
-                                        onMouseEnter={() => button.label === 'cart' && setShowShoppingCart(true)}
-                                        onMouseLeave={() => button.label === 'cart' && setShowShoppingCart(false)}
-                                        style={location.pathname === button.key ? { color: '#B88E2F' } : undefined}
+                                        onClick={() => handleOnClickButton(ButtonMenu[0].path)}
                                     />
-                                    {button.label === 'cart' && PurchasedItems.length > 0 && (
-                                        <Flex
-                                            style={{
-                                                position: 'absolute',
-                                                top: '8px',
-                                                right: '88px',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                width: '15px',
-                                                height: '15px',
-                                                backgroundColor: token.colorPrimary,
-                                                color: '#fff',
-                                                fontSize: '10px',
-                                                fontWeight: '500',
-                                                borderRadius: '50px',
-                                            }}
-                                        >
-                                            {PurchasedItems.length}
-                                        </Flex>
-                                    )}
-                                </>
-                            ))}
+                                </Badge>
+                            )}
+
+                            <Badge>
+                                <Button
+                                    icon={ButtonMenu[1].icon}
+                                    style={{ background: 'transparent', border: 0 }}
+                                    size="large"
+                                    onClick={() => handleOnClickButton(ButtonMenu[1].path)}
+                                />
+                            </Badge>
+
+                            <Badge count={6} offset={[-8, 10]} size="small">
+                                <Popover
+                                    placement="bottomRight"
+                                    arrow={{ pointAtCenter: true }}
+                                    content={<ShoppingCart PurchasedItems={PurchasedItems} />}
+                                >
+                                    <Button
+                                        icon={ButtonMenu[2].icon}
+                                        size="large"
+                                        style={{ background: 'transparent', border: 0 }}
+                                    />
+                                </Popover>
+                            </Badge>
+
+                            <Badge>
+                                <Button
+                                    icon={ButtonMenu[3].icon}
+                                    style={{ background: 'transparent', border: 0 }}
+                                    size="large"
+                                    onClick={() => handleOnClickButton(ButtonMenu[3].path)}
+                                />
+                            </Badge>
+
+                            {isAuthenticated && (
+                                <Badge>
+                                    <Button
+                                        icon={ButtonMenu[4].icon}
+                                        style={{ background: 'transparent', border: 0 }}
+                                        size="large"
+                                        onClick={() => handleOnClickButton(ButtonMenu[4].path)}
+                                    />
+                                </Badge>
+                            )}
                         </ConfigProvider>
                     </Flex>
                 </Col>
-                {showShoppingCart && (
-                    <Flex
-                        className="shopping-cart"
-                        onMouseEnter={() => setShowShoppingCart(true)}
-                        onMouseLeave={() => setShowShoppingCart(false)}
-                    >
-                        <ShoppingCart PurchasedItems={PurchasedItems} />
-                    </Flex>
-                )}
             </Row>
 
             <Outlet />

@@ -9,7 +9,7 @@ import { faGreaterThan, faPlus, faMinus, faTrash } from '@fortawesome/free-solid
 import { assets } from '../../assets';
 import { Banner } from '../../components/banner';
 
-import './Cart.css';
+import './Cart.scss';
 
 const { Text } = Typography;
 

@@ -7,13 +7,9 @@ export const CustomInputFooter = styled(Input)({
     borderBottom: '1px solid',
     borderRadius: 0,
     backgroundColor: 'transparent',
-});
+})
 
-// Checkout input
-export const CustomInputCheckout = styled(Input)({
-    border: `1px solid ${customColors.lightGrayColor}`,
-    backgroundColor: '#fff',
-    width: '520px',
-    height: '50px',
-    fontSize: '16px',
-});
+
+export const CustomInputWithoutBG = styled(Input)({
+    backgroundColor: 'transparent',
+})

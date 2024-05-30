@@ -4,7 +4,7 @@ import { Image, Button, Flex, Row, Typography, theme } from 'antd';
 import { customColors } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import './style.css';
+import './style.scss';
 
 type Props = {};
 const { Text } = Typography;
@@ -25,13 +25,9 @@ export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
             style={{
                 flexDirection: 'column',
                 alignItems: 'center',
-                position: 'absolute',
                 right: '0',
                 backgroundColor: '#fff',
                 padding: '20px 30px 30px 30px',
-                borderRadius: '10px',
-                boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-                marginRight: '10px',
             }}
         >
             <Text style={{ fontSize: '22px', fontWeight: '600' }}>Shopping Cart</Text>

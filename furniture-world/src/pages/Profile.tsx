@@ -153,25 +153,18 @@ export const ProfilePage = () => {
                     </Flex>
                 </Flex>
                 <Button
+                    size="large"
                     style={{
-                        padding: '20px',
-                        fontSize: '18px',
-                        fontWeight: '500',
-                        border: `2px solid ${token.colorPrimary}`,
-                        boxShadow: `0 0px 5px 0px ${token.colorPrimary}`,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        color: token.colorPrimary,
+                        fontWeight: '600',
                     }}
                     onClick={() => setIsChangeInfo(true)}
                 >
-                    Change Information
+                    Change Infomation
                 </Button>
             </Flex>
-            <Flex
+            {/* <Flex
                 style={{
-                    width: '70%',
+                    width: '60%',
                     alignItems: 'center',
                     padding: '10px',
                     borderRadius: '10px',
@@ -217,15 +210,24 @@ export const ProfilePage = () => {
                         />
                     </Flex>
                 )}
-            </Flex>
+            </Flex> */}
             <Flex style={{ width: '70%', marginTop: '50px', flexDirection: 'column' }}>
-                <Text style={{ fontSize: '30px', fontWeight: '500' }}>Purchase History</Text>
+                <Flex justify="space-between">
+                    <Text style={{ fontSize: '30px', fontWeight: '500' }}>Purchase History</Text>
+                    <Input.Search
+                        size="large"
+                        placeholder="input search text"
+                        allowClear
+                        // onSearch={onSearch}
+                        style={{ width: '25%' }}
+                    />
+                </Flex>
                 <Flex
                     style={{
                         width: '100%',
                         marginTop: '30px',
                         justifyContent: 'space-between',
-                        backgroundColor: token.colorBgContainer,
+                        backgroundColor: '#FFF3E3',
                         borderRadius: '10px',
                         gap: '30px',
                     }}
@@ -242,7 +244,7 @@ export const ProfilePage = () => {
                                             {...props}
                                             style={{
                                                 ...props.style,
-                                                backgroundColor: token.colorBgContainer,
+                                                backgroundColor: '#FFF3E3',
                                                 textAlign: 'center',
                                                 fontSize: '18px',
                                             }}
@@ -255,7 +257,7 @@ export const ProfilePage = () => {
                                             {...props}
                                             style={{
                                                 ...props.style,
-                                                backgroundColor: token.colorBgContainer,
+                                                backgroundColor: '#FFF3E3',
                                                 textAlign: 'center',
                                                 fontSize: '16px',
                                             }}
@@ -393,36 +395,21 @@ export const ProfilePage = () => {
                                 </Text>
                             </Flex>
                         </Flex>
-                        <Flex style={{ justifyContent: 'flex-end', gap: '20px' }}>
+                        <Flex style={{ justifyContent: 'center', gap: '20px' }}>
                             <Button
+                                size="large"
                                 style={{
-                                    color: token.colorPrimary,
-                                    padding: '20px',
-                                    fontSize: '16px',
-                                    fontWeight: '500',
-                                    marginTop: '20px',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    border: `2px solid ${token.colorPrimary}`,
-                                    boxShadow: `0 0px 5px 0px ${token.colorPrimary}`,
+                                    margin: '30px',
+                                    fontWeight: '600',
                                 }}
                             >
                                 Rating
                             </Button>
                             <Button
+                                size="large"
                                 style={{
-                                    backgroundColor: token.colorPrimary,
-                                    color: '#fff',
-                                    padding: '20px',
-                                    fontSize: '16px',
-                                    fontWeight: '500',
-                                    marginTop: '20px',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    border: `2px solid ${token.colorPrimary}`,
-                                    boxShadow: `0 0px 5px 0px ${token.colorPrimary}`,
+                                    margin: '30px',
+                                    fontWeight: '600',
                                 }}
                             >
                                 Reorder
