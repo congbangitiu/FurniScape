@@ -1,5 +1,5 @@
 import { Image, Menu, Col, Row, Button, Flex, ConfigProvider, theme, Badge, Dropdown, MenuProps, Popover } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { assets } from '../../assets';
 import { icons } from 'antd/es/image/PreviewGroup';
@@ -9,11 +9,10 @@ import { ShoppingCart } from '../shopping-cart';
 import { Footer } from '../footer';
 import './style.scss';
 import MenuItem from 'antd/es/menu/MenuItem';
-import { CustomNavbarBadge } from 'src/theme/customeBadge';
-import { CustomNavbarButton } from 'src/theme/customButton';
 import { useSelector } from 'react-redux';
-import { RootState } from '@reduxjs/toolkit/query';
 import { IRootState } from 'src/redux/store';
+import { useDispatch } from 'react-redux';
+import { setSelectedPath } from 'src/redux/navbar';
 
 const PurchasedItems = [
     {
@@ -83,12 +82,34 @@ export const Navbar = () => {
         },
     ];
 
+    const location = useLocation();
+    const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
+    const dispatch = useDispatch();
     const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
-
     const navigate = useNavigate();
+    // Initialize the selected key based on the current URL path
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/':
+                dispatch(setSelectedPath('home'));
+                break;
+            case '/shop':
+                dispatch(setSelectedPath('shop'));
+                break;
+            case '/about':
+                dispatch(setSelectedPath('about'));
+                break;
+            case '/contact':
+                dispatch(setSelectedPath('contact'));
+                break;
+            default:
+                dispatch(setSelectedPath(''));
+        }
+    }, [location.pathname, dispatch]);
 
-    const handleOnClickButton = (path: string) => {
-        navigate(path);
+    // Update the selected key when a menu item is clicked
+    const handleOnClickButton = (e: any) => {
+        dispatch(setSelectedPath(e.key));
     };
 
     return (
@@ -117,17 +138,18 @@ export const Navbar = () => {
                         style={{ fontSize: '16px', fontWeight: '600', backgroundColor: '#fff' }}
                         theme="light"
                         mode="horizontal"
+                        selectedKeys={[selectedPath]}
                     >
-                        <MenuItem key={1} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                        <MenuItem key="home" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
                             <Link to="/">Home</Link>
                         </MenuItem>
-                        <MenuItem key={2} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                        <MenuItem key="shop" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
                             <Link to="/shop">Shop</Link>
                         </MenuItem>
-                        <MenuItem key={3} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                        <MenuItem key="about" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
                             <Link to="/about">About</Link>
                         </MenuItem>
-                        <MenuItem key={4} style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
+                        <MenuItem key="contact" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
                             <Link to="contact">Contact</Link>
                         </MenuItem>
                     </Menu>
@@ -146,7 +168,7 @@ export const Navbar = () => {
                                         icon={ButtonMenu[0].icon}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
-                                        onClick={() => handleOnClickButton(ButtonMenu[0].path)}
+                                        // onClick={() => handleOnClickButton(ButtonMenu[0].path)}
                                     />
                                 </Badge>
                             )}
@@ -156,7 +178,7 @@ export const Navbar = () => {
                                     icon={ButtonMenu[1].icon}
                                     style={{ background: 'transparent', border: 0 }}
                                     size="large"
-                                    onClick={() => handleOnClickButton(ButtonMenu[1].path)}
+                                    // onClick={() => handleOnClickButton(ButtonMenu[1].path)}
                                 />
                             </Badge>
 
@@ -179,7 +201,7 @@ export const Navbar = () => {
                                     icon={ButtonMenu[3].icon}
                                     style={{ background: 'transparent', border: 0 }}
                                     size="large"
-                                    onClick={() => handleOnClickButton(ButtonMenu[3].path)}
+                                    // onClick={() => handleOnClickButton(ButtonMenu[3].path)}
                                 />
                             </Badge>
 
@@ -189,7 +211,7 @@ export const Navbar = () => {
                                         icon={ButtonMenu[4].icon}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
-                                        onClick={() => handleOnClickButton(ButtonMenu[4].path)}
+                                        // onClick={() => handleOnClickButton(ButtonMenu[4].path)}
                                     />
                                 </Badge>
                             )}
