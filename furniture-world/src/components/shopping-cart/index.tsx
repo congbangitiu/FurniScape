@@ -97,7 +97,7 @@ export const ShoppingCart = () => {
                                             color: token.colorPrimary,
                                         }}
                                     >
-                                        {item.product.price}
+                                        ${item.product.price}
                                     </Text>
                                 </Row>
                             </Flex>
@@ -114,7 +114,7 @@ export const ShoppingCart = () => {
             <Row style={{ width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
                 <Text style={{ fontSize: '16px', fontWeight: '500' }}>Subtotal</Text>
                 <Text style={{ fontSize: '18px', fontWeight: '500', color: token.colorPrimary }}>
-                    {cart.totalPrice}
+                    ${cart.totalPrice}
                 </Text>
             </Row>
             <Row style={{ width: '100%', border: `1px solid ${customColors.colorQuaternaryText}`, margin: '20px 0' }} />
