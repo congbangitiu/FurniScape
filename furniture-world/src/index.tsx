@@ -6,13 +6,19 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ConfigProvider } from 'antd';
 import { theme } from './theme';
+import { Router } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from './components/scrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
             <ConfigProvider theme={theme}>
-                <App />
+                <BrowserRouter>
+                    <ScrollToTop />
+                    <App />
+                </BrowserRouter>
             </ConfigProvider>
         </Provider>
     </React.StrictMode>,

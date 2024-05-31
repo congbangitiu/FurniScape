@@ -17,6 +17,7 @@ export const ShopPage = () => {
 
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
         setCurrentPage(page);
+        window.scrollTo({top: 550, behavior: 'smooth'});
     };
     const totalProducts = products.length;
     const paginatedProducts: IProduct[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
