@@ -5,23 +5,22 @@ import { Products } from '../../components/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
+import { products } from 'src/assets/data/productData_temp';
+import { current } from '@reduxjs/toolkit';
+import { IProduct } from 'src/redux/product/cartSlice';
 
 const { Text } = Typography;
 
 export const ShopPage = () => {
-    const { token } = theme.useToken();
-    const pages = [1, 2, 3, 4, 5, 6];
-    const [activePage, setActivePage] = useState<number>(1);
-    const [totalNumberItems, setTotalNumberItems] = useState<number>(100);
-
-    // const handlePageClick = (newPage: number) => {
-    //     const updatedPage = Math.max(1, Math.min(newPage, pages.length));
-    //     setActivePage(updatedPage);
-    // };
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(8);
 
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
-        setActivePage(page);
+        setCurrentPage(page);
     };
+    const totalProducts = products.length;
+    const paginatedProducts: IProduct[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    console.log(paginatedProducts)
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
@@ -67,75 +66,16 @@ export const ShopPage = () => {
                     </Flex>
                 </Row>
             </Row>
-            <Products />
+            <Products products={paginatedProducts} />
             <Pagination
-            style={{marginTop: '40px'}}
+                style={{ marginTop: '40px' }}
                 showSizeChanger={false}
                 onChange={handlePageChange}
                 defaultCurrent={1}
-                current={activePage}
-                total={totalNumberItems}
+                current={currentPage}
+                total={totalProducts}
+                pageSize={pageSize}
             />
-            {/* <Flex style={{ gap: '40px', marginTop: '50px' }}>
-                <Flex
-                    style={{
-                        width: '40px',
-                        height: '40px',
-                        fontSize: '18px',
-                        fontWeight: '500',
-                        color: '#fff',
-                        backgroundColor: token.colorPrimary,
-                        borderRadius: '10px',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                    }}
-                    className={activePage <= 1 ? 'disabled' : 'normal'}
-                    onClick={() => handlePageClick(activePage - 1)}
-                >
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                </Flex>
-                <Flex style={{ gap: '20px' }}>
-                    {pages.map((page, index) => (
-                        <Flex
-                            style={{
-                                width: '40px',
-                                height: '40px',
-                                fontSize: '18px',
-                                fontWeight: '500',
-                                backgroundColor: token.colorPrimary,
-                                borderRadius: '10px',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                            }}
-                            key={index}
-                            onClick={() => handlePageClick(page)}
-                            className={activePage === page ? 'active' : 'normal'}
-                        >
-                            {page}
-                        </Flex>
-                    ))}
-                </Flex>
-                <Flex
-                    style={{
-                        width: '40px',
-                        height: '40px',
-                        fontSize: '18px',
-                        fontWeight: '500',
-                        color: '#fff',
-                        backgroundColor: token.colorPrimary,
-                        borderRadius: '10px',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                    }}
-                    className={activePage >= pages.length ? 'disabled' : 'normal'}
-                    onClick={() => handlePageClick(activePage + 1)}
-                >
-                    <FontAwesomeIcon icon={faChevronRight} />
-                </Flex>
-            </Flex> */}
         </Flex>
     );
 };

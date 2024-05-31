@@ -4,6 +4,7 @@ import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../assets';
 import { customColors } from '../theme';
 import { Products } from '../components/products';
+import { products } from 'src/assets/data/productData_temp';
 
 const { Text } = Typography;
 
@@ -34,6 +35,9 @@ export const HomePage = () => {
     const setHoveredImage = (index: number, isHovered: boolean) => {
         setHoveredImages((prev) => prev.map((hovered, i) => (i === index ? isHovered : hovered)));
     };
+
+    //temp data
+    const highlightProducts = products.slice(0, 8);
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
@@ -186,7 +190,7 @@ export const HomePage = () => {
                 >
                     Our Products
                 </Text>
-                <Products />
+                <Products products={highlightProducts} />
                 <Link to="/shop">
                     <Button
                         style={{

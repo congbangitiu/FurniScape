@@ -5,20 +5,22 @@ import { customColors } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
+import { IRootState } from 'src/redux/store';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { removeItem } from 'src/redux/product/cartSlice';
 
 type Props = {};
 const { Text } = Typography;
-type ShoppingCartProps = {
-    PurchasedItems: Array<{
-        image: string;
-        name: string;
-        quantity: number;
-        price: string;
-    }>;
-};
 
-export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
+export const ShoppingCart = () => {
     const { token } = theme.useToken();
+    const cart = useSelector((state: IRootState) => state.product);
+    const dispatch = useDispatch();
+
+    const handleRemoveItem = (id: string) => {
+        dispatch(removeItem(id));
+    };
 
     return (
         <Flex
@@ -44,9 +46,9 @@ export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
                 }}
                 className="item-list"
             >
-                {PurchasedItems.map((item, index) => (
+                {cart.items.map((item) => (
                     <Row
-                        key={index}
+                        key={item.product.id}
                         style={{
                             width: '100%',
                             justifyContent: 'space-between',
@@ -61,13 +63,13 @@ export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
                             }}
                         >
                             <Image
-                                src={item.image}
+                                src={item.product.image}
                                 alt=""
                                 preview={{ mask: null }}
                                 style={{ width: '60px', height: '60px', borderRadius: '10px' }}
                             ></Image>
                             <Flex style={{ flexDirection: 'column', gap: '5px' }}>
-                                <Text style={{ fontSize: '18px', fontWeight: '500' }}>{item.name}</Text>
+                                <Text style={{ fontSize: '18px', fontWeight: '500' }}>{item.product.name}</Text>
                                 <Row
                                     style={{
                                         fontSize: '16px',
@@ -95,7 +97,7 @@ export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
                                             color: token.colorPrimary,
                                         }}
                                     >
-                                        {item.price}
+                                        {item.product.price}
                                     </Text>
                                 </Row>
                             </Flex>
@@ -104,13 +106,16 @@ export const ShoppingCart = ({ PurchasedItems }: ShoppingCartProps) => {
                             icon={faCircleXmark}
                             style={{ fontSize: '18px', color: customColors.colorQuaternaryText, cursor: 'pointer' }}
                             className="close-btn"
+                            onClick={() => handleRemoveItem(item.product.id)}
                         />
                     </Row>
                 ))}
             </Flex>
             <Row style={{ width: '100%', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
                 <Text style={{ fontSize: '16px', fontWeight: '500' }}>Subtotal</Text>
-                <Text style={{ fontSize: '18px', fontWeight: '500', color: token.colorPrimary }}>Rs. 520,000.00</Text>
+                <Text style={{ fontSize: '18px', fontWeight: '500', color: token.colorPrimary }}>
+                    {cart.totalPrice}
+                </Text>
             </Row>
             <Row style={{ width: '100%', border: `1px solid ${customColors.colorQuaternaryText}`, margin: '20px 0' }} />
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>

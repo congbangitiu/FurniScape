@@ -6,39 +6,41 @@ import type { ThHTMLAttributes, TdHTMLAttributes, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { assets } from '../../assets';
-import { Banner } from '../../components/banner';
-
+import { assets } from 'src/assets';
 import './Cart.scss';
+import {
+    ICartState,
+    decreaseItemQuantity,
+    increaseItemQuantity,
+    removeItem,
+    updateItemQuantity,
+} from 'src/redux/product/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from 'src/redux/store';
+import { Banner } from 'src/components/banner';
 
 const { Text } = Typography;
 
 export const CartPage = () => {
     const { token } = theme.useToken();
-    const [subtotal, setSubtotal] = useState(0);
     const [shippingFee, setShippingFee] = useState(50);
-
-    const data = [
-        { key: '1', image: assets.image1, name: 'Product 1', category: 'Category A', quantity: 1, price: 50 },
-        { key: '2', image: assets.image1, name: 'Product 2', category: 'Category B', quantity: 1, price: 70 },
-        { key: '3', image: assets.image1, name: 'Product 3', category: 'Category C', quantity: 1, price: 40 },
-        { key: '4', image: assets.image1, name: 'Product 4', category: 'Category D', quantity: 1, price: 90 },
-    ];
-
-    const [numberItems, setNumberItems] = useState<number[]>(new Array(data.length).fill(1));
-
-    const handleIncreaseItems = (index: number) => {
-        setNumberItems((currentItems) => currentItems.map((item, idx) => (idx === index ? item + 1 : item)));
+    const dispatch = useDispatch();
+    const cart = useSelector((state: IRootState) => state.product);
+    const handleIncreaseItems = (id: string) => {
+        console.log(id);
+        dispatch(increaseItemQuantity(id));
     };
 
-    const handleDecreaseItems = (index: number) => {
-        setNumberItems((currentItems) =>
-            currentItems.map((item, idx) => (idx === index && item > 0 ? item - 1 : item)),
-        );
+    const handleDecreaseItems = (id: string) => {
+        dispatch(decreaseItemQuantity(id));
     };
 
-    const Quantity = (props: { index: number; value: number }) => {
-        const { index, value } = props;
+    const handleRemoveItem = (id: string) => {
+        dispatch(removeItem(id));
+    };
+
+    const Quantity = (props: { id: string; value: number }) => {
+        const { id, value } = props;
         return (
             <Row style={{ fontSize: '18px', justifyContent: 'center', alignItems: 'center', gap: '20px' }}>
                 <Flex
@@ -52,7 +54,7 @@ export const CartPage = () => {
                         cursor: 'pointer',
                     }}
                     className="quantity-icon"
-                    onClick={() => handleDecreaseItems(index)}
+                    onClick={() => handleDecreaseItems(id)}
                 >
                     <FontAwesomeIcon icon={faMinus} style={{ fontSize: '14px' }} />
                 </Flex>
@@ -68,7 +70,7 @@ export const CartPage = () => {
                         cursor: 'pointer',
                     }}
                     className="quantity-icon"
-                    onClick={() => handleIncreaseItems(index)}
+                    onClick={() => handleIncreaseItems(id)}
                 >
                     <FontAwesomeIcon icon={faPlus} style={{ fontSize: '14px' }} />
                 </Flex>
@@ -81,21 +83,27 @@ export const CartPage = () => {
         return <Text style={{ fontSize: '16px' }}>${price * quantity}.00</Text>;
     };
 
-    const dataSource = data.map((datumn, index) => {
+    const dataSource = cart.items.map((item) => {
         return {
-            key: datumn.key,
+            key: item.product.id,
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={datumn.image}
+                    src={item.product.image}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
-            name: datumn.name,
-            category: datumn.category,
-            quantity: <Quantity index={index} value={numberItems[index]} />,
-            price: <Price price={datumn.price} quantity={numberItems[index]} />,
-            delete: <FontAwesomeIcon icon={faTrash} className="delete-icon" />,
+            name: item.product.name,
+            category: item.product.category,
+            quantity: <Quantity id={item.product.id} value={item.quantity} />,
+            price: <Price price={item.product.price} quantity={item.quantity} />,
+            delete: (
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    className="delete-icon"
+                    onClick={() => handleRemoveItem(item.product.id)}
+                />
+            ),
         };
     });
 
@@ -139,14 +147,6 @@ export const CartPage = () => {
             key: 'delete',
         },
     ];
-
-    useEffect(() => {
-        const newTotal = numberItems.reduce((acc, quantity, index) => {
-            return acc + quantity * data[index].price;
-        }, 0);
-
-        setSubtotal(newTotal);
-    }, [numberItems]);
 
     return (
         <Flex
@@ -232,7 +232,7 @@ export const CartPage = () => {
                                 color: customColors.colorQuaternaryText,
                             }}
                         >
-                            ${subtotal}.00
+                            ${cart.totalPrice}.00
                         </Text>
                     </Row>
                     <Row
@@ -288,7 +288,7 @@ export const CartPage = () => {
                                 color: token.colorPrimary,
                             }}
                         >
-                            ${subtotal + shippingFee}.00
+                            ${cart.totalPrice + shippingFee}.00
                         </Text>
                     </Row>
                     <Link to="/checkout" style={{ marginTop: '50px' }}>
