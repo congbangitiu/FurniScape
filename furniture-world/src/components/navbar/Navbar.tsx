@@ -14,44 +14,42 @@ import { IRootState } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { setSelectedPath } from 'src/redux/navbar';
 
-const PurchasedItems = [
-    {
-        image: assets.image1,
-        name: 'Asgaard sofa ',
-        quantity: 1,
-        price: '$250',
-    },
-    {
-        image: assets.image1,
-        name: 'Odin Coffee Table',
-        quantity: 2,
-        price: '$120',
-    },
-    {
-        image: assets.image1,
-        name: 'Thor Recliner Chair',
-        quantity: 1,
-        price: '$180',
-    },
-    {
-        image: assets.image1,
-        name: 'Loki Bookshelf',
-        quantity: 3,
-        price: '$75',
-    },
-    {
-        image: assets.image1,
-        name: 'Freya Dining Set',
-        quantity: 1,
-        price: '$500',
-    },
-    {
-        image: assets.image1,
-        name: 'Heimdall Wardrobe',
-        quantity: 1,
-        price: '$350',
-    },
-];
+//         image: assets.image1,
+//         name: 'Asgaard sofa ',
+//         quantity: 1,
+//         price: '$250',
+//     },
+//     {
+//         image: assets.image1,
+//         name: 'Odin Coffee Table',
+//         quantity: 2,
+//         price: '$120',
+//     },
+//     {
+//         image: assets.image1,
+//         name: 'Thor Recliner Chair',
+//         quantity: 1,
+//         price: '$180',
+//     },
+//     {
+//         image: assets.image1,
+//         name: 'Loki Bookshelf',
+//         quantity: 3,
+//         price: '$75',
+//     },
+//     {
+//         image: assets.image1,
+//         name: 'Freya Dining Set',
+//         quantity: 1,
+//         price: '$500',
+//     },
+//     {
+//         image: assets.image1,
+//         name: 'Heimdall Wardrobe',
+//         quantity: 1,
+//         price: '$350',
+//     },
+// ];
 
 export const Navbar = () => {
     const ButtonMenu = [
@@ -83,11 +81,15 @@ export const Navbar = () => {
     ];
 
     const location = useLocation();
-    const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
     const dispatch = useDispatch();
+    const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
     const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
+    const products = useSelector((state: IRootState) => state.product.items);
+    const cartProductCount = products.reduce((total, product) => {
+        return total + product.quantity;
+    }, 0);
     const navigate = useNavigate();
-    // Initialize the selected key based on the current URL path
+
     useEffect(() => {
         switch (location.pathname) {
             case '/':
@@ -106,11 +108,6 @@ export const Navbar = () => {
                 dispatch(setSelectedPath(''));
         }
     }, [location.pathname, dispatch]);
-
-    // Update the selected key when a menu item is clicked
-    const handleOnClickButton = (e: any) => {
-        dispatch(setSelectedPath(e.key));
-    };
 
     return (
         <>
@@ -182,11 +179,11 @@ export const Navbar = () => {
                                 />
                             </Badge>
 
-                            <Badge count={6} offset={[-8, 10]} size="small">
+                            <Badge count={cartProductCount} offset={[-8, 10]} size="small">
                                 <Popover
                                     placement="bottomRight"
                                     arrow={{ pointAtCenter: true }}
-                                    content={<ShoppingCart PurchasedItems={PurchasedItems} />}
+                                    content={<ShoppingCart />}
                                 >
                                     <Button
                                         icon={ButtonMenu[2].icon}
