@@ -14,7 +14,7 @@ import {
     increaseItemQuantity,
     removeItem,
     updateItemQuantity,
-} from 'src/redux/product/cartSlice';
+} from 'src/redux/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from 'src/redux/store';
 import { Banner } from 'src/components/banner';
@@ -25,7 +25,7 @@ export const CartPage = () => {
     const { token } = theme.useToken();
     const [shippingFee, setShippingFee] = useState(50);
     const dispatch = useDispatch();
-    const cart = useSelector((state: IRootState) => state.product);
+    const cart = useSelector((state: IRootState) => state.cart);
     const handleIncreaseItems = (id: string) => {
         console.log(id);
         dispatch(increaseItemQuantity(id));

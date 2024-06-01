@@ -8,14 +8,14 @@ import './style.scss';
 import { IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { removeItem } from 'src/redux/product/cartSlice';
+import { removeItem } from 'src/redux/cart/cartSlice';
 
 type Props = {};
 const { Text } = Typography;
 
 export const ShoppingCart = () => {
     const { token } = theme.useToken();
-    const cart = useSelector((state: IRootState) => state.product);
+    const cart = useSelector((state: IRootState) => state.cart);
     const dispatch = useDispatch();
 
     const handleRemoveItem = (id: string) => {

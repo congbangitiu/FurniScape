@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme } from 'antd';
 import type { ThHTMLAttributes, TdHTMLAttributes } from 'react';
 import type { TableColumnsType } from 'antd';
-import { customColors } from '../theme';
+import { customColors, navBarHeight } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../assets';
@@ -130,7 +130,7 @@ export const ProfilePage = () => {
                 alignItems: 'center',
                 width: '100vw',
                 position: 'relative',
-                paddingTop: '50px',
+                paddingTop: `${navBarHeight}`,
             }}
         >
             <Flex style={{ width: '70%', justifyContent: 'space-between', alignItems: 'center', marginTop: '50px' }}>

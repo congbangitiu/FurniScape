@@ -18,8 +18,8 @@ function App() {
         <Routes>
             <Route path="/" element={<Navbar />}>
                 <Route index element={<HomePage />} />
-                <Route path="shop" element={<ShopPage />} />
-                <Route path="shop/products/:id" element={<ProductDetailsPage />} />
+                <Route path="shop/" element={<ShopPage />} />
+                <Route path="products/:id" element={<ProductDetailsPage />} />
                 <Route path="contact" element={<ContactPage />} />
                 <Route path="checkout" element={<CheckoutPage />} />
                 <Route path="about" element={<AboutPage />} />

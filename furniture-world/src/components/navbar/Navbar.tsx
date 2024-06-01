@@ -13,13 +13,14 @@ import { useSelector } from 'react-redux';
 import { IRootState } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { setSelectedPath } from 'src/redux/navbar';
+import { navBarHeight } from 'src/theme';
 
 export const Navbar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
     const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
-    const products = useSelector((state: IRootState) => state.product.items);
+    const products = useSelector((state: IRootState) => state.cart.items);
     const cartProductCount = products.reduce((total, product) => {
         return total + product.quantity;
     }, 0);

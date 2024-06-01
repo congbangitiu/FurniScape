@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../assets';
-import { customColors } from '../theme';
+import { customColors, navBarHeight } from '../theme';
 import { Products } from '../components/products';
 import { products } from 'src/assets/data/productData_temp';
 import Marquee from 'react-fast-marquee';
@@ -41,7 +41,7 @@ export const HomePage = () => {
     const highlightProducts = products.slice(0, 8);
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}` }}>
             <Flex style={{ position: 'relative' }}>
                 <Image style={{ width: '100vw' }} preview={{ mask: null }} src={assets.banner} alt="Banner" />
                 <Flex
@@ -191,7 +191,7 @@ export const HomePage = () => {
                 >
                     Our Products
                 </Text>
-                <Products products={highlightProducts} />
+                <Products productsDetailList={highlightProducts} />
                 <Link to="/shop">
                     <Button
                         style={{
