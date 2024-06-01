@@ -86,7 +86,7 @@ export const ProductDetailsPage = () => {
                             title: <Typography>Shop</Typography>,
                         },
                         {
-                            title: 'Products',
+                            title: <Typography>{productDetail?.product.name}</Typography>,
                         },
                     ]}
                 />
