@@ -7,17 +7,18 @@ import { customColors } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare, faCodeCompare } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { IProduct, addItem } from 'src/redux/product/cartSlice';
+import { IProduct, addItem } from 'src/redux/cart/cartSlice';
 import { PlusOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
+import { IProductInStock } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
-interface IProductList {
-    products: IProduct[];
+export interface IProductList {
+    productsDetailList: IProductInStock[]
 }
 
-export const Products: React.FC<IProductList> = ({ products }) => {
+export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
     const { token } = theme.useToken();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const navigate = useNavigate();
@@ -36,16 +37,16 @@ export const Products: React.FC<IProductList> = ({ products }) => {
                 marginTop: '20px',
             }}
         >
-            {products.map((product, index) => (
+            {productsDetailList.map((productDetail, index) => (
                 <Badge.Ribbon
-                    text={product.status}
-                    color={product.status !== 'New' ? 'red' : 'green'}
+                    text={productDetail.product.status}
+                    color={productDetail.product.status !== 'New' ? 'red' : 'green'}
                     style={{ fontSize: '15px' }}
                 >
                     <Card
                         hoverable
                         style={{ width: 300 }}
-                        cover={<Image alt="img" src={product.image} />}
+                        cover={<Image alt="img" src={productDetail.product.image} />}
                         actions={[
                             <Tooltip placement="bottom" title="Share">
                                 <ShareAltOutlined
@@ -57,16 +58,16 @@ export const Products: React.FC<IProductList> = ({ products }) => {
                                 <PlusOutlined
                                     key="addProduct"
                                     // style={{ margin: '5px' }}
-                                    onClick={() => handleAddProduct(product)}
+                                    onClick={() => handleAddProduct(productDetail.product)}
                                 />
                                 ,
                             </Tooltip>,
                         ]}
                     >
-                        <div onClick={() => navigate('/shop/products/:id')}>
-                            <Card.Meta title={product.name} description={product.description} />
+                        <div onClick={() => navigate(`/products/${productDetail.product.id}`)}>
+                            <Card.Meta title={productDetail.product.name} description={productDetail.product.description} />
                             <Typography.Title level={5} style={{ margin: '8px 0 0 0' }}>
-                                {product.price}$
+                                {productDetail.product.price}$
                             </Typography.Title>
                         </div>
                     </Card>

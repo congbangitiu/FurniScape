@@ -14,6 +14,8 @@ export const customColors = {
     colorYellow: '#FFC700',
 };
 
+export const navBarHeight: string = '67px';
+
 export const theme: ThemeConfig = {
     token: {
         // fontFamily: 'BlinkMacSystemFont',
@@ -30,11 +32,8 @@ export const theme: ThemeConfig = {
         Pagination: {
             itemSize: 38,
             itemActiveBg: '#FFF3E3',
-        }
+        },
     },
-    
 };
 
-export const menuConfig: MenuConfig = {
-    
-}
+export const menuConfig: MenuConfig = {};

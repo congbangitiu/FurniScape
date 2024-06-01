@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../assets';
-import { customColors } from '../theme';
+import { customColors, navBarHeight } from '../theme';
 import { Products } from '../components/products';
 import { products } from 'src/assets/data/productData_temp';
+import Marquee from 'react-fast-marquee';
 
 const { Text } = Typography;
 
@@ -40,7 +41,7 @@ export const HomePage = () => {
     const highlightProducts = products.slice(0, 8);
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}` }}>
             <Flex style={{ position: 'relative' }}>
                 <Image style={{ width: '100vw' }} preview={{ mask: null }} src={assets.banner} alt="Banner" />
                 <Flex
@@ -190,7 +191,7 @@ export const HomePage = () => {
                 >
                     Our Products
                 </Text>
-                <Products products={highlightProducts} />
+                <Products productsDetailList={highlightProducts} />
                 <Link to="/shop">
                     <Button
                         style={{
@@ -223,31 +224,35 @@ export const HomePage = () => {
                 <Text style={{ fontSize: '40px', fontWeight: '700', margin: '0px 0 20px 0' }}>
                     #FurniScapeFurniture
                 </Text>
-                <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(8, 2fr)', margin: '20px' }}>
-                    {images.map((img, index) => (
-                        <Image
-                            key={index}
-                            src={img}
-                            style={{
-                                objectFit: 'contain',
-                                cursor: 'pointer',
-                                transition: 'all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1)',
-                                transform: hoveredImages[index] ? 'scale(1.1)' : 'scale(1)',
-                            }}
-                            preview={{
-                                mask: null,
-                                style: {
+                <Marquee>
+                    <div
+                        style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(8, 2fr)', margin: '20px' }}
+                    >
+                        {images.map((img, index) => (
+                            <Image
+                                key={index}
+                                src={img}
+                                style={{
                                     objectFit: 'contain',
                                     cursor: 'pointer',
-                                    transition: 'all 0.1s cubic-bezier(0.15, 0.83, 0.66, 1)',
+                                    transition: 'all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1)',
                                     transform: hoveredImages[index] ? 'scale(1.1)' : 'scale(1)',
-                                },
-                            }}
-                            onMouseEnter={() => setHoveredImage(index, true)}
-                            onMouseLeave={() => setHoveredImage(index, false)}
-                        />
-                    ))}
-                </div>
+                                }}
+                                preview={{
+                                    mask: null,
+                                    style: {
+                                        objectFit: 'contain',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.1s cubic-bezier(0.15, 0.83, 0.66, 1)',
+                                        transform: hoveredImages[index] ? 'scale(1.1)' : 'scale(1)',
+                                    },
+                                }}
+                                onMouseEnter={() => setHoveredImage(index, true)}
+                                onMouseLeave={() => setHoveredImage(index, false)}
+                            />
+                        ))}
+                    </div>
+                </Marquee>
             </Flex>
         </Flex>
     );

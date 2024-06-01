@@ -13,78 +13,14 @@ import { useSelector } from 'react-redux';
 import { IRootState } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { setSelectedPath } from 'src/redux/navbar';
-
-//         image: assets.image1,
-//         name: 'Asgaard sofa ',
-//         quantity: 1,
-//         price: '$250',
-//     },
-//     {
-//         image: assets.image1,
-//         name: 'Odin Coffee Table',
-//         quantity: 2,
-//         price: '$120',
-//     },
-//     {
-//         image: assets.image1,
-//         name: 'Thor Recliner Chair',
-//         quantity: 1,
-//         price: '$180',
-//     },
-//     {
-//         image: assets.image1,
-//         name: 'Loki Bookshelf',
-//         quantity: 3,
-//         price: '$75',
-//     },
-//     {
-//         image: assets.image1,
-//         name: 'Freya Dining Set',
-//         quantity: 1,
-//         price: '$500',
-//     },
-//     {
-//         image: assets.image1,
-//         name: 'Heimdall Wardrobe',
-//         quantity: 1,
-//         price: '$350',
-//     },
-// ];
+import { navBarHeight } from 'src/theme';
 
 export const Navbar = () => {
-    const ButtonMenu = [
-        {
-            label: 'user',
-            icon: <UserOutlined style={{ fontSize: '18px' }} />,
-            path: '/profile',
-        },
-        {
-            label: 'search',
-            icon: <SearchOutlined style={{ fontSize: '18px' }} />,
-            path: '/search',
-        },
-        {
-            label: 'cart',
-            icon: <ShoppingCartOutlined style={{ fontSize: '18px' }} />,
-            path: '/cart',
-        },
-        {
-            label: 'signIn',
-            icon: <LoginOutlined style={{ fontSize: '18px' }} onClick={() => navigate('/signIn')} />,
-            path: '/signIn',
-        },
-        {
-            label: 'signOut',
-            icon: <LogoutOutlined style={{ fontSize: '18px' }} />,
-            path: '/signUp',
-        },
-    ];
-
     const location = useLocation();
     const dispatch = useDispatch();
     const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
     const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
-    const products = useSelector((state: IRootState) => state.product.items);
+    const products = useSelector((state: IRootState) => state.cart.items);
     const cartProductCount = products.reduce((total, product) => {
         return total + product.quantity;
     }, 0);
@@ -162,17 +98,16 @@ export const Navbar = () => {
                             {isAuthenticated && (
                                 <Badge>
                                     <Button
-                                        icon={ButtonMenu[0].icon}
+                                        icon={<UserOutlined style={{ fontSize: '18px' }} />}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
-                                        // onClick={() => handleOnClickButton(ButtonMenu[0].path)}
                                     />
                                 </Badge>
                             )}
 
                             <Badge>
                                 <Button
-                                    icon={ButtonMenu[1].icon}
+                                    icon={<SearchOutlined style={{ fontSize: '18px' }} />}
                                     style={{ background: 'transparent', border: 0 }}
                                     size="large"
                                     // onClick={() => handleOnClickButton(ButtonMenu[1].path)}
@@ -186,7 +121,7 @@ export const Navbar = () => {
                                     content={<ShoppingCart />}
                                 >
                                     <Button
-                                        icon={ButtonMenu[2].icon}
+                                        icon={<ShoppingCartOutlined style={{ fontSize: '18px' }} />}
                                         size="large"
                                         style={{ background: 'transparent', border: 0 }}
                                     />
@@ -195,17 +130,17 @@ export const Navbar = () => {
 
                             <Badge>
                                 <Button
-                                    icon={ButtonMenu[3].icon}
+                                    icon={<LoginOutlined style={{ fontSize: '18px' }} />}
                                     style={{ background: 'transparent', border: 0 }}
                                     size="large"
-                                    // onClick={() => handleOnClickButton(ButtonMenu[3].path)}
+                                    onClick={() => navigate('/signIn')}
                                 />
                             </Badge>
 
                             {isAuthenticated && (
                                 <Badge>
                                     <Button
-                                        icon={ButtonMenu[4].icon}
+                                        icon={<LogoutOutlined style={{ fontSize: '18px' }} />}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
                                         // onClick={() => handleOnClickButton(ButtonMenu[4].path)}

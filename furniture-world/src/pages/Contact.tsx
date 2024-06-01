@@ -1,6 +1,6 @@
 import { assets } from '../assets';
 import { Flex, Row, Col, Typography, Form, Input, Button } from 'antd';
-import { customColors } from '../theme';
+import { customColors, navBarHeight } from '../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan, faLocationDot, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Banner } from 'src/components/banner';
@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 export const ContactPage = () => {
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: '50px' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}`  }}>
             <Banner title="Contact" />
             <Flex style={{ flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
                 <Text style={{ fontSize: '36px', fontWeight: '600' }}>Get In Touch With Us</Text>

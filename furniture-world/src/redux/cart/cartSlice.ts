@@ -80,8 +80,8 @@ const totalPriceUpdating = (items: ICartItem[]) => {
     }, 0);
 };
 
-export const productSlice = createSlice({
-    name: 'product',
+export const cartSlice = createSlice({
+    name: 'cart',
     initialState,
     reducers: {
         addItem: (state, action) => {
@@ -103,10 +103,12 @@ export const productSlice = createSlice({
             state.totalPrice = totalPriceUpdating(state.items);
         },
         updateItemQuantity: (state, action) => {
-            const { productId, quantity } = action.payload;
-            const itemToUpdate = state.items.find((item) => item.product.id === productId);
+            const { product, quantity } = action.payload;
+            const itemToUpdate = state.items.find((item) => item.product.id === product.id);
             if (itemToUpdate) {
                 itemToUpdate.quantity += quantity;
+            } else {
+                state.items.push({ product: product, quantity: quantity });
             }
         },
         increaseItemQuantity: (state, action) => {
@@ -132,4 +134,4 @@ export const productSlice = createSlice({
 });
 
 export const { addItem, removeItem, increaseItemQuantity, decreaseItemQuantity, updateItemQuantity } =
-    productSlice.actions;
+    cartSlice.actions;

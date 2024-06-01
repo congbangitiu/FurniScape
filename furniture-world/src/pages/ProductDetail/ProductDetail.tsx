@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Flex, Row, Typography, Image, Col, theme } from 'antd';
-import { customColors } from '../../theme';
+import { Flex, Row, Typography, Image, Col, theme, Breadcrumb } from 'antd';
+import { customColors, navBarHeight } from '../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faStar, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../../assets';
@@ -8,6 +8,13 @@ import { Description } from '../../components/description';
 import { Reviews } from '../../components/reviews';
 import { RatingForm } from '../../components/rating-form';
 import './style.scss';
+import { HomeOutlined } from '@ant-design/icons';
+import { IProduct, updateItemQuantity } from 'src/redux/cart/cartSlice';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'src/redux/store';
+import { products } from 'src/assets/data/productData_temp';
+import { useDispatch } from 'react-redux';
 
 const { Text } = Typography;
 
@@ -15,9 +22,12 @@ export const ProductDetailsPage = () => {
     const { token } = theme.useToken();
     const [activeSize, setActiveSize] = useState<string>('L');
     const [activeColor, setActiveColor] = useState<string>('#816DFA');
-    const [purchasedItems, setPurchasedItems] = useState<number>(1);
+    const [quantity, setQuantity] = useState<number>(1);
     const [tab, setTab] = useState<string>('description');
     const [isRating, setIsRating] = useState(false);
+    const { id } = useParams<{ id: string }>();
+    const productDetail = products.find((productDetail) => productDetail.product.id === id);
+    const dispatch = useDispatch();
 
     const sizes = ['L', 'XL', 'XS'];
     const colors = ['#816DFA', '#000', '#B88E2F'];
@@ -29,16 +39,20 @@ export const ProductDetailsPage = () => {
         setActiveColor(color);
     };
 
-    const handleIncreasePurchasedItems = () => {
-        setPurchasedItems(purchasedItems + 1);
+    const handleIncreaseQuantity = () => {
+        setQuantity(quantity + 1);
     };
 
-    const handleDecreasePurchasedItems = () => {
-        if (purchasedItems <= 0) {
-            setPurchasedItems(0);
+    const handleDecreaseQuantity = () => {
+        if (quantity <= 0) {
+            setQuantity(0);
         } else {
-            setPurchasedItems(purchasedItems - 1);
+            setQuantity(quantity - 1);
         }
+    };
+
+    const handleAddToCart = (product?: IProduct) => {
+        dispatch(updateItemQuantity({ product, quantity }));
     };
 
     return (
@@ -47,7 +61,7 @@ export const ProductDetailsPage = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100vw',
-                paddingTop: '50px',
+                paddingTop: `${navBarHeight}`,
                 overflow: 'none',
             }}
         >
@@ -57,45 +71,29 @@ export const ProductDetailsPage = () => {
                     alignItems: 'center',
                     gap: '15px',
                     backgroundColor: customColors.colorBgSecondary,
-                    padding: '30px 100px',
+                    padding: '20px 100px',
                 }}
             >
-                <Text
-                    style={{
-                        fontSize: '18px',
-                        fontWeight: '400',
-                        color: customColors.colorQuaternaryText,
-                        lineHeight: '0',
-                    }}
-                >
-                    Home
-                </Text>
-                <FontAwesomeIcon icon={faChevronRight} style={{ fontSize: '16px', fontWeight: '400' }} />
-                <Text
-                    style={{
-                        fontSize: '18px',
-                        fontWeight: '400',
-                        color: customColors.colorQuaternaryText,
-                        lineHeight: '0',
-                    }}
-                >
-                    Shop
-                </Text>
-                <FontAwesomeIcon icon={faChevronRight} style={{ fontSize: '16px', fontWeight: '400' }} />
-                <Text
-                    style={{
-                        fontSize: '18px',
-                        fontWeight: '500',
-                        lineHeight: '0',
-                        color: token.colorPrimary,
-                    }}
-                >
-                    Asgaard sofa
-                </Text>
+                <Breadcrumb
+                    separator=">"
+                    items={[
+                        {
+                            href: '/',
+                            title: <HomeOutlined />,
+                        },
+                        {
+                            href: '/shop',
+                            title: <Typography>Shop</Typography>,
+                        },
+                        {
+                            title: 'Products',
+                        },
+                    ]}
+                />
             </Row>
             <Flex
                 style={{
-                    marginTop: '50px',
+                    marginTop: '100px',
                     justifyContent: 'space-between',
                     width: '100%',
                     padding: '0 100px',
@@ -162,7 +160,7 @@ export const ProductDetailsPage = () => {
                             fontWeight: '400',
                         }}
                     >
-                        Asgaard sofa
+                        {productDetail?.product.name}
                     </Text>
                     <Text
                         style={{
@@ -171,7 +169,7 @@ export const ProductDetailsPage = () => {
                             color: customColors.colorQuaternaryText,
                         }}
                     >
-                        Rs. 250,000.00
+                        {productDetail?.product.price}
                     </Text>
                     <Row style={{ alignItems: 'center', gap: '15px', marginTop: '10px' }}>
                         <Row style={{ alignItems: 'center', gap: '5px' }}>
@@ -315,7 +313,7 @@ export const ProductDetailsPage = () => {
                                     cursor: 'pointer',
                                     padding: '5px',
                                 }}
-                                onClick={handleDecreasePurchasedItems}
+                                onClick={handleDecreaseQuantity}
                             />
                             <Text
                                 style={{
@@ -326,7 +324,7 @@ export const ProductDetailsPage = () => {
                                     textAlign: 'center',
                                 }}
                             >
-                                {purchasedItems}
+                                {quantity}
                             </Text>
                             <FontAwesomeIcon
                                 icon={faPlus}
@@ -336,7 +334,7 @@ export const ProductDetailsPage = () => {
                                     cursor: 'pointer',
                                     padding: '5px',
                                 }}
-                                onClick={handleIncreasePurchasedItems}
+                                onClick={handleIncreaseQuantity}
                             />
                         </Row>
                         <Row
@@ -350,6 +348,7 @@ export const ProductDetailsPage = () => {
                                 color: '#fff',
                                 cursor: 'pointer',
                             }}
+                            onClick={() => handleAddToCart(productDetail?.product)}
                             className="add-btn"
                         >
                             Add to cart

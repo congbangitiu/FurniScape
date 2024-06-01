@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
 import { products } from 'src/assets/data/productData_temp';
-import { current } from '@reduxjs/toolkit';
-import { IProduct } from 'src/redux/product/cartSlice';
+import { IProduct } from 'src/redux/cart/cartSlice';
+import { navBarHeight } from 'src/theme';
+import { IProductInStock } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
@@ -17,13 +18,14 @@ export const ShopPage = () => {
 
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
         setCurrentPage(page);
+        window.scrollTo({ top: 550, behavior: 'smooth' });
     };
     const totalProducts = products.length;
-    const paginatedProducts: IProduct[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-    console.log(paginatedProducts)
+    const paginatedProducts: IProductInStock[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    console.log(paginatedProducts);
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: `${navBarHeight}` }}>
             <Banner title="Shop" />
             <Row
                 style={{
@@ -66,7 +68,7 @@ export const ShopPage = () => {
                     </Flex>
                 </Row>
             </Row>
-            <Products products={paginatedProducts} />
+            <Products productsDetailList={paginatedProducts} />
             <Pagination
                 style={{ marginTop: '40px' }}
                 showSizeChanger={false}

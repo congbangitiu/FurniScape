@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, Row, Image, Typography, theme } from 'antd';
 import { Banner } from '../components/banner';
 import { assets } from '../assets';
+import { navBarHeight } from 'src/theme';
 
 type Props = {};
 
@@ -34,7 +35,7 @@ export const AboutPage = (props: Props) => {
     ];
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
+        <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: `${navBarHeight}`  }}>
             <Banner title="About" />
             <Flex style={{ flexDirection: 'column', gap: '60px', width: '100%', marginTop: '50px' }}>
                 <Flex style={{ justifyContent: 'space-between', alignItems: 'center', padding: '0 100px' }}>
