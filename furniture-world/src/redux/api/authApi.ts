@@ -30,14 +30,14 @@ export const authApi = createApi({
     }),
 });
 
-export const userLogin = createAsyncThunk('auth/signIn', async (userData: IUserSignInData, { rejectWithValue }) => {
+export const userLogin = createAsyncThunk('auth/signin', async (userData: IUserSignInData, { rejectWithValue }) => {
     try {
-        const { data } = await axios.post(`${backendURL}/user/signIn`, userData, {
+        const { data } = await axios.post(`${backendURL}/auth/signin`, userData, {
             headers: {
                 'content-type': 'application/json',
             },
         });
-        localStorage.setItem('userToken', data?.userToken);
+        localStorage.setItem('accessToken', data?.userToken);
         return data;
     } catch (err: any) {
         if (err.response && err.response.message) {
@@ -48,9 +48,9 @@ export const userLogin = createAsyncThunk('auth/signIn', async (userData: IUserS
     }
 });
 
-export const userSignUp = createAsyncThunk('auth/signUp', async (userData: IUserSignUpData, { rejectWithValue }) => {
+export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUserSignUpData, { rejectWithValue }) => {
     try {
-        const { data } = await axios.post(`${backendURL}/user/signUp`, userData, {
+        const { data } = await axios.post(`${backendURL}/auth/signup`, userData, {
             headers: {
                 'content-type': 'application/json',
             },
@@ -68,7 +68,7 @@ export const UserForgotPassword = createAsyncThunk(
     'auth/forgotPassword',
     async (userData: IUserSignUpData, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post(`${backendURL}/user/forgotPassword`, userData, {
+            const { data } = await axios.post(`${backendURL}/api/forgotPassword`, userData, {
                 headers: {
                     'content-type': 'application/json',
                 },

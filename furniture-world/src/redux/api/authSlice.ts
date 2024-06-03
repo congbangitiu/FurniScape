@@ -56,6 +56,7 @@ export default createSlice({
             })
             .addCase(userSignUp.fulfilled, (state, { payload }) => {
                 state.loading = false;
+                state.userData = payload;
                 state.error = null;
             })
             .addCase(userSignUp.rejected, (state, { payload }) => {
