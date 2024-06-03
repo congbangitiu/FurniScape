@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IRootState } from '../store';
-import { UserForgotPassword, authApi, userLogin, userSignUp } from './authApi';
+import { UserForgotPassword, authApi, userSignIn, userSignOut, userSignUp } from './authApi';
+import Cookies from 'js-cookie';
 
 const accessToken = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : null;
 
@@ -19,12 +20,12 @@ const initialState: IUserState = {
     error: null,
 };
 
-export default createSlice({
+const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        logOut: (state) => {
-            localStorage.removeItem('accessToken');
+        signOut: (state) => {
+            Cookies.remove('accessToken')
             state.loading = false;
             state.error = null;
             state.userData = null;
@@ -37,20 +38,20 @@ export default createSlice({
     extraReducers: (builder) => {
         builder
             // Sign In
-            .addCase(userLogin.pending, (state) => {
+            .addCase(userSignIn.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(userLogin.fulfilled, (state, { payload }) => {
+            .addCase(userSignIn.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.userData = payload;
                 state.accessToken = payload.accessToken;
             })
-            .addCase(userLogin.rejected, (state, { payload }) => {
+            .addCase(userSignIn.rejected, (state, { payload }) => {
                 state.loading = false;
                 state.error = payload ? payload : null;
             })
-            // Sing Up
+            // Sign Up
             .addCase(userSignUp.pending, (state) => {
                 state.loading = true;
             })
@@ -63,8 +64,17 @@ export default createSlice({
                 state.loading = false;
                 state.error = payload ? payload : null;
             });
+        // Sign Out
+        // .addCase(userSignOut.fulfilled, (state) => {
+        //     state.loading = false;
+        //     state.userData = null;
+        //     state.accessToken = null;
+        // });
         // Forgot password
     },
 });
+
+export const { signOut, setCredentials } = authSlice.actions;
+export default authSlice;
 
 // export const currentToken = (state: IRootState) => state.authaccessToken.

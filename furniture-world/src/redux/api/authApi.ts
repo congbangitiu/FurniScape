@@ -5,6 +5,7 @@ import { backendURL } from 'src/constant/api/backendURL';
 import { IUserSignInData } from 'src/pages/signIn/SignIn';
 import { IUserSignUpData } from 'src/pages/signUp/SignUp';
 import { IRootState } from '../store';
+import Cookies from 'js-cookie';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -30,15 +31,15 @@ export const authApi = createApi({
     }),
 });
 
-export const userLogin = createAsyncThunk('auth/signin', async (userData: IUserSignInData, { rejectWithValue }) => {
+export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserSignInData, { rejectWithValue }) => {
     try {
         const { data } = await axios.post(`${backendURL}/auth/signin`, userData, {
             headers: {
                 'content-type': 'application/json',
             },
         });
-        localStorage.setItem('accessToken', data?.userToken);
-        return data;
+        Cookies.set('accessToken', data.cookie, { expires: 7 });
+        return data.validUser;
     } catch (err: any) {
         if (err.response && err.response.message) {
             return rejectWithValue(err.response.message);
@@ -56,11 +57,17 @@ export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUser
             },
         });
 
-        return data;
+        return data.user;
+        // const response = await axios.post(`${backendURL}/auth/signup`, userData);
+        // return response.data;
     } catch (error: any) {
         if (error.response && error.response.message) return rejectWithValue(error.response.message);
         else return rejectWithValue(error.response);
     }
+});
+
+export const userSignOut = createAsyncThunk('auth/signout', async () => {
+    localStorage.removeItem('accessToken');
 });
 
 // Future work

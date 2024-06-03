@@ -21,11 +21,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/query';
-import { userLogin } from 'src/redux/api/authApi';
+import { userSignIn } from 'src/redux/api/authApi';
 import './signIn.scss';
 
 export interface IUserSignInData {
-    username: string;
+    email: string;
     password: string;
     remember: boolean;
 }
@@ -36,8 +36,8 @@ export const SignInPage = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data: IUserSignInData) => {
-        console.log('Received values:', data);
-        dispatch(userLogin(data));
+        dispatch(userSignIn(data));
+        navigate('/');
     };
 
     useEffect(() => {
@@ -64,10 +64,10 @@ export const SignInPage = () => {
                             <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
                         </Link>
 
-                        <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
+                        <Form.Item name="email" rules={[{ required: true, message: 'Please input your username!' }]}>
                             <Input
                                 prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
-                                placeholder="Username"
+                                placeholder="Email"
                                 size="large"
                             />
                         </Form.Item>

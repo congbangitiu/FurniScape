@@ -14,6 +14,8 @@ import { IRootState } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { setSelectedPath } from 'src/redux/navbar';
 import { navBarHeight } from 'src/theme';
+import { userSignOut } from 'src/redux/api/authApi';
+import authSlice, { signOut } from 'src/redux/api/authSlice';
 
 export const Navbar = () => {
     const location = useLocation();
@@ -44,6 +46,10 @@ export const Navbar = () => {
                 dispatch(setSelectedPath(''));
         }
     }, [location.pathname, dispatch]);
+
+    const handleUserSignOut = () => {
+        dispatch(signOut());
+    };
 
     return (
         <>
@@ -128,14 +134,16 @@ export const Navbar = () => {
                                 </Popover>
                             </Badge>
 
-                            <Badge>
-                                <Button
-                                    icon={<LoginOutlined style={{ fontSize: '18px' }} />}
-                                    style={{ background: 'transparent', border: 0 }}
-                                    size="large"
-                                    onClick={() => navigate('/signIn')}
-                                />
-                            </Badge>
+                            {!isAuthenticated && (
+                                <Badge>
+                                    <Button
+                                        icon={<LoginOutlined style={{ fontSize: '18px' }} />}
+                                        style={{ background: 'transparent', border: 0 }}
+                                        size="large"
+                                        onClick={() => navigate('/signIn')}
+                                    />
+                                </Badge>
+                            )}
 
                             {isAuthenticated && (
                                 <Badge>
@@ -143,7 +151,7 @@ export const Navbar = () => {
                                         icon={<LogoutOutlined style={{ fontSize: '18px' }} />}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
-                                        // onClick={() => handleOnClickButton(ButtonMenu[4].path)}
+                                        onClick={() => handleUserSignOut()}
                                     />
                                 </Badge>
                             )}

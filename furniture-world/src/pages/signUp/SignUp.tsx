@@ -23,9 +23,16 @@ import { IAppDispatch, IRootState } from '../../redux/store';
 import { userSignUp } from 'src/redux/api/authApi';
 
 export interface IUserSignUpData {
-    username: string;
-    dateOfBirth: Date;
-    gender: string;
+    fullname: string;
+    phone: string;
+    address: string;
+    email: string;
+    password: string;
+}
+
+interface IUserSignUpFormData {
+    fullname: string;
+    phone: string;
     address: string;
     email: string;
     password: string;
@@ -38,8 +45,10 @@ export const SignUpPage = () => {
     const { userData } = useSelector((state: IRootState) => state.auth);
     const navigate = useNavigate();
 
-    const onSubmit = (data: IUserSignUpData) => {
-        dispatch(userSignUp(data))
+    const onSubmit = (data: IUserSignUpFormData) => {
+        const { confirmPassword, ...dataToSubmit } = data;
+        console.log(dataToSubmit);
+        dispatch(userSignUp(dataToSubmit));
         // .then((action)=> {
         //     localStorage.setItem('accessToken', action.payload.token);
         //     navigate('/')
@@ -54,16 +63,6 @@ export const SignUpPage = () => {
         <Row gutter={16} style={{ height: '100vh' }}>
             <Col span="14">
                 <div className="backgroundSignUp">
-                    {/* <img
-                        src={assets.chairImg}
-                        style={{
-                            backgroundColor: 'transparent',
-                            borderRadius: '20px',
-                            maxWidth: '600px',
-                            maxHeight: '900px',
-                        }}
-                        alt="chair"
-                    /> */}
                     <img src={assets.signInSignUpBG} alt="img" />
                 </div>
             </Col>
@@ -82,40 +81,6 @@ export const SignUpPage = () => {
                         <Link to="/">
                             <img src={assets.loginLogo} alt="loginLogo" width={190} style={{ marginBottom: '20px' }} />
                         </Link>
-                        <Form.Item name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
-                            <Input
-                                prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
-                                placeholder="Username"
-                                size="large"
-                            />
-                        </Form.Item>
-
-                        {/* <Form.Item
-                            name="dateOfBirth"
-                            rules={[{ required: true, message: 'Please select your date of birth!' }]}
-                        >
-                            <DatePicker  placeholder='Date of birth'/>
-                        </Form.Item>
-
-                        <Form.Item name="gender" rules={[{ required: true, message: 'Please select your gender!' }]}>
-                            <Select style={{width:'50%'}} placeholder="Select your gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </Select>
-                        </Form.Item> */}
-
-                        <Form.Item
-                            name="phoneNumber"
-                            rules={[{ required: true, message: 'Please input a valid phone number!' }]}
-                        >
-                            <Input
-                                type="number"
-                                prefix={<PhoneOutlined className="" style={{ marginRight: '6px' }} />}
-                                placeholder="Phone Number"
-                                size="large"
-                            />
-                        </Form.Item>
 
                         <Form.Item
                             name="email"
@@ -127,6 +92,26 @@ export const SignUpPage = () => {
                             <Input
                                 prefix={<MailOutlined className="" style={{ marginRight: '6px' }} />}
                                 placeholder="Email"
+                                size="large"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="fullname" rules={[{ required: true, message: 'Please input your username!' }]}>
+                            <Input
+                                prefix={<UserOutlined className="site-form-item-icon" style={{ marginRight: '6px' }} />}
+                                placeholder="Full Name"
+                                size="large"
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="phoneNumber"
+                            rules={[{ required: true, message: 'Please input a valid phone number!' }]}
+                        >
+                            <Input
+                                type="number"
+                                prefix={<PhoneOutlined className="" style={{ marginRight: '6px' }} />}
+                                placeholder="Phone Number"
                                 size="large"
                             />
                         </Form.Item>

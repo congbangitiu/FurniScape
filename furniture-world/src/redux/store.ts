@@ -4,6 +4,7 @@ import authSlice from './api/authSlice';
 import { navbarPathSlice } from './navbar';
 import { cartSlice } from './cart/cartSlice';
 import { productsSlice } from './products/productsSlice';
+import { authApi } from './api/authApi';
 
 export const store = configureStore({
     reducer: {
