@@ -7,14 +7,13 @@ const nodemailer = require("nodemailer");
 
 const signup = async (req, res, next) => {
   try {
-    const { email, username, fullname, phone, password, address, role } = req.body;
+    const { email, fullname, phone, password, address, role } = req.body;
     // console.log(req.body);
     const hashPassword = bcryptjs.hashSync(password, 10);
     //console.log(email, username, password, role);
     const [newUser, created] = await User.findOrCreate({
       where: { email },
       defaults: { 
-        name: username,
         fullname: fullname || username,
         phone: phone,
         password: hashPassword, 

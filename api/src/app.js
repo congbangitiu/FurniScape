@@ -12,6 +12,8 @@ const path = require("path");
 //export router
 const userRouter = require(`./routes/user.route`);
 const authRouter = require("./routes/auth.route");
+const productRouter = require("./routes/product.route");
+const orderRouter = require("./routes/order.route");
 
 //datebase setup
 const db = require("./models/index.js");
@@ -32,6 +34,8 @@ app.use(cookieParser());
 //patch
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
