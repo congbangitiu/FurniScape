@@ -17,7 +17,6 @@ export const HomePage = () => {
     const dispatch = useDispatch<IAppDispatch>();
     const productsInStock = useSelector((state: IRootState) => state.products.items);
     const productsStatus = useSelector((state: IRootState) => state.products.status);
-    console.log(productsInStock);
 
     const images = [
         assets.image1,

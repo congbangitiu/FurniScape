@@ -1,10 +1,11 @@
-import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme } from 'antd';
+import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme, Space, RadioChangeEvent } from 'antd';
 import { customColors } from '../../theme';
 import './Checkout.scss';
 import countryList from '../../assets/data/countries.js';
 import { Banner } from '../../components/banner';
 import { IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const { Text } = Typography;
 
@@ -12,7 +13,11 @@ export const CheckoutPage = () => {
     const { token } = theme.useToken();
     const cartItems = useSelector((state: IRootState) => state.cart);
     const userInfo = useSelector((state: IRootState) => state.auth.userData);
+    const [paymentMethod, setPaymentMethod] = useState('');
 
+    const onchangePaymentMethod = (e: RadioChangeEvent) => {
+        setPaymentMethod(e.target.value);
+    };
     const options = countryList.map((country, index) => ({
         value: index.toString(),
         label: country.label,
@@ -312,19 +317,49 @@ export const CheckoutPage = () => {
                             marginTop: '10px',
                         }}
                     ></Row>
-                    <Col>
+
+                    <Radio.Group onChange={onchangePaymentMethod} value={paymentMethod}>
+                        <Space direction="vertical">
+                            <Radio value={'banking'}>
+                                <Typography.Title level={4}>Direct Bank Transfer</Typography.Title>
+                                <Text
+                                    style={{
+                                        fontSize: '16px',
+                                        fontWeight: '300',
+                                        color: customColors.colorQuaternaryText,
+                                    }}
+                                >
+                                    Make your payment directly into our bank account. Please use your Order ID as the
+                                    payment reference. Your order will not be shipped until the funds have cleared in
+                                    our account.
+                                </Text>
+                            </Radio>
+
+                            <Radio value={'cash'}>
+                                <Typography.Title level={4}>Cash On Delivery</Typography.Title>
+                                <Text
+                                    style={{
+                                        fontSize: '16px',
+                                        fontWeight: '300',
+                                        color: customColors.colorQuaternaryText,
+                                    }}
+                                >
+                                    Pay for your order in cash upon delivery at your doorstep. No advance payment
+                                    required.
+                                </Text>
+                            </Radio>
+                        </Space>
+                    </Radio.Group>
+                    {/* <Col>
                         <Row
                             style={{
                                 width: '100%',
                                 marginTop: '20px',
                             }}
                         >
-                            <Radio style={{ fontSize: '18px', fontWeight: '500' }}> Direct Bank Transfer</Radio>
+                            <Radio style={{ fontSize: '18px', fontWeight: '500' }}> </Radio>
                         </Row>
-                        <Text style={{ fontSize: '16px', fontWeight: '300', color: customColors.colorQuaternaryText }}>
-                            Make your payment directly into our bank account. Please use your Order ID as the payment
-                            reference. Your order will not be shipped until the funds have cleared in our account.
-                        </Text>
+                       
                     </Col>
                     <Col>
                         <Row
@@ -335,10 +370,8 @@ export const CheckoutPage = () => {
                         >
                             <Radio style={{ fontSize: '18px', fontWeight: '500' }}> Cash On Delivery</Radio>
                         </Row>
-                        <Text style={{ fontSize: '16px', fontWeight: '300', color: customColors.colorQuaternaryText }}>
-                            Pay for your order in cash upon delivery at your doorstep. No advance payment required.
-                        </Text>
-                    </Col>
+                       
+                    </Col> */}
                     <Text style={{ fontSize: '16px', fontWeight: '500', marginTop: '20px', textAlign: 'justify' }}>
                         Your personal data will be used to support your experience throughout this website, to manage
                         access to your account, and for other purposes described in our <b>privacy policy</b>.
