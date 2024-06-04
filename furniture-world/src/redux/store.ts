@@ -11,8 +11,8 @@ export const store = configureStore({
         auth: authSlice.reducer,
         filter: filtersSlice.reducer,
         cart: cartSlice.reducer,
-        product: productsSlice.reducer,
         navbarPath: navbarPathSlice.reducer,
+        products: productsSlice.reducer,
     },
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });

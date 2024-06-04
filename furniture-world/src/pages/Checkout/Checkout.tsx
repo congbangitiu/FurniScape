@@ -3,11 +3,15 @@ import { customColors } from '../../theme';
 import './Checkout.scss';
 import countryList from '../../assets/data/countries.js';
 import { Banner } from '../../components/banner';
+import { IRootState } from 'src/redux/store';
+import { useSelector } from 'react-redux';
 
 const { Text } = Typography;
 
 export const CheckoutPage = () => {
     const { token } = theme.useToken();
+    const cartItems = useSelector((state: IRootState) => state.cart);
+    const userInfo = useSelector((state: IRootState) => state.auth.userData);
 
     const options = countryList.map((country, index) => ({
         value: index.toString(),
@@ -232,14 +236,17 @@ export const CheckoutPage = () => {
                         >
                             Product
                         </Text>
+
                         <Text
                             style={{
                                 fontSize: '25px',
                                 fontWeight: '500',
+                                textAlign: 'right',
                             }}
                         >
-                            Subtotal
+                            Price
                         </Text>
+                        {/* 
                         <Text
                             style={{
                                 fontSize: '16px',
@@ -249,7 +256,7 @@ export const CheckoutPage = () => {
                         >
                             Assgaard sofa x 1
                         </Text>
-                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. 250,000.00</Text>
+                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. </Text>
                         <Text
                             style={{
                                 fontSize: '16px',
@@ -259,7 +266,24 @@ export const CheckoutPage = () => {
                         >
                             Subtotal
                         </Text>
-                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. 250,000.00</Text>
+                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. 250,000.00</Text> */}
+
+                        {cartItems.items.map((item) => (
+                            <>
+                                <Text
+                                    style={{
+                                        fontSize: '16px',
+                                        fontWeight: '500',
+                                        color: customColors.colorQuaternaryText,
+                                    }}
+                                >
+                                    {`${item.name} x ${item.quantity}`}
+                                </Text>
+                                <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>
+                                    ${Number(item.price) * Number(item.quantity)}
+                                </Text>
+                            </>
+                        ))}
                     </Flex>
                     <Flex
                         style={{
@@ -278,7 +302,7 @@ export const CheckoutPage = () => {
                                 textAlign: 'right',
                             }}
                         >
-                            Rs. 250,000.00
+                            ${cartItems.totalPrice}
                         </Text>
                     </Flex>
                     <Row

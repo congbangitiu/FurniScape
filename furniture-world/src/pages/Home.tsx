@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../assets';
@@ -6,11 +6,18 @@ import { customColors, navBarHeight } from '../theme';
 import { Products } from '../components/products';
 import { products } from 'src/assets/data/productData_temp';
 import Marquee from 'react-fast-marquee';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppDispatch, IRootState } from 'src/redux/store';
+import { fetchProducts } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
 export const HomePage = () => {
     const { token } = theme.useToken();
+    const dispatch = useDispatch<IAppDispatch>();
+    const productsInStock = useSelector((state: IRootState) => state.products.items);
+    const productsStatus = useSelector((state: IRootState) => state.products.status);
+    console.log(productsInStock);
 
     const images = [
         assets.image1,
@@ -38,7 +45,10 @@ export const HomePage = () => {
     };
 
     //temp data
-    const highlightProducts = products.slice(0, 8);
+    const highlightProducts = productsInStock.slice(0, 8);
+    useEffect(() => {
+        if (productsStatus == 'idle') dispatch(fetchProducts());
+    });
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}` }}>

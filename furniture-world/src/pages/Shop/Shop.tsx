@@ -5,15 +5,17 @@ import { Products } from '../../components/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
-import { products } from 'src/assets/data/productData_temp';
 import { IProduct } from 'src/redux/cart/cartSlice';
 import { navBarHeight } from 'src/theme';
+import { IRootState } from 'src/redux/store';
+import { useSelector } from 'react-redux';
 
 const { Text } = Typography;
 
 export const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(8);
+    const products = useSelector((state: IRootState) => state.products.items);
 
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
         setCurrentPage(page);

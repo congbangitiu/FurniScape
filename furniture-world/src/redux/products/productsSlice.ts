@@ -4,26 +4,28 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
 import { getAllProductsAPI } from 'src/constant/api/productsAPI';
+import axios, { AxiosResponse } from 'axios';
 
 export const fetchProducts = createAsyncThunk('products/getAllProducts', async (_, { rejectWithValue }) => {
     try {
-        const products = await getAllProductsAPI();
-        return products;
-    } catch (error) {
-        return rejectWithValue(error);
+        const products = await axios.get(`${backendURL}/product/getProducts`);
+        return products.data;
+    } catch (error: any) {
+        if (error.response && error.response.message) return rejectWithValue(error.response.message);
+        else return rejectWithValue(error.message);
     }
 });
 
 export interface IProductInStock {
     items: IProduct[];
-    error: boolean | null;
-    loading: boolean;
+    error: Object | null;
+    status: string;
 }
 
 const initialState: IProductInStock = {
     items: [],
     error: null,
-    loading: false,
+    status: 'idle',
 };
 
 export const productsSlice = createSlice({
@@ -31,16 +33,17 @@ export const productsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchProducts.pending, (state) => {
-            state.loading = true;
-        })
-        .addCase(fetchProducts.fulfilled, (state, {payload: IProduct[]}) => {
-            state.loading = false;
-            state.items = payload
-        })
-        .addCase(fetchProducts.rejected, (state, {payload}) => {
-            state.loading=false
-            state.error = payload
-        })
+        builder
+            .addCase(fetchProducts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchProducts.fulfilled, (state, { payload }) => {
+                state.status = 'succeed';
+                state.items = payload;
+            })
+            .addCase(fetchProducts.rejected, (state, { payload }) => {
+                state.status = 'failed';
+                state.error = payload ?? null;
+            });
     },
 });

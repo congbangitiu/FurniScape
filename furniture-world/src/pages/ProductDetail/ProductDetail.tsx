@@ -13,7 +13,6 @@ import { IProduct, updateItemQuantity } from 'src/redux/cart/cartSlice';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'src/redux/store';
-import { products } from 'src/assets/data/productData_temp';
 import { useDispatch } from 'react-redux';
 
 const { Text } = Typography;
@@ -26,7 +25,9 @@ export const ProductDetailsPage = () => {
     const [tab, setTab] = useState<string>('description');
     const [isRating, setIsRating] = useState(false);
     const { id } = useParams<{ id: string }>();
-    const productDetail = products.find((productDetail) => productDetail.id === id);
+    const productDetail = useSelector((state: IRootState) => state.products.items).find(
+        (productDetail) => productDetail.id === id,
+    );
     const dispatch = useDispatch();
 
     const sizes = ['L', 'XL', 'XS'];

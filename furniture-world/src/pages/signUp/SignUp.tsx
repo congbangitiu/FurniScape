@@ -100,7 +100,7 @@ export const SignUpPage = () => {
                         </Form.Item>
 
                         <Form.Item
-                            name="phoneNumber"
+                            name="phone"
                             rules={[{ required: true, message: 'Please input a valid phone number!' }]}
                         >
                             <Input
