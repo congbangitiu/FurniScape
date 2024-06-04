@@ -24,7 +24,6 @@ export const SignInPage = () => {
 
     const onSubmit = (data: IUserData) => {
         dispatch(userSignIn(data));
-        navigate('/');
     };
 
     useEffect(() => {

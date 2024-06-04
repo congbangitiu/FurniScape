@@ -8,7 +8,6 @@ import './style.scss';
 import { products } from 'src/assets/data/productData_temp';
 import { IProduct } from 'src/redux/cart/cartSlice';
 import { navBarHeight } from 'src/theme';
-import { IProductInStock } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
@@ -21,8 +20,7 @@ export const ShopPage = () => {
         window.scrollTo({ top: 550, behavior: 'smooth' });
     };
     const totalProducts = products.length;
-    const paginatedProducts: IProductInStock[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-    console.log(paginatedProducts);
+    const paginatedProducts: IProduct[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: `${navBarHeight}` }}>

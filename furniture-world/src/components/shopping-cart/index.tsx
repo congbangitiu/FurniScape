@@ -48,7 +48,7 @@ export const ShoppingCart = () => {
             >
                 {cart.items.map((item) => (
                     <Row
-                        key={item.product.id}
+                        key={item.id}
                         style={{
                             width: '100%',
                             justifyContent: 'space-between',
@@ -63,13 +63,13 @@ export const ShoppingCart = () => {
                             }}
                         >
                             <Image
-                                src={item.product.image}
+                                src={item.image_dir}
                                 alt=""
                                 preview={{ mask: null }}
                                 style={{ width: '60px', height: '60px', borderRadius: '10px' }}
                             ></Image>
                             <Flex style={{ flexDirection: 'column', gap: '5px' }}>
-                                <Text style={{ fontSize: '18px', fontWeight: '500' }}>{item.product.name}</Text>
+                                <Text style={{ fontSize: '18px', fontWeight: '500' }}>{item.name}</Text>
                                 <Row
                                     style={{
                                         fontSize: '16px',
@@ -97,7 +97,7 @@ export const ShoppingCart = () => {
                                             color: token.colorPrimary,
                                         }}
                                     >
-                                        ${item.product.price}
+                                        ${item.price}
                                     </Text>
                                 </Row>
                             </Flex>
@@ -106,7 +106,7 @@ export const ShoppingCart = () => {
                             icon={faCircleXmark}
                             style={{ fontSize: '18px', color: customColors.colorQuaternaryText, cursor: 'pointer' }}
                             className="close-btn"
-                            onClick={() => handleRemoveItem(item.product.id)}
+                            onClick={() => handleRemoveItem(item.id)}
                         />
                     </Row>
                 ))}

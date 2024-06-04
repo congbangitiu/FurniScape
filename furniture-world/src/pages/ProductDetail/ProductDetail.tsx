@@ -26,7 +26,7 @@ export const ProductDetailsPage = () => {
     const [tab, setTab] = useState<string>('description');
     const [isRating, setIsRating] = useState(false);
     const { id } = useParams<{ id: string }>();
-    const productDetail = products.find((productDetail) => productDetail.product.id === id);
+    const productDetail = products.find((productDetail) => productDetail.id === id);
     const dispatch = useDispatch();
 
     const sizes = ['L', 'XL', 'XS'];
@@ -86,7 +86,7 @@ export const ProductDetailsPage = () => {
                             title: <Typography>Shop</Typography>,
                         },
                         {
-                            title: <Typography>{productDetail?.product.name}</Typography>,
+                            title: <Typography>{productDetail?.name}</Typography>,
                         },
                     ]}
                 />
@@ -160,7 +160,7 @@ export const ProductDetailsPage = () => {
                             fontWeight: '400',
                         }}
                     >
-                        {productDetail?.product.name}
+                        {productDetail?.name}
                     </Text>
                     <Text
                         style={{
@@ -169,7 +169,7 @@ export const ProductDetailsPage = () => {
                             color: customColors.colorQuaternaryText,
                         }}
                     >
-                        {productDetail?.product.price}
+                        {productDetail?.price}
                     </Text>
                     <Row style={{ alignItems: 'center', gap: '15px', marginTop: '10px' }}>
                         <Row style={{ alignItems: 'center', gap: '5px' }}>
@@ -348,7 +348,7 @@ export const ProductDetailsPage = () => {
                                 color: '#fff',
                                 cursor: 'pointer',
                             }}
-                            onClick={() => handleAddToCart(productDetail?.product)}
+                            onClick={() => handleAddToCart(productDetail)}
                             className="add-btn"
                         >
                             Add to cart

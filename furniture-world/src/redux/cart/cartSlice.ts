@@ -7,76 +7,63 @@ export interface IProduct {
     name: string;
     price: number;
     category: string;
-    image: any;
+    image_dir: any;
     description: string;
     discount?: number;
     status?: string;
-}
-
-// quantity each type of product
-export interface ICartItem {
-    product: IProduct;
     quantity: number;
 }
 
-export interface ICartState {
-    items: ICartItem[];
+export interface ICartItems {
+    items: IProduct[];
     totalPrice: number;
 }
 
-const initialState: ICartState = {
+const initialState: ICartItems = {
     items: [
         {
-            product: {
-                id: '0',
-                image: assets.image1,
-                name: 'Product 1',
-                category: 'CategoryA',
-                price: 50,
-                description: 'none',
-            },
+            id: '0',
+            image_dir: assets.image1,
+            name: 'Product 1',
+            category: 'CategoryA',
+            price: 50,
+            description: 'none',
             quantity: 1,
         },
         {
-            product: {
-                id: '1',
-                image: assets.image1,
-                name: 'Product 2',
-                category: 'Category B',
-                price: 50,
-                description: 'none',
-            },
+            id: '1',
+            image_dir: assets.image1,
+            name: 'Product 2',
+            category: 'Category B',
+            price: 50,
+            description: 'none',
             quantity: 1,
         },
         {
-            product: {
-                id: '2',
-                image: assets.image1,
-                name: 'Product 3',
-                category: 'Category C',
-                price: 50,
-                description: 'none',
-            },
+            id: '2',
+            image_dir: assets.image1,
+            name: 'Product 3',
+            category: 'Category C',
+            price: 50,
+            description: 'none',
             quantity: 1,
         },
         {
-            product: {
-                id: '3',
-                image: assets.image1,
-                name: 'Product 4',
-                category: 'Category D',
-                price: 50,
-                description: 'none',
-            },
+            id: '3',
+            image_dir: assets.image1,
+            name: 'Product 4',
+            category: 'Category D',
+            price: 50,
+            description: 'none',
             quantity: 1,
         },
     ],
     totalPrice: 200,
 };
 
-const totalPriceUpdating = (items: ICartItem[]) => {
+const totalPriceUpdating = (items: IProduct[]) => {
     return items.reduce((total, item) => {
-        return total + item.product.price * item.quantity;
+        return total + item.price * item.quantity;
     }, 0);
 };
 
@@ -86,34 +73,31 @@ export const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const newItem = action.payload;
-            const existingItem = state.items.find((item) => item.product.id === newItem.id);
+            const existingItem = state.items.find((item) => item.id === newItem.id);
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                state.items.push({
-                    product: newItem,
-                    quantity: 1,
-                });
+                state.items.push({ ...newItem, quantity: 1 });
             }
             state.totalPrice = totalPriceUpdating(state.items);
         },
         removeItem: (state, action) => {
             const productId = action.payload;
-            state.items = state.items.filter((item) => item.product.id !== productId);
+            state.items = state.items.filter((item) => item.id !== productId);
             state.totalPrice = totalPriceUpdating(state.items);
         },
         updateItemQuantity: (state, action) => {
             const { product, quantity } = action.payload;
-            const itemToUpdate = state.items.find((item) => item.product.id === product.id);
+            const itemToUpdate = state.items.find((item) => item.id === product.id);
             if (itemToUpdate) {
                 itemToUpdate.quantity += quantity;
             } else {
-                state.items.push({ product: product, quantity: quantity });
+                state.items.push({ ...product, quantity: quantity });
             }
         },
         increaseItemQuantity: (state, action) => {
             const productId = action.payload;
-            const itemIncrease = state.items.find((item) => item.product.id === productId);
+            const itemIncrease = state.items.find((item) => item.id === productId);
 
             if (itemIncrease) {
                 itemIncrease.quantity += 1;
@@ -122,11 +106,11 @@ export const cartSlice = createSlice({
         },
         decreaseItemQuantity: (state, action) => {
             const productId = action.payload;
-            const itemDecrease = state.items.find((item) => item.product.id === productId);
+            const itemDecrease = state.items.find((item) => item.id === productId);
             if (itemDecrease && itemDecrease.quantity > 1) {
                 itemDecrease.quantity -= 1;
             } else if (itemDecrease && itemDecrease.quantity === 1) {
-                state.items = state.items.filter((item) => item.product.id !== productId);
+                state.items = state.items.filter((item) => item.id !== productId);
             }
             state.totalPrice = totalPriceUpdating(state.items);
         },

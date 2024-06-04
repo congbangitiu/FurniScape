@@ -38,7 +38,7 @@ export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUser
             },
         });
         Cookies.set('accessToken', data.cookie, { expires: 7 });
-        return data.validUser;
+        return data;
     } catch (err: any) {
         if (err.response && err.response.message) {
             return rejectWithValue(err.response.message);

@@ -9,7 +9,7 @@ import { faGreaterThan, faPlus, faMinus, faTrash } from '@fortawesome/free-solid
 import { assets } from 'src/assets';
 import './Cart.scss';
 import {
-    ICartState,
+    ICartItems,
     decreaseItemQuantity,
     increaseItemQuantity,
     removeItem,
@@ -85,23 +85,23 @@ export const CartPage = () => {
 
     const dataSource = cart.items.map((item) => {
         return {
-            key: item.product.id,
+            key: item.id,
             image: (
                 <Image
                     preview={{ mask: null }}
-                    src={item.product.image}
+                    src={item.image_dir}
                     style={{ width: '80px', height: '80px', borderRadius: '10px' }}
                 />
             ),
-            name: item.product.name,
-            category: item.product.category,
-            quantity: <Quantity id={item.product.id} value={item.quantity} />,
-            price: <Price price={item.product.price} quantity={item.quantity} />,
+            name: item.name,
+            category: item.category,
+            quantity: <Quantity id={item.id} value={item.quantity} />,
+            price: <Price price={item.price} quantity={item.quantity} />,
             delete: (
                 <FontAwesomeIcon
                     icon={faTrash}
                     className="delete-icon"
-                    onClick={() => handleRemoveItem(item.product.id)}
+                    onClick={() => handleRemoveItem(item.id)}
                 />
             ),
         };

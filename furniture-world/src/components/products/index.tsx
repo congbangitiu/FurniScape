@@ -10,12 +10,11 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { IProduct, addItem } from 'src/redux/cart/cartSlice';
 import { PlusOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { IProductInStock } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
 export interface IProductList {
-    productsDetailList: IProductInStock[]
+    productsDetailList: IProduct[]
 }
 
 export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
@@ -39,14 +38,14 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
         >
             {productsDetailList.map((productDetail, index) => (
                 <Badge.Ribbon
-                    text={productDetail.product.status}
-                    color={productDetail.product.status !== 'New' ? 'red' : 'green'}
+                    text={productDetail.status}
+                    color={productDetail.status !== 'New' ? 'red' : 'green'}
                     style={{ fontSize: '15px' }}
                 >
                     <Card
                         hoverable
                         style={{ width: 300 }}
-                        cover={<Image alt="img" src={productDetail.product.image} />}
+                        cover={<Image alt="img" src={productDetail.image_dir} />}
                         actions={[
                             <Tooltip placement="bottom" title="Share">
                                 <ShareAltOutlined
@@ -58,16 +57,16 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
                                 <PlusOutlined
                                     key="addProduct"
                                     // style={{ margin: '5px' }}
-                                    onClick={() => handleAddProduct(productDetail.product)}
+                                    onClick={() => handleAddProduct(productDetail)}
                                 />
                                 ,
                             </Tooltip>,
                         ]}
                     >
-                        <div onClick={() => navigate(`/products/${productDetail.product.id}`)}>
-                            <Card.Meta title={productDetail.product.name} description={productDetail.product.description} />
+                        <div onClick={() => navigate(`/products/${productDetail.id}`)}>
+                            <Card.Meta title={productDetail.name} description={productDetail.description} />
                             <Typography.Title level={5} style={{ margin: '8px 0 0 0' }}>
-                                {productDetail.product.price}$
+                                {productDetail.price}$
                             </Typography.Title>
                         </div>
                     </Card>
