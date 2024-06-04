@@ -2,10 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import axios from 'axios';
 import { backendURL } from 'src/constant/api/backendURL';
-import { IUserSignInData } from 'src/pages/signIn/SignIn';
-import { IUserSignUpData } from 'src/pages/signUp/SignUp';
 import { IRootState } from '../store';
 import Cookies from 'js-cookie';
+import { IUserData } from './authSlice';
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -31,7 +30,7 @@ export const authApi = createApi({
     }),
 });
 
-export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserSignInData, { rejectWithValue }) => {
+export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserData, { rejectWithValue }) => {
     try {
         const { data } = await axios.post(`${backendURL}/auth/signin`, userData, {
             headers: {
@@ -49,7 +48,7 @@ export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUser
     }
 });
 
-export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUserSignUpData, { rejectWithValue }) => {
+export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUserData, { rejectWithValue }) => {
     try {
         const { data } = await axios.post(`${backendURL}/auth/signup`, userData, {
             headers: {
@@ -73,7 +72,7 @@ export const userSignOut = createAsyncThunk('auth/signout', async () => {
 // Future work
 export const UserForgotPassword = createAsyncThunk(
     'auth/forgotPassword',
-    async (userData: IUserSignUpData, { rejectWithValue }) => {
+    async (userData: IUserData, { rejectWithValue }) => {
         try {
             const { data } = await axios.post(`${backendURL}/api/forgotPassword`, userData, {
                 headers: {

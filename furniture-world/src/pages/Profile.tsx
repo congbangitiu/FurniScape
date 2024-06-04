@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../assets';
 import { ChangeInformation } from '../components/change-info';
+import { useSelector } from 'react-redux';
+import { IRootState } from 'src/redux/store';
+import { IUserData } from 'src/redux/api/authSlice';
 
 const { Text } = Typography;
 
@@ -14,6 +17,7 @@ export const ProfilePage = () => {
     const { token } = theme.useToken();
     const [query, setQuery] = useState('');
     const [isChangeInfo, setIsChangeInfo] = useState(false);
+    const userData: IUserData = useSelector((state: IRootState) => state.auth.userData);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -146,9 +150,9 @@ export const ProfilePage = () => {
                         }}
                     />
                     <Flex style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: '30px', fontWeight: '600' }}>Pham Gia Bao</Text>
+                        <Text style={{ fontSize: '30px', fontWeight: '600' }}>{userData.fullname}</Text>
                         <Text style={{ fontSize: '20px', fontWeight: '500', color: customColors.colorQuaternaryText }}>
-                            pgb@gmail.com
+                            {userData.email}
                         </Text>
                     </Flex>
                 </Flex>
@@ -159,7 +163,7 @@ export const ProfilePage = () => {
                     }}
                     onClick={() => setIsChangeInfo(true)}
                 >
-                    Change Infomation
+                    Change Information
                 </Button>
             </Flex>
             {/* <Flex

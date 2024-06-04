@@ -21,14 +21,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { userSignUp } from 'src/redux/api/authApi';
+import { IUserData } from 'src/redux/api/authSlice';
 
-export interface IUserSignUpData {
-    fullname: string;
-    phone: string;
-    address: string;
-    email: string;
-    password: string;
-}
+
 
 interface IUserSignUpFormData {
     fullname: string;
@@ -40,7 +35,7 @@ interface IUserSignUpFormData {
 }
 
 export const SignUpPage = () => {
-    const [userRegisterData, setUserRegisterData] = useState<IUserSignUpData>();
+    const [userRegisterData, setUserRegisterData] = useState<IUserData>();
     const dispatch = useDispatch<IAppDispatch>();
     const { userData } = useSelector((state: IRootState) => state.auth);
     const navigate = useNavigate();

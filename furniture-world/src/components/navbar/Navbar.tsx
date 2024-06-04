@@ -21,7 +21,7 @@ export const Navbar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
-    const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== null);
+    const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken !== undefined);
     const products = useSelector((state: IRootState) => state.cart.items);
     const cartProductCount = products.reduce((total, product) => {
         return total + product.quantity;
@@ -101,12 +101,13 @@ export const Navbar = () => {
                 >
                     <Flex gap="large" wrap="wrap" style={{ paddingTop: '4px' }}>
                         <ConfigProvider theme={{ components: { Button: { textHoverBg: '#ffffff' } } }}>
-                            {isAuthenticated && (
+                            {isAuthenticated !== undefined && (
                                 <Badge>
                                     <Button
                                         icon={<UserOutlined style={{ fontSize: '18px' }} />}
                                         style={{ background: 'transparent', border: 0 }}
                                         size="large"
+                                        onClick={() => navigate('/profile')}
                                     />
                                 </Badge>
                             )}
@@ -134,7 +135,7 @@ export const Navbar = () => {
                                 </Popover>
                             </Badge>
 
-                            {!isAuthenticated && (
+                            {isAuthenticated == undefined && (
                                 <Badge>
                                     <Button
                                         icon={<LoginOutlined style={{ fontSize: '18px' }} />}
@@ -145,7 +146,7 @@ export const Navbar = () => {
                                 </Badge>
                             )}
 
-                            {isAuthenticated && (
+                            {isAuthenticated !== undefined && (
                                 <Badge>
                                     <Button
                                         icon={<LogoutOutlined style={{ fontSize: '18px' }} />}

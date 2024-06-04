@@ -4,11 +4,18 @@ import { IRootState } from '../store';
 import { UserForgotPassword, authApi, userSignIn, userSignOut, userSignUp } from './authApi';
 import Cookies from 'js-cookie';
 
-const accessToken = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : null;
+const accessToken = Cookies.get('accessToken') ? Cookies.get('accessToken') : undefined; 
+export interface IUserData {
+    fullname: string;
+    phone: string;
+    address: string;
+    email: string;
+    password: string;
+}
 
 interface IUserState {
     userData: any | null;
-    accessToken: string | null;
+    accessToken: string | undefined;
     loading: boolean;
     error: Object | null;
 }
@@ -25,11 +32,11 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         signOut: (state) => {
-            Cookies.remove('accessToken')
+            Cookies.remove('accessToken');
             state.loading = false;
             state.error = null;
             state.userData = null;
-            state.accessToken = null;
+            state.accessToken = undefined;
         },
         setCredentials: (state, { payload }) => {
             state.userData = payload;

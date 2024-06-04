@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Checkbox, Row, Col, Alert } from 'antd';
-import {
-    EyeTwoTone,
-    EyeInvisibleOutlined,
-    UserOutlined,
-    LockOutlined,
-    FacebookOutlined,
-    LoadingOutlined,
-    GoogleOutlined,
-    PhoneOutlined,
-    FacebookFilled,
-    HomeOutlined,
-    MailOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, LockOutlined, LoadingOutlined, GoogleOutlined, FacebookFilled } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { assets } from '../../assets';
-import { ButtonWithIcon } from '../../theme/customButton';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import { RootState } from '@reduxjs/toolkit/query';
 import { userSignIn } from 'src/redux/api/authApi';
 import './signIn.scss';
+import { IUserData } from 'src/redux/api/authSlice';
 
 export interface IUserSignInData {
     email: string;
@@ -35,7 +22,7 @@ export const SignInPage = () => {
     const { loading, error, userData } = useSelector((state: IRootState) => state.auth);
     const navigate = useNavigate();
 
-    const onSubmit = (data: IUserSignInData) => {
+    const onSubmit = (data: IUserData) => {
         dispatch(userSignIn(data));
         navigate('/');
     };
