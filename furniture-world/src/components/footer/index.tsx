@@ -16,7 +16,7 @@ export const Footer = (props: Props) => {
         <Flex style={{ flexDirection: 'column' }}>
             <Flex
                 style={{
-                    width: '100vw',
+                    // width: '100%',
                     height: '200px',
                     justifyContent: 'space-around',
                     backgroundColor: customColors.colorBgSecondary,
@@ -62,7 +62,7 @@ export const Footer = (props: Props) => {
             </Flex>
             {/* <Flex style={{ justifyContent: 'space-around', padding: '48px 0' }}> */}
 
-            <Row gutter={16} style={{  width: '100%', padding: '48px 0' }}>
+            <Row gutter={16} style={{ width: '100%', padding: '48px 0' }}>
                 <Col span={6}>
                     <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
                         <Image src={assets.logoImage} alt="" preview={false} style={{ width: '80px' }} />

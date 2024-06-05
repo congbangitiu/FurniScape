@@ -45,9 +45,11 @@ export const HomePage = () => {
     const highlightProducts = productsInStock.slice(0, 8);
 
     return (
-        <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}` }}>
+        <Flex style={{ flexDirection: 'column', width: '100%', alignItems: 'center', paddingTop: `${navBarHeight}` }}>
             <Flex style={{ position: 'relative' }}>
-                <Image style={{ width: '100vw' }} preview={{ mask: null }} src={assets.banner} alt="Banner" />
+                <div style={{ width: '100%' }}>
+                    <Image style={{ width: '100%' }} preview={{ mask: null }} src={assets.banner} alt="Banner" />
+                </div>
                 <Flex
                     style={{
                         position: 'absolute',
@@ -228,7 +230,7 @@ export const HomePage = () => {
                 <Text style={{ fontSize: '40px', fontWeight: '700', margin: '0px 0 20px 0' }}>
                     #FurniScapeFurniture
                 </Text>
-                {/* <Marquee>
+                <Marquee>
                     <div
                         style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(8, 2fr)', margin: '20px' }}
                     >
@@ -256,7 +258,7 @@ export const HomePage = () => {
                             />
                         ))}
                     </div>
-                </Marquee> */}
+                </Marquee>
             </Flex>
         </Flex>
     );
