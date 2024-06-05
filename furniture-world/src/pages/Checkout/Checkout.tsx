@@ -45,7 +45,7 @@ export const CheckoutPage = () => {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item
+                    {/* <Form.Item
                         label={
                             <Text style={{ color: '#000', fontWeight: 'bold', fontSize: '16px' }}>
                                 Company name (optional)
@@ -62,8 +62,8 @@ export const CheckoutPage = () => {
                                 fontSize: '16px',
                             }}
                         />
-                    </Form.Item>
-                    <Form.Item
+                    </Form.Item> */}
+                    {/* <Form.Item
                         label={
                             <Text
                                 style={{
@@ -92,7 +92,7 @@ export const CheckoutPage = () => {
                             }
                             options={options}
                         />
-                    </Form.Item>
+                    </Form.Item> */}
                     <Form.Item
                         label={
                             <Text
@@ -102,7 +102,7 @@ export const CheckoutPage = () => {
                                     fontSize: '16px',
                                 }}
                             >
-                                Street address
+                             Full Address
                             </Text>
                         }
                     >
@@ -117,7 +117,7 @@ export const CheckoutPage = () => {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item
+                    {/* <Form.Item
                         label={
                             <Text
                                 style={{
@@ -140,8 +140,8 @@ export const CheckoutPage = () => {
                                 fontSize: '16px',
                             }}
                         />
-                    </Form.Item>
-                    <Form.Item
+                    </Form.Item> */}
+                    {/* <Form.Item
                         label={
                             <Text
                                 style={{
@@ -164,7 +164,7 @@ export const CheckoutPage = () => {
                                 fontSize: '16px',
                             }}
                         />
-                    </Form.Item>
+                    </Form.Item> */}
                     <Form.Item
                         label={
                             <Text

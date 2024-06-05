@@ -46,7 +46,7 @@ export const ShopPage = () => {
         if (value === 'Office') categoryProducts = categoryProducts.filter((product) => product.category === 'Office');
         if (value === 'Living Room')
             categoryProducts = categoryProducts.filter((product) => product.category === 'Living Room');
-        if (value === 'All')  categoryProducts;
+        if (value === 'All') categoryProducts;
         setProducts(categoryProducts);
     };
 
@@ -77,7 +77,6 @@ export const ShopPage = () => {
                 <Row style={{ gap: '40px' }}>
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>
                         <Text style={{ fontSize: '18px', fontWeight: '500' }}>Category</Text>
-                        {/* <Input style={{ width: '40px', height: '40px', backgroundColor: '#fff', border: 'none' }} /> */}
                         <Select
                             onChange={handleSelectCategory}
                             style={{
@@ -98,6 +97,7 @@ export const ShopPage = () => {
                             ]}
                         />
                     </Flex>
+
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>
                         <Text style={{ fontSize: '18px', fontWeight: '500' }}>Shorted by</Text>
                         <Select
@@ -113,11 +113,16 @@ export const ShopPage = () => {
                                 { label: 'Increasing price', value: 'increasing' },
                                 { label: 'Decreasing price', value: 'decreasing' },
                             ]}
-                        >
-                            {/* <Select.Option value="increasing">Increasing price</Select.Option>
-                            <Select.Option value="decreasing">Decreasing price</Select.Option>
-                            <Select.Option value="category">Category</Select.Option> */}
-                        </Select>
+                        />
+                    </Flex>
+                    <Flex style={{ alignItems: 'center', gap: '10px' }}>
+                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Search</Text>
+                        <Input.Search
+                            size="large"
+                            placeholder="Enter product"
+                            allowClear
+                            style={{ width: '80%' }}
+                        />
                     </Flex>
                 </Row>
             </Row>

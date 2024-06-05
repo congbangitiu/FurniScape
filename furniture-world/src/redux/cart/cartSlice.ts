@@ -1,6 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Item from 'antd/es/list/Item';
+import Cookies from 'js-cookie';
 import { assets } from 'src/assets';
+import { Header } from 'src/components/header';
+import { placeOrderAPI } from 'src/constant/api/orderAPI';
 
 export interface IProduct {
     id: string;
