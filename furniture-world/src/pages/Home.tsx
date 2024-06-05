@@ -14,9 +14,7 @@ const { Text } = Typography;
 
 export const HomePage = () => {
     const { token } = theme.useToken();
-    const dispatch = useDispatch<IAppDispatch>();
     const productsInStock = useSelector((state: IRootState) => state.products.items);
-    const productsStatus = useSelector((state: IRootState) => state.products.status);
 
     const images = [
         assets.image1,
@@ -45,9 +43,6 @@ export const HomePage = () => {
 
     //temp data
     const highlightProducts = productsInStock.slice(0, 8);
-    useEffect(() => {
-        if (productsStatus == 'idle') dispatch(fetchProducts());
-    });
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', paddingTop: `${navBarHeight}` }}>
@@ -233,7 +228,7 @@ export const HomePage = () => {
                 <Text style={{ fontSize: '40px', fontWeight: '700', margin: '0px 0 20px 0' }}>
                     #FurniScapeFurniture
                 </Text>
-                <Marquee>
+                {/* <Marquee>
                     <div
                         style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(8, 2fr)', margin: '20px' }}
                     >
@@ -261,7 +256,7 @@ export const HomePage = () => {
                             />
                         ))}
                     </div>
-                </Marquee>
+                </Marquee> */}
             </Flex>
         </Flex>
     );

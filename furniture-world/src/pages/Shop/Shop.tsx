@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Row, Typography, Input, Select, theme, Pagination, PaginationProps } from 'antd';
 import { Banner } from '../../components/banner';
 import { Products } from '../../components/products';
@@ -15,14 +15,43 @@ const { Text } = Typography;
 export const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(8);
-    const products = useSelector((state: IRootState) => state.products.items);
-
+    const productFetch = useSelector((state: IRootState) => state.products.items);
+    const [products, setProducts] = useState(productFetch);
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
         setCurrentPage(page);
         window.scrollTo({ top: 550, behavior: 'smooth' });
     };
     const totalProducts = products.length;
     const paginatedProducts: IProduct[] = products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    const handleShowBy = (value: string) => {
+        let sortProduct = [...products];
+        if (value === 'increasing') {
+            sortProduct = sortProduct.sort((a, b) => a.price - b.price);
+        }
+        if (value === 'decreasing') {
+            sortProduct = sortProduct.sort((a, b) => b.price - a.price);
+        }
+        setProducts(sortProduct);
+    };
+
+    const handleSelectCategory = (value: string) => {
+        let categoryProducts = [...productFetch];
+        if (value === 'Dining Room')
+            categoryProducts = categoryProducts.filter((product) => product.category === 'Dining Room');
+        if (value === 'Bedroom')
+            categoryProducts = categoryProducts.filter((product) => product.category === 'Bedroom');
+        if (value === 'Kitchen')
+            categoryProducts = categoryProducts.filter((product) => product.category === 'Kitchen');
+        if (value === 'Office') categoryProducts = categoryProducts.filter((product) => product.category === 'Office');
+        if (value === 'Living Room')
+            categoryProducts = categoryProducts.filter((product) => product.category === 'Living Room');
+        if (value === 'All')  categoryProducts;
+        setProducts(categoryProducts);
+    };
+
+    // run when products fetch change to update products
+    useEffect(() => setProducts(productFetch), [productFetch]);
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: `${navBarHeight}` }}>
@@ -47,12 +76,10 @@ export const ShopPage = () => {
                 </Row>
                 <Row style={{ gap: '40px' }}>
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>
-                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Show</Text>
-                        <Input style={{ width: '40px', height: '40px', backgroundColor: '#fff', border: 'none' }} />
-                    </Flex>
-                    <Flex style={{ alignItems: 'center', gap: '10px' }}>
-                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Shorted by</Text>
+                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Category</Text>
+                        {/* <Input style={{ width: '40px', height: '40px', backgroundColor: '#fff', border: 'none' }} /> */}
                         <Select
+                            onChange={handleSelectCategory}
                             style={{
                                 width: '200px',
                                 height: '40px',
@@ -60,10 +87,36 @@ export const ShopPage = () => {
                                 border: 'none',
                                 fontSize: '18px',
                             }}
+                            defaultValue={'All'}
+                            options={[
+                                { label: 'All categories', value: 'All' },
+                                { label: 'Dining Room', value: 'Dining Room' },
+                                { label: 'Bedroom', value: 'Bedroom' },
+                                { label: 'Kitchen', value: 'Kitchen' },
+                                { label: 'Office', value: 'Office' },
+                                { label: 'Living Room', value: 'Living Room' },
+                            ]}
+                        />
+                    </Flex>
+                    <Flex style={{ alignItems: 'center', gap: '10px' }}>
+                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Shorted by</Text>
+                        <Select
+                            onChange={handleShowBy}
+                            style={{
+                                width: '200px',
+                                height: '40px',
+                                backgroundColor: '#fff',
+                                border: 'none',
+                                fontSize: '18px',
+                            }}
+                            options={[
+                                { label: 'Increasing price', value: 'increasing' },
+                                { label: 'Decreasing price', value: 'decreasing' },
+                            ]}
                         >
-                            <Select.Option value="increasingPrice">Increasing price</Select.Option>
-                            <Select.Option value="decreasingPrice">Decreasing price</Select.Option>
-                            <Select.Option value="category">Category</Select.Option>
+                            {/* <Select.Option value="increasing">Increasing price</Select.Option>
+                            <Select.Option value="decreasing">Decreasing price</Select.Option>
+                            <Select.Option value="category">Category</Select.Option> */}
                         </Select>
                     </Flex>
                 </Row>

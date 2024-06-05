@@ -321,33 +321,36 @@ export const CheckoutPage = () => {
                     <Radio.Group onChange={onchangePaymentMethod} value={paymentMethod}>
                         <Space direction="vertical">
                             <Radio value={'banking'}>
-                                <Typography.Title level={4}>Direct Bank Transfer</Typography.Title>
-                                <Text
-                                    style={{
-                                        fontSize: '16px',
-                                        fontWeight: '300',
-                                        color: customColors.colorQuaternaryText,
-                                    }}
-                                >
-                                    Make your payment directly into our bank account. Please use your Order ID as the
-                                    payment reference. Your order will not be shipped until the funds have cleared in
-                                    our account.
-                                </Text>
+                                <Typography.Title style={{ margin: '8px 5px' }} level={4}>
+                                    Direct Bank Transfer
+                                </Typography.Title>
                             </Radio>
+                            <Text
+                                style={{
+                                    fontSize: '16px',
+                                    fontWeight: '300',
+                                    color: customColors.colorQuaternaryText,
+                                }}
+                            >
+                                Make your payment directly into our bank account. Please use your Order ID as the
+                                payment reference. Your order will not be shipped until the funds have cleared in our
+                                account.
+                            </Text>
 
                             <Radio value={'cash'}>
-                                <Typography.Title level={4}>Cash On Delivery</Typography.Title>
-                                <Text
-                                    style={{
-                                        fontSize: '16px',
-                                        fontWeight: '300',
-                                        color: customColors.colorQuaternaryText,
-                                    }}
-                                >
-                                    Pay for your order in cash upon delivery at your doorstep. No advance payment
-                                    required.
-                                </Text>
+                                <Typography.Title style={{ margin: '8px 5px' }} level={4}>
+                                    Cash On Delivery
+                                </Typography.Title>
                             </Radio>
+                            <Text
+                                style={{
+                                    fontSize: '16px',
+                                    fontWeight: '300',
+                                    color: customColors.colorQuaternaryText,
+                                }}
+                            >
+                                Pay for your order in cash upon delivery at your doorstep. No advance payment required.
+                            </Text>
                         </Space>
                     </Radio.Group>
                     {/* <Col>
