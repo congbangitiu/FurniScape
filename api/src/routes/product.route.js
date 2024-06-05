@@ -4,6 +4,8 @@ const { addProduct,
         addProducts,
         getProducts,
         updateProduct,
+        searchByKeyword,
+        searchByCategory,
 }  = require("../controllers/product.controller");
 const { verifyToken, verifyAdmin } = require("../utils/verifyToken");
 
@@ -13,8 +15,12 @@ router.post("/addProduct", verifyAdmin, addProduct);
 
 router.post("/addProducts", verifyAdmin, addProducts);
 
-router.get("/getProducts", verifyToken, getProducts);
+router.get("/getProducts", getProducts);
 
-router.get("/updateProduct", verifyAdmin, updateProduct)
+router.get("/updateProduct", verifyAdmin, updateProduct);
+
+router.get("/searchByKeyword/:keyword", searchByKeyword);
+
+router.get("/searchByCategory/:category", searchByCategory);
 
 module.exports = router;

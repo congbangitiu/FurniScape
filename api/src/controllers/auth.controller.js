@@ -22,7 +22,12 @@ const signup = async (req, res, next) => {
       },
     });
     if (created) {
-      return res.status(201).json(newUser);
+      // run login go return token
+      const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET);
+      res.cookie("access_token", token, { httpOnly: true }).status(201).json({
+        newUser,
+        cookie: token,
+      });
     } else return res.status(400).json({ msg: "User already existed" });
     //res.status(201).json(newUser);
   } catch (err) {
