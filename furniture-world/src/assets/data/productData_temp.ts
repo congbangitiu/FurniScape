@@ -1,4 +1,4 @@
-import { IProduct } from 'src/redux/cart/cartSlice';
+import { IProduct } from 'src/redux/userApi/cart/cartSlice';
 import { assets } from '..';
 
 export const products: IProduct[] = [

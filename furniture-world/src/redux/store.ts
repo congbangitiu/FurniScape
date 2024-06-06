@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import filtersSlice from '../components/Filters/filtersSlice';
+import filtersSlice from '../components/userComponents/Filters/filtersSlice';
 import authSlice from './api/authSlice';
 import { navbarPathSlice } from './navbar';
-import { cartSlice } from './cart/cartSlice';
+import { cartSlice } from './userApi/cart/cartSlice';
 import { productsSlice } from './products/productsSlice';
 import { authApi } from './api/authApi';
 

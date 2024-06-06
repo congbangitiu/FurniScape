@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IProduct } from '../cart/cartSlice';
+import { IProduct } from '../userApi/cart/cartSlice';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';

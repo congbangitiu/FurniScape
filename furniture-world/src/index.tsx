@@ -8,7 +8,7 @@ import { ConfigProvider } from 'antd';
 import { theme } from './theme';
 import { Router } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from './components/scrollToTop';
+import ScrollToTop from './components/userComponents/scrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

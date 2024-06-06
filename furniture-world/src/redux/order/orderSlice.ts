@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ICartItems, IProduct } from '../cart/cartSlice';
+import { ICartItems, IProduct } from '../userApi/cart/cartSlice';
 import Cookies from 'js-cookie';
 import { placeOrderAPI } from 'src/constant/api/orderAPI';
 import { IRootState } from '../store';
@@ -50,7 +50,6 @@ export const orderSlice = createSlice({
             });
     },
 });
-
 
 // - Payment method khi banking thì response về tài khoản ngân hàng để chuyển
 // - user request để coi lại order
