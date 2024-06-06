@@ -51,8 +51,7 @@ export const orderSlice = createSlice({
     },
 });
 
-// - placeOrder xong cs lưu vào dbs order list products orders của user
-// - 2 case order : đã SignIn và chưa SignIn ( sẽ post cùng userData, products và payment method (cash or banking)) 
+
 // - Payment method khi banking thì response về tài khoản ngân hàng để chuyển
 // - user request để coi lại order
 // - admin có get order để xem được không

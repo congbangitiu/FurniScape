@@ -99,7 +99,7 @@ export const ShopPage = () => {
                     </Flex>
 
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>
-                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Shorted by</Text>
+                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Sorted by</Text>
                         <Select
                             onChange={handleShowBy}
                             style={{
