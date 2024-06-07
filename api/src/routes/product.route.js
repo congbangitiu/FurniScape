@@ -1,12 +1,12 @@
 const express = require(`express`);
 
-const { addProduct,
-        addProducts,
+const { addProducts,
         getProducts,
         updateProduct,
         searchByKeyword,
         searchByCategory,
 }  = require("../controllers/product.controller");
+
 const { verifyToken, verifyAdmin } = require("../utils/verifyToken");
 
 const router = express.Router();
