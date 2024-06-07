@@ -1,4 +1,4 @@
-const { Order } = require('../models');
+const { Order, Order_Product, User } = require('../models');
 const { getUserId } = require('../utils/verifyToken');
 const { getProduct } = require('./product.controller');
 
@@ -22,7 +22,7 @@ const placeOrder = async (req, res) => {
         for (let i = 0; i < products.length; i++) {
             const product = await getProduct(products[i].id);
             if (!product) {
-                return res.status(400).json({ message: 'Product' + products[i].id + 'not found' });
+                return res.status(400).json({ message: 'Product ' + products[i].id + ' not found' });
             }
             if (product.quantity < products[i].quantity) {
                 return res.status(400).json({ message: 'Insufficient quantity of' + product.name });
@@ -54,6 +54,7 @@ const placeOrder = async (req, res) => {
         if (payment === 'banking') {
             return res.status(201).json({ message: 'Order placed', bankingInfo: 'Vietcombank\n9933808121\nDao Minh Huy' });
         }
+        return res.status(201).json({ message: 'Order placed' });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -83,7 +84,46 @@ const getAllOrders = async (req, res, next) => {
     }
 }
 
+const getOrderDetails = async (req, res, next) => {
+    try {
+        const { id } = req.query;
+        const order = await Order.findByPk(id);
+        if (!order) {
+            //console.log(id);
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        let user = await User.findByPk(req.user.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (order.userId !== user.id && user.role !== 'admin') {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+        let products = await Order_Product.findAll({ where: { orderId: id } });
+        if (!products) {
+            return res.status(404).json({ message: 'No product found' });
+        }
+        let productList = [];
+        for (let i = 0; i < products.length; i++) {
+            const product = await getProduct(products[i].productId);
+            productList.push({  product: product.name,
+                                unitPrice: product.price,
+                                quantity: products[i].quantity,
+                                total: product.price * products[i].quantity,
+                            });
+        }
+        return res.status(200).json({   order: order, 
+                                        products: productList, 
+                                        totalPrice: order.total,
+                                    });
+
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {  placeOrder,
                     getOrderFromUser,
                     getAllOrders,
+                    getOrderDetails,
                 };
