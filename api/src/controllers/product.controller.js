@@ -36,10 +36,14 @@ const getProducts = async (req, res, next) => {
     }
 };
 
+const getProduct = async (productId) => {
+    return await Product.findByPk(productId);
+  };
+
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name, category, price, quantity, description, image_dir } = req.body;
+        const { name, category, price, quantity, description,status, image_dir } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
@@ -49,6 +53,7 @@ const updateProduct = async (req, res, next) => {
         product.price = price;
         product.quantity = quantity;
         product.description = description;
+        product.status = status;
         product.image_dir = image_dir;
         await product.save();
         return res.status(200).json(product);
@@ -88,6 +93,7 @@ const searchByCategory = async (req, res, next) => {
 };
 
 module.exports = { addProduct ,addProducts, 
-                    getProducts, updateProduct,
+                    getProducts, getProduct,
+                    updateProduct,
                     searchByKeyword, searchByCategory
                 };

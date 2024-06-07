@@ -1,15 +1,11 @@
-const { User } = require("../models");
+const { User} = require("../models");
+const { getUserId } = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
-
-const test = (req, res) => {
-  res.json({
-    message: "Hello World",
-  });
-};
 
 const getUser = async (req, res, next) => {
   try {
-    var id = req.user.id;
+    const jwt = req.cookies.access_token || req.headers["authorization"];
+    var id = getUserId(jwt);
     const finduser = await User.findByPk(id);
     if (!finduser) return res.status(404).json({ msg: "User not found" });
     return res.status(200).json(finduser);
@@ -63,6 +59,8 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-module.exports = { test, updateUser, getUser };
+
+
+module.exports = { updateUser, getUser, };
 //fsmegasale15
 //sieutuyet20

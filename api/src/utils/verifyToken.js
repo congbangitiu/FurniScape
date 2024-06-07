@@ -29,13 +29,12 @@ const verifyAdmin = (req, res, next) => {
 
     // get user role from user.id
     User.findByPk(user.id).then((user) => {
-      if (user == null || user.role !== "admin") {
-        return next(errorHandler(403, "Forbidden"));
+      if (user.role === "admin") {
+        req.user = user;
+        return next();
       }
+      return next(errorHandler(403, "Forbidden"));
     });
-
-    req.user = user;
-    next();
   });
 }
 
@@ -43,11 +42,6 @@ const getUserId = (jwtToken) => {
   return jwt.verify(jwtToken, process.env.JWT_SECRET).id;
 };
 
-const getProduct = async (productId) => {
-  return await Product.findByPk(productId);
-};
-
 module.exports = {verifyToken , verifyAdmin, 
-                  getUserId, getProduct,
-                  
+                  getUserId,
                 };

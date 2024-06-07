@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.STRING,
       },
+      status: {
+        type: DataTypes.STRING,
+        defaultValue: "new",
+      },
       image_dir: {
         type: DataTypes.STRING,
       },
