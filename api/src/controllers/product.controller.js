@@ -36,6 +36,10 @@ const getProducts = async (req, res, next) => {
     }
 };
 
+const getProduct = async (productId) => {
+    return await Product.findByPk(productId);
+  };
+
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -89,6 +93,7 @@ const searchByCategory = async (req, res, next) => {
 };
 
 module.exports = { addProduct ,addProducts, 
-                    getProducts, updateProduct,
+                    getProducts, getProduct,
+                    updateProduct,
                     searchByKeyword, searchByCategory
                 };
