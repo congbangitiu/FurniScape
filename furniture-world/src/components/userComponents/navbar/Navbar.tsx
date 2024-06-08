@@ -48,9 +48,6 @@ export const Navbar = () => {
             case '/contact':
                 dispatch(setSelectedPath('contact'));
                 break;
-            case '/admin':
-                dispatch(setSelectedPath('admin'));
-                break;
             default:
                 dispatch(setSelectedPath(''));
         }
@@ -100,9 +97,6 @@ export const Navbar = () => {
                         </MenuItem>
                         <MenuItem key="contact" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
                             <Link to="/contact">Contact</Link>
-                        </MenuItem>
-                        <MenuItem key="userOrder" style={{ margin: '0 30px', padding: '0 30px', fontSize: '18px' }}>
-                            <Link to="/admin">Admin</Link>
                         </MenuItem>
                     </Menu>
                 </Col>
