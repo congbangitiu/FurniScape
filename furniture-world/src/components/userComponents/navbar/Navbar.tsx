@@ -21,7 +21,7 @@ export const Navbar = () => {
     const location = useLocation();
     const dispatch = useDispatch<IAppDispatch>();
     const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
-    const isAuthenticated = useSelector((state: IRootState) => state.auth.accessToken);
+    const isAuthenticated = Cookies.get('accessToken')
     const products = useSelector((state: IRootState) => state.cart.items) ?? null;
     const cartProductCount = products.reduce((total, product) => {
         return total + product.quantity;
