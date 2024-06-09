@@ -14,8 +14,8 @@ export const AdminRoutes = () => {
         <Routes>
             <Route path="/" element={<LayoutAdmin />}>
                 <Route index element={<HomePageAdmin />} />
-                <Route path="user" element={<UsersPageAdmin />} />
-                <Route path="products/:id" element={<ProductPageAdmin />} />
+                <Route path="users" element={<UsersPageAdmin />} />
+                <Route path="products" element={<ProductPageAdmin />} />
                 <Route path="profile" element={<AdminProfilePage />} />
                 <Route path="orders" element={<OrderListPageAdmin />} />
             </Route>

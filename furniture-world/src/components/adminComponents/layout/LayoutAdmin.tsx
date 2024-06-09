@@ -90,6 +90,28 @@ export const LayoutAdmin = () => {
     const [collapsed, setCollapsed] = useState(false);
     const handleUserSignOut = () => {};
 
+    const handleNavigate: MenuProps['onClick'] = (e) => {
+        switch (e.key) {
+            case '1':
+                navigate('/');
+                break;
+            case '2':
+                navigate('profile');
+                break;
+            case '3':
+                navigate('users');
+                break;
+            case '4':
+                navigate('products');
+                break;
+            case '5':
+                navigate('orders');
+                break;
+            default:
+                navigate('/');
+        }
+    };
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header
@@ -147,6 +169,7 @@ export const LayoutAdmin = () => {
                         defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
                         style={{ height: '100%', borderRight: 0 }}
                         items={items}
+                        onClick={handleNavigate}
                     />
                 </Sider>
                 <Layout style={{ padding: '0 24px 24px' }}>
