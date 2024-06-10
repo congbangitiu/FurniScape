@@ -6,14 +6,18 @@ import { Banner } from '../../../components/userComponents/banner';
 import { IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
+import { IUserData } from 'src/redux/api/authSlice';
 
 const { Text } = Typography;
 
 export const CheckoutPage = () => {
     const { token } = theme.useToken();
     const cartItems = useSelector((state: IRootState) => state.cart);
-    const userInfo = useSelector((state: IRootState) => state.auth.userData);
+    const userInfo: IUserData = useSelector((state: IRootState) => state.auth.userData);
     const [paymentMethod, setPaymentMethod] = useState('');
+    const isAuthenticated = Cookies.get('accessToken');
+    console.log(isAuthenticated);
 
     const onchangePaymentMethod = (e: RadioChangeEvent) => {
         setPaymentMethod(e.target.value);
@@ -26,194 +30,169 @@ export const CheckoutPage = () => {
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
             <Banner title="Checkout" />
-            <Text style={{ fontSize: '30px', fontWeight: '500', marginTop: '20px' }}>Billing details</Text>
+            <Text style={{ fontSize: '30px', fontWeight: '600', marginTop: '20px' }}>Billing details</Text>
             <Flex style={{ marginTop: '40px', width: '70%' }}>
-                <Form layout="vertical" style={{ width: '70%' }}>
-                    <Form.Item
-                        label={
-                            <Text style={{ color: '#000', fontWeight: 'bold', fontSize: '16px' }}>Your full name</Text>
-                        }
-                    >
-                        <Input
-                            placeholder="David"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item>
-                    {/* <Form.Item
-                        label={
-                            <Text style={{ color: '#000', fontWeight: 'bold', fontSize: '16px' }}>
-                                Company name (optional)
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="David"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item> */}
-                    {/* <Form.Item
-                        label={
-                            <Text
-                                style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
-                                    fontSize: '16px',
-                                }}
-                            >
-                                Country / Region
-                            </Text>
-                        }
-                    >
-                        <Select
-                            showSearch
-                            className="ant-select-selector"
-                            style={{
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                            placeholder="Search to Select"
-                            optionFilterProp="children"
-                            filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                            filterSort={(optionA, optionB) =>
-                                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                {isAuthenticated && (
+                    <Flex vertical style={{ width: '50%' }}>
+                        <Flex>
+                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Full Name:</Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>Bao Pham</Typography>
+                        </Flex>
+                        <Flex>
+                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Phone Number: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                                {/* {userInfo.phone} */}
+                                bao
+                            </Typography>
+                        </Flex>
+                        <Flex>
+                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Address: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                                {/* {userInfo.address} */}
+                                gia
+                            </Typography>
+                        </Flex>
+                        <Flex>
+                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Country: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                                {/* {userInfo.country} */}
+                                pgan
+                            </Typography>
+                        </Flex>
+                    </Flex>
+                )}
+
+                {!isAuthenticated && (
+                    <Form layout="vertical" style={{ width: '70%' }}>
+                        <Form.Item
+                            label={
+                                <Text style={{ color: '#000', fontWeight: 'bold', fontSize: '16px' }}>
+                                    Your full name
+                                </Text>
                             }
-                            options={options}
-                        />
-                    </Form.Item> */}
-                    <Form.Item
-                        label={
-                            <Text
+                        >
+                            <Input
+                                placeholder="David"
                                 style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
+                                    border: `2px solid ${customColors.lightGrayColor}`,
+                                    backgroundColor: '#fff',
+                                    width: '525px',
+                                    height: '50px',
                                     fontSize: '16px',
                                 }}
-                            >
-                                Full Address
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item>
-                    {/* <Form.Item
-                        label={
-                            <Text
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        color: '#000',
+                                        fontWeight: 'bold',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    Country / Region
+                                </Text>
+                            }
+                        >
+                            <Select
+                                showSearch
+                                className="ant-select-selector"
                                 style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
+                                    width: '525px',
+                                    height: '50px',
                                     fontSize: '16px',
                                 }}
-                            >
-                                Town / City
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item> */}
-                    {/* <Form.Item
-                        label={
-                            <Text
+                                placeholder="Search to Select"
+                                optionFilterProp="children"
+                                filterOption={(input, option) => (option?.label ?? '').includes(input)}
+                                filterSort={(optionA, optionB) =>
+                                    (optionA?.label ?? '')
+                                        .toLowerCase()
+                                        .localeCompare((optionB?.label ?? '').toLowerCase())
+                                }
+                                options={options}
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        color: '#000',
+                                        fontWeight: 'bold',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    Full Address
+                                </Text>
+                            }
+                        >
+                            <Input
+                                placeholder="This field is optional"
                                 style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
+                                    border: `2px solid ${customColors.lightGrayColor}`,
+                                    backgroundColor: '#fff',
+                                    width: '525px',
+                                    height: '50px',
                                     fontSize: '16px',
                                 }}
-                            >
-                                ZIP code
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item> */}
-                    <Form.Item
-                        label={
-                            <Text
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        color: '#000',
+                                        fontWeight: 'bold',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    ZIP code
+                                </Text>
+                            }
+                        >
+                            <Input
+                                placeholder="This field is optional"
                                 style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
+                                    border: `2px solid ${customColors.lightGrayColor}`,
+                                    backgroundColor: '#fff',
+                                    width: '525px',
+                                    height: '50px',
                                     fontSize: '16px',
                                 }}
-                            >
-                                Phone number
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label={
-                            <Text
+                            />
+                        </Form.Item>
+
+                        <Form.Item
+                            label={
+                                <Text
+                                    style={{
+                                        color: '#000',
+                                        fontWeight: 'bold',
+                                        fontSize: '16px',
+                                    }}
+                                >
+                                    Email address
+                                </Text>
+                            }
+                        >
+                            <Input
+                                placeholder="This field is optional"
                                 style={{
-                                    color: '#000',
-                                    fontWeight: 'bold',
+                                    border: `2px solid ${customColors.lightGrayColor}`,
+                                    backgroundColor: '#fff',
+                                    width: '525px',
+                                    height: '50px',
                                     fontSize: '16px',
                                 }}
-                            >
-                                Email address
-                            </Text>
-                        }
-                    >
-                        <Input
-                            placeholder="This field is optional"
-                            style={{
-                                border: `2px solid ${customColors.lightGrayColor}`,
-                                backgroundColor: '#fff',
-                                width: '520px',
-                                height: '50px',
-                                fontSize: '16px',
-                            }}
-                        />
-                    </Form.Item>
-                </Form>
+                            />
+                        </Form.Item>
+                    </Form>
+                )}
+
                 <Flex
                     style={{
                         width: '50%',
@@ -236,7 +215,7 @@ export const CheckoutPage = () => {
                         <Text
                             style={{
                                 fontSize: '25px',
-                                fontWeight: '500',
+                                fontWeight: '600',
                             }}
                         >
                             Product
@@ -245,7 +224,7 @@ export const CheckoutPage = () => {
                         <Text
                             style={{
                                 fontSize: '25px',
-                                fontWeight: '500',
+                                fontWeight: '600',
                                 textAlign: 'right',
                             }}
                         >
@@ -255,36 +234,36 @@ export const CheckoutPage = () => {
                         <Text
                             style={{
                                 fontSize: '16px',
-                                fontWeight: '500',
+                                fontWeight: '400',
                                 color: customColors.colorQuaternaryText,
                             }}
                         >
                             Assgaard sofa x 1
                         </Text>
-                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. </Text>
+                        <Text style={{ fontSize: '16px', fontWeight: '400', textAlign: 'right' }}>Rs. </Text>
                         <Text
                             style={{
                                 fontSize: '16px',
-                                fontWeight: '500',
+                                fontWeight: '400',
                                 color: customColors.colorQuaternaryText,
                             }}
                         >
                             Subtotal
                         </Text>
-                        <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>Rs. 250,000.00</Text> */}
+                        <Text style={{ fontSize: '16px', fontWeight: '400', textAlign: 'right' }}>Rs. 250,000.00</Text> */}
 
                         {cartItems.items.map((item) => (
                             <>
                                 <Text
                                     style={{
                                         fontSize: '16px',
-                                        fontWeight: '500',
+                                        fontWeight: '400',
                                         color: customColors.colorQuaternaryText,
                                     }}
                                 >
                                     {`${item.name} x ${item.quantity}`}
                                 </Text>
-                                <Text style={{ fontSize: '16px', fontWeight: '500', textAlign: 'right' }}>
+                                <Text style={{ fontSize: '16px', fontWeight: '400', textAlign: 'right' }}>
                                     ${Number(item.price) * Number(item.quantity)}
                                 </Text>
                             </>
@@ -298,11 +277,11 @@ export const CheckoutPage = () => {
                             marginTop: '10px',
                         }}
                     >
-                        <Text style={{ fontSize: '18px', fontWeight: '500' }}>Total</Text>
+                        <Text style={{ fontSize: '18px', fontWeight: '400' }}>Total</Text>
                         <Text
                             style={{
                                 fontSize: '25px',
-                                fontWeight: '500',
+                                fontWeight: '400',
                                 color: token.colorPrimary,
                                 textAlign: 'right',
                             }}
@@ -357,10 +336,10 @@ export const CheckoutPage = () => {
                         <Row
                             style={{
                                 width: '100%',
-                                marginTop: '20px',
+                                marginTop: '25px',
                             }}
                         >
-                            <Radio style={{ fontSize: '18px', fontWeight: '500' }}> </Radio>
+                            <Radio style={{ fontSize: '18px', fontWeight: '400' }}> </Radio>
                         </Row>
                        
                     </Col>
@@ -368,23 +347,23 @@ export const CheckoutPage = () => {
                         <Row
                             style={{
                                 width: '100%',
-                                marginTop: '20px',
+                                marginTop: '25px',
                             }}
                         >
-                            <Radio style={{ fontSize: '18px', fontWeight: '500' }}> Cash On Delivery</Radio>
+                            <Radio style={{ fontSize: '18px', fontWeight: '400' }}> Cash On Delivery</Radio>
                         </Row>
                        
                     </Col> */}
-                    <Text style={{ fontSize: '16px', fontWeight: '500', marginTop: '20px', textAlign: 'justify' }}>
+                    <Text style={{ fontSize: '16px', fontWeight: '400', marginTop: '25px', textAlign: 'justify' }}>
                         Your personal data will be used to support your experience throughout this website, to manage
                         access to your account, and for other purposes described in our <b>privacy policy</b>.
                     </Text>
                     <Button
                         style={{
                             color: token.colorPrimary,
-                            padding: '20px 50px',
+                            padding: '25px 50px',
                             fontSize: '16px',
-                            fontWeight: '500',
+                            fontWeight: '400',
                             marginTop: '30px',
                             display: 'flex',
                             justifyContent: 'center',

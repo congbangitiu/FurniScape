@@ -11,6 +11,7 @@ export interface IUserData {
     phone: string;
     address: string;
     email: string;
+    country: string;
     password: string;
 }
 

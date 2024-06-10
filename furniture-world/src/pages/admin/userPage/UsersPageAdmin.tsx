@@ -13,6 +13,9 @@ interface DataType {
     };
     gender: string;
     email: string;
+    phone: string;
+    address: string;
+    country: string;
     login: {
         uuid: string;
     };
@@ -45,6 +48,18 @@ const columns: ColumnsType<DataType> = [
     {
         title: 'Email',
         dataIndex: 'email',
+    },
+    {
+        title: 'Phone Number',
+        dataIndex: 'phone_number',
+    },
+    {
+        title: 'Address',
+        dataIndex: 'address',
+    },
+    {
+        title: 'City',
+        dataIndex: 'city',
     },
 ];
 

@@ -93,7 +93,7 @@ export const LayoutAdmin = () => {
     const handleNavigate: MenuProps['onClick'] = (e) => {
         switch (e.key) {
             case '1':
-                navigate('/');
+                navigate('/admin');
                 break;
             case '2':
                 navigate('profile');

@@ -166,55 +166,6 @@ export const ProfilePage = () => {
                     Change Information
                 </Button>
             </Flex>
-            {/* <Flex
-                style={{
-                    width: '60%',
-                    alignItems: 'center',
-                    padding: '10px',
-                    borderRadius: '10px',
-                    boxShadow: '0 0 10px 0 rgba(0,0,0,0.2)',
-                    marginTop: '50px',
-                }}
-            >
-                <Flex style={{ backgroundColor: token.colorPrimary, padding: '10px', borderRadius: '5px' }}>
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                        style={{ color: '#fff', fontSize: '20px', fontWeight: '500' }}
-                    />
-                </Flex>
-                <Input
-                    placeholder="Search your order ..."
-                    style={{
-                        backgroundColor: '#fff',
-                        border: 'none',
-                        fontSize: '16px',
-                        caretColor: token.colorPrimary,
-                        outline: 'none',
-                        boxShadow: 'none',
-                    }}
-                    onChange={handleInputChange}
-                    value={query}
-                ></Input>
-                {query && (
-                    <Flex
-                        style={{
-                            backgroundColor: token.colorPrimary,
-                            width: '25px',
-                            height: '25px',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: '100px',
-                            cursor: 'pointer',
-                        }}
-                        onClick={handleClearSearch}
-                    >
-                        <FontAwesomeIcon
-                            icon={faXmark}
-                            style={{ color: '#fff', fontSize: '16px', fontWeight: '400' }}
-                        />
-                    </Flex>
-                )}
-            </Flex> */}
             <Flex style={{ width: '70%', marginTop: '50px', flexDirection: 'column' }}>
                 <Flex justify="space-between">
                     <Text style={{ fontSize: '30px', fontWeight: '500' }}>Purchase History</Text>

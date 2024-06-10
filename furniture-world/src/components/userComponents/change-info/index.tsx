@@ -154,28 +154,7 @@ export const ChangeInformation = ({ setIsChangeInfo }: ChangeInformationProps) =
                                 }}
                                 preview={{ mask: null }}
                             />
-                            {/* <Input
-                                type="file"
-                                name="photo"
-                                id="customFile"
-                                accept=".jpg, .png, .jpeg, .webp"
-                                style={{ display: 'none' }}
-                            />
-                            <label
-                                htmlFor="customFile"
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignSelf: 'center',
-                                    backgroundColor: token.colorPrimary,
-                                    color: '#fff',
-                                    padding: '10px 20px',
-                                    borderRadius: ' 5px',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                Upload photo
-                            </label> */}
+
                             <Upload>
                                 <Button icon={<UploadOutlined />}>Change Avatar</Button>
                             </Upload>

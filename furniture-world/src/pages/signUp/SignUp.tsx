@@ -23,12 +23,11 @@ import { IAppDispatch, IRootState } from '../../redux/store';
 import { userSignUp } from 'src/redux/api/authApi';
 import { IUserData } from 'src/redux/api/authSlice';
 
-
-
 interface IUserSignUpFormData {
     fullname: string;
     phone: string;
     address: string;
+    country: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -115,6 +114,14 @@ export const SignUpPage = () => {
                             <Input
                                 prefix={<HomeOutlined className="" style={{ marginRight: '6px' }} />}
                                 placeholder="Address"
+                                size="large"
+                            />
+                        </Form.Item>
+
+                        <Form.Item name="country" rules={[{ required: true, message: 'Please input your country' }]}>
+                            <Input
+                                prefix={<HomeOutlined className="" style={{ marginRight: '6px' }} />}
+                                placeholder="Country"
                                 size="large"
                             />
                         </Form.Item>
