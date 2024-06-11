@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IRootState } from '../store';
-import { UserForgotPassword, authApi, userSignIn, userSignOut, userSignUp } from './authApi';
+import { UserForgotPassword, getUserInfo, userSignIn, userSignOut, userSignUp } from './authApi';
 import Cookies from 'js-cookie';
 
 // const accessToken = Cookies.get('accessToken') ?? null;
@@ -70,6 +70,20 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(userSignUp.rejected, (state, { payload }) => {
+                state.loading = false;
+                state.error = payload ? payload : null;
+            })
+            // get user info after reloading
+            .addCase(getUserInfo.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUserInfo.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.userData = payload;
+                // state.accessToken = payload.cookie;
+            })
+            .addCase(getUserInfo.rejected, (state, { payload }) => {
                 state.loading = false;
                 state.error = payload ? payload : null;
             });

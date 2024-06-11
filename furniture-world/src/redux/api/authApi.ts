@@ -5,29 +5,22 @@ import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
 import Cookies from 'js-cookie';
 import { IUserData } from './authSlice';
+import { getUserInfoApi } from 'src/constant/api/userAuthentication';
 
-export const authApi = createApi({
-    reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({
-        // base url of backend API
-        baseUrl: backendURL,
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as IRootState).auth.accessToken;
-            if (token) {
-                // include token in req header
-                headers.set('authorization', `Bearer ${token}`);
-                return headers;
-            }
-        },
-    }),
-    endpoints: (builder) => ({
-        getUserDetails: builder.query({
-            query: () => ({
-                url: 'api/user/profile',
-                method: 'GET',
-            }),
-        }),
-    }),
+export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: string, { rejectWithValue }) => {
+    try {
+        console.log('run 2', token)
+        // const response = await getUserInfoApi(token);
+        const response = await axios.get(`${backendURL}/user/getuser`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        console.log(response);
+        return response;
+    } catch (err: any) {
+        return rejectWithValue(err.message);
+    }
 });
 
 export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserData, { rejectWithValue }) => {

@@ -1,4 +1,4 @@
-import { backendURL } from './backendURL';
+import { apiClient, backendURL } from './backendURL';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 interface UserData {
     id: number;
@@ -33,3 +33,16 @@ export const authApi = createApi({
         }),
     }),
 });
+
+export const getUserInfoApi = (token: any) => {
+    apiClient.get('user/getuser', {
+        headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + token,
+        },
+    });
+};
+
+// export const getUserInfoApi = (token: any) => {
+//     apiClient.get('user/getuser', token);
+// };

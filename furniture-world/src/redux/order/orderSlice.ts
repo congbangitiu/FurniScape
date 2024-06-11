@@ -19,7 +19,7 @@ const initialState: IOrder = {
 
 const cartItems = useSelector((state: IRootState) => state.cart.items);
 
-const placeOrder = createAsyncThunk('order/placeOrder', async (cartItems: ICartItems, { rejectWithValue }) => {
+export const placeOrder = createAsyncThunk('order/placeOrder', async (cartItems: ICartItems, { rejectWithValue }) => {
     try {
         const token = Cookies.get('accessToken');
         const items = cartItems.items.map(({ id, quantity }) => ({ id, quantity }));

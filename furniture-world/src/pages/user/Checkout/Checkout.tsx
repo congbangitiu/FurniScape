@@ -3,13 +3,20 @@ import { customColors } from '../../../theme';
 import './Checkout.scss';
 import countryList from '../../../assets/data/countries.js';
 import { Banner } from '../../../components/userComponents/banner';
-import { IRootState } from 'src/redux/store';
+import { IAppDispatch, IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import { IUserData } from 'src/redux/api/authSlice';
+import { useDispatch } from 'react-redux';
+import { placeOrder } from 'src/redux/order/orderSlice';
 
 const { Text } = Typography;
+
+export interface IProductsPlaceOrder {
+    id: string;
+    quantity: string;
+}
 
 export const CheckoutPage = () => {
     const { token } = theme.useToken();
@@ -17,7 +24,7 @@ export const CheckoutPage = () => {
     const userInfo: IUserData = useSelector((state: IRootState) => state.auth.userData);
     const [paymentMethod, setPaymentMethod] = useState('');
     const isAuthenticated = Cookies.get('accessToken');
-    console.log(isAuthenticated);
+    const dispatch = useDispatch<IAppDispatch>();
 
     const onchangePaymentMethod = (e: RadioChangeEvent) => {
         setPaymentMethod(e.target.value);
@@ -26,6 +33,10 @@ export const CheckoutPage = () => {
         value: index.toString(),
         label: country.label,
     }));
+
+    const handlePlaceOrder = () => {
+        // dispatch(placeOrder(cartItems));
+    };
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
@@ -36,7 +47,9 @@ export const CheckoutPage = () => {
                     <Flex vertical style={{ width: '50%' }}>
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Full Name:</Typography>
-                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>Bao Pham</Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                                Bao Pham
+                            </Typography>
                         </Flex>
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Phone Number: </Typography>
@@ -371,6 +384,7 @@ export const CheckoutPage = () => {
                             border: `2px solid ${token.colorPrimary}`,
                             backgroundColor: 'transparent',
                         }}
+                        onClick={handlePlaceOrder}
                     >
                         Place order
                     </Button>

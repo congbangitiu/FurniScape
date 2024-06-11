@@ -16,6 +16,7 @@ import { signOut } from 'src/redux/api/authSlice';
 import Cookies from 'js-cookie';
 import { fetchProducts } from 'src/redux/products/productsSlice';
 import { Footer } from '../footer';
+import { getUserInfo } from 'src/redux/api/authApi';
 
 export const Navbar = () => {
     const location = useLocation();
@@ -31,6 +32,9 @@ export const Navbar = () => {
     const productsStatus = useSelector((state: IRootState) => state.products.status);
     useEffect(() => {
         if (productsStatus == 'idle') dispatch(fetchProducts());
+        // if (isAuthenticated) {
+        //     dispatch(getUserInfo(isAuthenticated));
+        // }
     });
     // navigate with pathname
     useEffect(() => {
@@ -51,6 +55,9 @@ export const Navbar = () => {
                 dispatch(setSelectedPath(''));
         }
     }, [location.pathname, dispatch]);
+
+    // reload getUserInfo by token
+    useEffect;
 
     const handleUserSignOut = () => {
         dispatch(signOut());
