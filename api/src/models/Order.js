@@ -2,20 +2,23 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
-    static associate(models) {
-      Order.belongsTo(models.User, {
-        foreignKey: "userId",
-        as: "user",
-      });
-      Order.belongsToMany(models.Product, {
-        through: "Order_Product",
-        as: "products",
-        foreignKey: "orderId",
-        otherKey: "quantity",
-        
-      });
+      static associate(models) {
+        Order.belongsTo(models.User, {
+          foreignKey: "userId",
+          as: "user",
+        });
+        Order.belongsToMany(models.Product, {
+          through: {
+            model: "Order_Product",
+            unique: false,
+          },
+          as: "products",
+          foreignKey: "orderId",
+          otherKey: "productId",
+          timestamps: false,
+        });
+      }
     }
-  }
   Order.init(
     {
       id: {
@@ -36,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
       total: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+      },
+      payment: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
