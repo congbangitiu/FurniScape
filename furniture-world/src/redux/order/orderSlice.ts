@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { placeOrderAPI } from 'src/constant/api/orderAPI';
 import { IRootState } from '../store';
 import { useSelector } from 'react-redux';
+import { IProductListPlaceOrder } from 'src/pages/user/Checkout/Checkout';
 
 export interface IOrder {
     items: IProduct[] | null;
@@ -17,18 +18,18 @@ const initialState: IOrder = {
     message: null,
 };
 
-const cartItems = useSelector((state: IRootState) => state.cart.items);
-
-export const placeOrder = createAsyncThunk('order/placeOrder', async (cartItems: ICartItems, { rejectWithValue }) => {
-    try {
-        const token = Cookies.get('accessToken');
-        const items = cartItems.items.map(({ id, quantity }) => ({ id, quantity }));
-        const response = await placeOrderAPI(items, token);
-        return response;
-    } catch (error: any) {
-        return rejectWithValue(error.message);
-    }
-});
+export const placeOrder = createAsyncThunk(
+    'order/placeOrder',
+    async (productsList: IProductListPlaceOrder, { rejectWithValue }) => {
+        try {
+            const token = Cookies.get('accessToken');
+            const response = await placeOrderAPI(productsList, token);
+            return response;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    },
+);
 
 export const orderSlice = createSlice({
     name: 'order',
@@ -41,7 +42,7 @@ export const orderSlice = createSlice({
             })
             .addCase(placeOrder.fulfilled, (state, { payload }) => {
                 state.status = 'succeed';
-                state.items = cartItems;
+                // state.items = payload;
                 state.message = payload ?? null;
             })
             .addCase(placeOrder.rejected, (state, { payload }) => {
@@ -50,8 +51,3 @@ export const orderSlice = createSlice({
             });
     },
 });
-
-// - Payment method khi banking thì response về tài khoản ngân hàng để chuyển
-// - user request để coi lại order
-// - admin có get order để xem được không
-// - thêm props status vào products

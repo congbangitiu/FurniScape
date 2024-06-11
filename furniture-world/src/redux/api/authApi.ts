@@ -9,15 +9,13 @@ import { getUserInfoApi } from 'src/constant/api/userAuthentication';
 
 export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: string, { rejectWithValue }) => {
     try {
-        console.log('run 2', token)
         // const response = await getUserInfoApi(token);
         const response = await axios.get(`${backendURL}/user/getuser`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'authorization': `${token}`,
             },
         });
-        console.log(response);
-        return response;
+        return response.data;
     } catch (err: any) {
         return rejectWithValue(err.message);
     }

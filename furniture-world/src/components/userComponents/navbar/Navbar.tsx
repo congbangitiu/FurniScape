@@ -32,9 +32,11 @@ export const Navbar = () => {
     const productsStatus = useSelector((state: IRootState) => state.products.status);
     useEffect(() => {
         if (productsStatus == 'idle') dispatch(fetchProducts());
-        // if (isAuthenticated) {
-        //     dispatch(getUserInfo(isAuthenticated));
-        // }
+        if (isAuthenticated) {
+                console.log('reload')
+            dispatch(getUserInfo(isAuthenticated));
+
+        }
     });
     // navigate with pathname
     useEffect(() => {

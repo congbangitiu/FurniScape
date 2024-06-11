@@ -13,9 +13,13 @@ import { placeOrder } from 'src/redux/order/orderSlice';
 
 const { Text } = Typography;
 
-export interface IProductsPlaceOrder {
+export interface IProductPlaceOrder {
     id: string;
-    quantity: string;
+    quantity: number;
+}
+
+export interface IProductListPlaceOrder {
+    products: IProductPlaceOrder[];
 }
 
 export const CheckoutPage = () => {
@@ -29,14 +33,18 @@ export const CheckoutPage = () => {
     const onchangePaymentMethod = (e: RadioChangeEvent) => {
         setPaymentMethod(e.target.value);
     };
+
+    const handlePlaceOrder = () => {
+        const productList: IProductListPlaceOrder = {
+            products: cartItems.items.map(({ id, quantity }) => ({ id, quantity })),
+        };
+        dispatch(placeOrder(productList));
+    };
+
     const options = countryList.map((country, index) => ({
         value: index.toString(),
         label: country.label,
     }));
-
-    const handlePlaceOrder = () => {
-        // dispatch(placeOrder(cartItems));
-    };
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
@@ -372,6 +380,7 @@ export const CheckoutPage = () => {
                         access to your account, and for other purposes described in our <b>privacy policy</b>.
                     </Text>
                     <Button
+                        onClick={handlePlaceOrder}
                         style={{
                             color: token.colorPrimary,
                             padding: '25px 50px',
@@ -384,7 +393,6 @@ export const CheckoutPage = () => {
                             border: `2px solid ${token.colorPrimary}`,
                             backgroundColor: 'transparent',
                         }}
-                        onClick={handlePlaceOrder}
                     >
                         Place order
                     </Button>
