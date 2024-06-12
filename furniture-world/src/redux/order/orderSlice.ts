@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ICartItems, IProduct } from '../userApi/cart/cartSlice';
 import Cookies from 'js-cookie';
-import { placeOrderAPI } from 'src/constant/api/orderAPI';
-import { IRootState } from '../store';
-import { useSelector } from 'react-redux';
+import { placeOrderAPI } from 'src/constant/api/orderAPI'
 import { IProductListPlaceOrder } from 'src/pages/user/Checkout/Checkout';
 
 export interface IOrder {
