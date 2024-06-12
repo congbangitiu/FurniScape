@@ -9,11 +9,13 @@ export const placeOrderAPI = (items: any, token: any) =>
     });
 
 export const getUserOrderDetailsAPI = (id: string, token: any) =>
-    apiClient.get('order/orderDetails', {
+    apiClient.get('order/getOrderDetails', {
         headers: {
             authorization: token,
         },
-        params: id,
+        params: {
+            id: id,
+        },
     });
 
 export const getUserOrdersAPI = (token: any) =>

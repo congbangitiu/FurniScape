@@ -9,27 +9,24 @@ import { backendURL } from 'src/constant/api/backendURL';
 import axios from 'axios';
 
 export interface IProductOrder {
+    image: any;
     product: string;
     unitPrice: string;
     quantity: number;
-    total: number;
+    category: string;
 }
 
 export interface IOrder {
     id: string;
     status: string;
-    total: string;
+    total: number;
     payment: string;
     createdAt: string;
-    products: IProductOrder[] | null;
-}
-
-export interface IOrderInfo {
-    order: IOrder[];
+    products: IProductOrder[];
 }
 
 export interface IOrderSlice {
-    orderList: IOrderInfo[] | null;
+    orderList: IOrder[] | null;
     status: string | null;
     message: Object | null;
 }
@@ -46,7 +43,6 @@ export const placeOrder = createAsyncThunk(
         try {
             const token = Cookies.get('accessToken');
             const response = await placeOrderAPI(productsList, token);
-            // const data: IOrder = { id, status, total, payment, createdAt };
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.message);
@@ -54,21 +50,38 @@ export const placeOrder = createAsyncThunk(
     },
 );
 
-export const getUserOrders = createAsyncThunk('order/getUserOrders', async (_, { rejectWithValue }) => {
+// get User Order List and products details of each order
+export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrders', async (_, { rejectWithValue }) => {
     try {
         const token = Cookies.get('accessToken');
         const { data } = await getUserOrdersAPI(token);
 
-        const order: IOrder[] = data.map((order: any) => ({
-            id: order.id,
-            status: order.status,
-            total: order.status,
-            payment: order.payment,
-            createdAt: order.createdAt,
-            products: null,
-        }));
+        const orders: IOrder[] = data.map((order: any) => {
+            const dateObject = new Date(order.createdAt);
 
-        return order;
+            const hours = dateObject.getHours().toString().padStart(2, '0');
+            const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+            const day = dateObject.getDate().toString().padStart(2, '0');
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); // Month starts from 0
+            const year = dateObject.getFullYear();
+
+            const formattedDateTime = `${hours}:${minutes} - ${day}/${month}/${year}`;
+            return {
+                id: order.id,
+                status: order.status,
+                total: `$${order.total}`,
+                payment: order.payment,
+                createdAt: formattedDateTime,
+                products: null,
+            };
+        });
+
+        for (let order of orders) {
+            const { data } = await getUserOrderDetailsAPI(order.id, token);
+            order.products = data.products;
+        }
+
+        return orders;
     } catch (error: any) {
         return rejectWithValue(error.message);
     }
@@ -80,6 +93,7 @@ export const getUserOrderDetails = createAsyncThunk(
         try {
             const token = Cookies.get('accessToken');
             const response = await getUserOrderDetailsAPI(id, token);
+            console.log(response);
             return response.data;
         } catch (err: any) {
             return rejectWithValue(err.message);
@@ -104,24 +118,24 @@ export const orderSlice = createSlice({
                 state.status = 'failed';
                 state.message = payload ?? null;
             })
-            .addCase(getUserOrderDetails.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(getUserOrderDetails.fulfilled, (state, { payload }) => {
-                state.status = 'succeed';
-                // state.items = payload;
-                state.message = payload ?? null;
-            })
-            .addCase(getUserOrderDetails.rejected, (state, { payload }) => {
-                state.status = 'failed';
-                state.message = payload ?? null;
-            })
+            // .addCase(getUserOrderDetails.pending, (state) => {
+            //     state.status = 'loading';
+            // })
+            // .addCase(getUserOrderDetails.fulfilled, (state, { payload }) => {
+            //     state.status = 'succeed';
+            //     // state.items = payload;
+            //     state.message = payload ?? null;
+            // })
+            // .addCase(getUserOrderDetails.rejected, (state, { payload }) => {
+            //     state.status = 'failed';
+            //     state.message = payload ?? null;
+            // })
             .addCase(getUserOrders.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(getUserOrders.fulfilled, (state, { payload }) => {
                 state.status = 'succeed';
-                // state.orderList = payload;
+                state.orderList = payload;
                 state.message = payload ?? null;
             })
             .addCase(getUserOrders.rejected, (state, { payload }) => {

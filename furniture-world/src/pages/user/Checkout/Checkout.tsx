@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { IUserData } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
-import { placeOrder } from 'src/redux/order/orderSlice';
+import { getUserOrders, placeOrder } from 'src/redux/order/orderSlice';
 import useMessage from 'antd/es/message/useMessage';
 import { useNavigate } from 'react-router';
 
@@ -68,7 +68,7 @@ export const CheckoutPage = () => {
         dispatch(placeOrder(productList));
         setTimeout(() => {
             navigate('/profile');
-        }, 2000);
+        }, 1000);
     };
 
     // display success message

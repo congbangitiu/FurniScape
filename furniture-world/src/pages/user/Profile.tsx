@@ -13,7 +13,8 @@ import { IUserData } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { getUserInfo } from 'src/redux/api/authApi';
-import { getUserOrders, getUserOrderDetails } from 'src/redux/order/orderSlice';
+import { getUserOrders, getUserOrderDetails, IOrder } from 'src/redux/order/orderSlice';
+import { OrderDataTable } from 'src/components/userComponents/dataTable/DataTable';
 
 const { Text } = Typography;
 
@@ -24,7 +25,8 @@ export const ProfilePage = () => {
     const userData: IUserData = useSelector((state: IRootState) => state.auth.userData);
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();
-    const userOrders = useSelector((state: IRootState) => state.order.orderList)
+    const userOrders: IOrder[] | null = useSelector((state: IRootState) => state.order.orderList);
+    console.log(userOrders);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -38,9 +40,21 @@ export const ProfilePage = () => {
     //     if (isAuthenticated) dispatch(getUserInfo(isAuthenticated));
     // });
 
+    // useEffect(() => {
+    //     dispatch(getUserOrders());
+    // }, [userOrders]);
+
+    // get all details of each order
     useEffect(() => {
         dispatch(getUserOrders());
-    },[userOrders])
+        // if (userOrders) {
+        //     console.log('run');
+        //     dispatch(getUserOrderDetails(userOrders[0].id));
+        // }
+        // userOrders.map((order) => {
+        //     dispatch(getUserOrderDetails(order.id));
+        // });
+    }, [isChangeInfo]);
 
     const dataSource = [
         {
@@ -192,7 +206,10 @@ export const ProfilePage = () => {
                         style={{ width: '25%' }}
                     />
                 </Flex>
-                <Flex
+
+                <OrderDataTable orderData={userOrders || []} />
+
+                {/* <Flex
                     style={{
                         width: '100%',
                         marginTop: '30px',
@@ -237,6 +254,7 @@ export const ProfilePage = () => {
                             }}
                         />
                     </Col>
+                    
                     <Col style={{ width: '30%', margin: '20px 20px 0 0' }}>
                         <Flex
                             style={{
@@ -386,7 +404,7 @@ export const ProfilePage = () => {
                             </Button>
                         </Flex>
                     </Col>
-                </Flex>
+                </Flex> */}
             </Flex>
 
             {isChangeInfo && (
