@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme } from 'antd';
 import type { ThHTMLAttributes, TdHTMLAttributes } from 'react';
 import type { TableColumnsType } from 'antd';
@@ -8,8 +8,11 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../../assets';
 import { ChangeInformation } from '../../components/userComponents/change-info';
 import { useSelector } from 'react-redux';
-import { IRootState } from 'src/redux/store';
+import { IAppDispatch, IRootState } from 'src/redux/store';
 import { IUserData } from 'src/redux/api/authSlice';
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
+import { getUserInfo } from 'src/redux/api/authApi';
 
 const { Text } = Typography;
 
@@ -18,6 +21,8 @@ export const ProfilePage = () => {
     const [query, setQuery] = useState('');
     const [isChangeInfo, setIsChangeInfo] = useState(false);
     const userData: IUserData = useSelector((state: IRootState) => state.auth.userData);
+    const isAuthenticated = Cookies.get('accessToken');
+    const dispatch = useDispatch<IAppDispatch>();
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -26,6 +31,10 @@ export const ProfilePage = () => {
     const handleClearSearch = () => {
         setQuery('');
     };
+
+    // useEffect(() => {
+    //     if (isAuthenticated) dispatch(getUserInfo(isAuthenticated));
+    // });
 
     const dataSource = [
         {

@@ -24,7 +24,7 @@ export const placeOrder = createAsyncThunk(
         try {
             const token = Cookies.get('accessToken');
             const response = await placeOrderAPI(productsList, token);
-            return response;
+            return response.data;
         } catch (error: any) {
             return rejectWithValue(error.message);
         }
