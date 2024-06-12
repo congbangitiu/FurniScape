@@ -69,7 +69,7 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
             return {
                 id: order.id,
                 status: order.status,
-                total: `$${order.total}`,
+                total: `${order.total}$`,
                 payment: order.payment,
                 createdAt: formattedDateTime,
                 products: null,

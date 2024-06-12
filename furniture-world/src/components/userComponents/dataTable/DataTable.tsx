@@ -44,7 +44,7 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
             key: index,
             id: order.id,
             status: order.status,
-            totalPrice: Number(order.total),
+            totalPrice: String(order.total),
             payment: order.payment,
             createdAt: order.createdAt,
         });
