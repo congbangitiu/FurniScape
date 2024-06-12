@@ -33,7 +33,6 @@ export const Navbar = () => {
     useEffect(() => {
         if (productsStatus == 'idle') dispatch(fetchProducts());
         if (isAuthenticated) {
-                console.log('reload')
             dispatch(getUserInfo(isAuthenticated));
 
         }

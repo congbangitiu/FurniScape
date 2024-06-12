@@ -1,15 +1,31 @@
-import { Flex, Row, Col, Typography, Form, Input, Button, Radio, Select, theme, Space, RadioChangeEvent } from 'antd';
+import {
+    Flex,
+    Row,
+    Col,
+    Typography,
+    Form,
+    Input,
+    message,
+    Button,
+    Radio,
+    Select,
+    theme,
+    Space,
+    RadioChangeEvent,
+} from 'antd';
 import { customColors } from '../../../theme';
 import './Checkout.scss';
 import countryList from '../../../assets/data/countries.js';
 import { Banner } from '../../../components/userComponents/banner';
 import { IAppDispatch, IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { IUserData } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
 import { placeOrder } from 'src/redux/order/orderSlice';
+import useMessage from 'antd/es/message/useMessage';
+import { useNavigate } from 'react-router';
 
 const { Text } = Typography;
 
@@ -20,26 +36,54 @@ export interface IProductPlaceOrder {
 
 export interface IProductListPlaceOrder {
     products: IProductPlaceOrder[];
+    payment: string;
 }
 
 export const CheckoutPage = () => {
     const { token } = theme.useToken();
     const cartItems = useSelector((state: IRootState) => state.cart);
     const userInfo: IUserData = useSelector((state: IRootState) => state.auth.userData);
-    const [paymentMethod, setPaymentMethod] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('cash');
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();
+    const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate();
+    const orderStatus = useSelector((state: IRootState) => state.order.status);
 
     const onchangePaymentMethod = (e: RadioChangeEvent) => {
         setPaymentMethod(e.target.value);
     };
 
     const handlePlaceOrder = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Order added successfully',
+        });
+
         const productList: IProductListPlaceOrder = {
             products: cartItems.items.map(({ id, quantity }) => ({ id, quantity })),
+            payment: paymentMethod,
         };
+
         dispatch(placeOrder(productList));
+        setTimeout(() => {
+            navigate('/profile');
+        }, 2000);
     };
+
+    // display success message
+    // useEffect(() => {
+    //     if (orderStatus === 'succeed') {
+    //         messageApi.open({
+    //             type: 'success',
+    //             content: 'Order added successfully',
+    //         });
+    //     } else if (orderStatus === 'failed')
+    //         messageApi.open({
+    //             type: 'error',
+    //             content: 'Order added failure',
+    //         });
+    // });
 
     const options = countryList.map((country, index) => ({
         value: index.toString(),
@@ -48,6 +92,7 @@ export const CheckoutPage = () => {
 
     return (
         <Flex style={{ flexDirection: 'column', alignItems: 'center', width: '100vw', paddingTop: '50px' }}>
+            {contextHolder}
             <Banner title="Checkout" />
             <Text style={{ fontSize: '30px', fontWeight: '600', marginTop: '20px' }}>Billing details</Text>
             <Flex style={{ marginTop: '40px', width: '70%' }}>
@@ -56,28 +101,26 @@ export const CheckoutPage = () => {
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Full Name:</Typography>
                             <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
-                                Bao Pham
+                                {userInfo.fullname}
+                                {/* Bao Pham */}
                             </Typography>
                         </Flex>
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Phone Number: </Typography>
                             <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
-                                {/* {userInfo.phone} */}
-                                bao
+                                {userInfo.phone}
                             </Typography>
                         </Flex>
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Address: </Typography>
                             <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
-                                {/* {userInfo.address} */}
-                                gia
+                                {userInfo.address}
                             </Typography>
                         </Flex>
                         <Flex>
                             <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Country: </Typography>
                             <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
-                                {/* {userInfo.country} */}
-                                pgan
+                                {userInfo.country}
                             </Typography>
                         </Flex>
                     </Flex>
@@ -318,7 +361,7 @@ export const CheckoutPage = () => {
                         }}
                     ></Row>
 
-                    <Radio.Group onChange={onchangePaymentMethod} value={paymentMethod}>
+                    <Radio.Group onChange={onchangePaymentMethod} value={paymentMethod} defaultValue={paymentMethod}>
                         <Space direction="vertical">
                             <Radio value={'banking'}>
                                 <Typography.Title style={{ margin: '8px 5px' }} level={4}>
@@ -353,28 +396,7 @@ export const CheckoutPage = () => {
                             </Text>
                         </Space>
                     </Radio.Group>
-                    {/* <Col>
-                        <Row
-                            style={{
-                                width: '100%',
-                                marginTop: '25px',
-                            }}
-                        >
-                            <Radio style={{ fontSize: '18px', fontWeight: '400' }}> </Radio>
-                        </Row>
-                       
-                    </Col>
-                    <Col>
-                        <Row
-                            style={{
-                                width: '100%',
-                                marginTop: '25px',
-                            }}
-                        >
-                            <Radio style={{ fontSize: '18px', fontWeight: '400' }}> Cash On Delivery</Radio>
-                        </Row>
-                       
-                    </Col> */}
+
                     <Text style={{ fontSize: '16px', fontWeight: '400', marginTop: '25px', textAlign: 'justify' }}>
                         Your personal data will be used to support your experience throughout this website, to manage
                         access to your account, and for other purposes described in our <b>privacy policy</b>.
