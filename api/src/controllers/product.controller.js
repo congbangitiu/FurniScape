@@ -2,14 +2,13 @@ const { Product } = require('../models');
 
 const addProduct = async (req, res, next) => {
     try {
-        const { name, category, price, quantity, description, image_dir } = req.body;
+        const { name, category, price, quantity, description } = req.body;
         const newProduct = await Product.create({
             name,
             category,
             price,
             quantity,
             description,
-            image_dir,
         });
         return res.status(201).json(newProduct);
     } catch (error) {
@@ -62,6 +61,41 @@ const updateProduct = async (req, res, next) => {
     }
 };
 
+const updateProductImage = async (req, res, next) => {
+    try {
+        if(!req.file) return res.status(400).json({ message: 'No file uploaded' });
+        const id = req.query.id;
+        // find product by id
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        // check if product has an image
+        if (product.image_dir) {
+            // delete the image
+            if(product.image_dir === req.file.path){
+                return res.status(409).json({ message: 'Image Overwrited' });
+            }
+            // delete old image
+            const originalFilePath = path.join(
+                __dirname,
+                "../../",
+                `${product.image_dir}`
+              );
+            fs.unlink(originalFilePath, async (err) => {
+                if (err) console.error(err);
+            });
+        }
+        //update preview directory in database
+        product.image_dir = req.file.path;
+        await product.save();
+        console.log("Update Preview successfully");
+        return res.status(200).json({ message: 'Image uploaded successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const searchByKeyword = async (req, res, next) => {
     try {
         const { keyword } = req.params;
@@ -94,6 +128,6 @@ const searchByCategory = async (req, res, next) => {
 
 module.exports = { addProduct ,addProducts, 
                     getProducts, getProduct,
-                    updateProduct,
+                    updateProduct, updateProductImage,
                     searchByKeyword, searchByCategory
                 };
