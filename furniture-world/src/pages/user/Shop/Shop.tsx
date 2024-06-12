@@ -72,7 +72,7 @@ export const ShopPage = () => {
                             fill="black"
                         />
                     </svg>
-                    <Text style={{ fontSize: '18px', fontWeight: '400' }}>Showing 1-16 of 32 results</Text>
+                    <Text style={{ fontSize: '18px', fontWeight: '400' }}>Products List</Text>
                 </Row>
                 <Row style={{ gap: '40px' }}>
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>

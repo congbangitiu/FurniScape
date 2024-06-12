@@ -26,6 +26,7 @@ import { useDispatch } from 'react-redux';
 import { getUserOrders, placeOrder } from 'src/redux/order/orderSlice';
 import useMessage from 'antd/es/message/useMessage';
 import { useNavigate } from 'react-router';
+import { cartSlice, resetCartItems } from 'src/redux/userApi/cart/cartSlice';
 
 const { Text } = Typography;
 
@@ -66,6 +67,7 @@ export const CheckoutPage = () => {
         };
 
         dispatch(placeOrder(productList));
+        dispatch(resetCartItems());
         setTimeout(() => {
             navigate('/profile');
         }, 1000);

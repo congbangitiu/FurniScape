@@ -18,47 +18,6 @@ export interface ICartItems {
 }
 
 const initialState: ICartItems = { items: [], totalPrice: 0 };
-// const initialState: ICartItems = {
-//     items: [
-//         {
-//             id: '0',
-//             image_dir: assets.image1,
-//             name: 'Product 1',
-//             category: 'CategoryA',
-//             price: 50,
-//             description: 'none',
-//             quantity: 1,
-//         },
-//         {
-//             id: '1',
-//             image_dir: assets.image1,
-//             name: 'Product 2',
-//             category: 'Category B',
-//             price: 50,
-//             description: 'none',
-//             quantity: 1,
-//         },
-//         {
-//             id: '2',
-//             image_dir: assets.image1,
-//             name: 'Product 3',
-//             category: 'Category C',
-//             price: 50,
-//             description: 'none',
-//             quantity: 1,
-//         },
-//         {
-//             id: '3',
-//             image_dir: assets.image1,
-//             name: 'Product 4',
-//             category: 'Category D',
-//             price: 50,
-//             description: 'none',
-//             quantity: 1,
-//         },
-//     ],
-//     totalPrice: 200,
-// };
 
 const totalPriceUpdating = (items: IProduct[]) => {
     return items.reduce((total, item) => {
@@ -70,6 +29,10 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        resetCartItems: (state) => {
+            state.items = [];
+            state.totalPrice = 0;
+        },
         addItem: (state, action) => {
             const newItem = action.payload;
             const existingItem = state.items.find((item) => item.id === newItem.id);
@@ -116,5 +79,5 @@ export const cartSlice = createSlice({
     },
 });
 
-export const { addItem, removeItem, increaseItemQuantity, decreaseItemQuantity, updateItemQuantity } =
+export const { resetCartItems, addItem, removeItem, increaseItemQuantity, decreaseItemQuantity, updateItemQuantity } =
     cartSlice.actions;

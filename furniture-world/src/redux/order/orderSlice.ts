@@ -79,6 +79,9 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
         for (let order of orders) {
             const { data } = await getUserOrderDetailsAPI(order.id, token);
             order.products = data.products;
+            order.products.forEach((product) => {
+                product.unitPrice = `${product.unitPrice}$`;
+            });
         }
 
         return orders;
