@@ -122,7 +122,7 @@ const updateProductImage = async (req, res, next) => {
         //update preview directory in database
         product.image_dir = req.file.path;
         await product.save();
-        console.log("Update Preview successfully");
+        // console.log("Update Preview successfully");
         return res.status(200).json({ message: 'Image uploaded successfully' });
     } catch (error) {
         next(error);
