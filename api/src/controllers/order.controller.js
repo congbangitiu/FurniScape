@@ -49,7 +49,7 @@ const placeOrder = async (req, res) => {
             const quantity = products[i].quantity;
             await newOrder.addProduct(product, { through: { quantity } });
         }
-        
+
         // if payment is banking, send back account number
         if (payment === 'banking') {
             return res.status(201).json({ message: 'Order placed', bankingInfo: 'Vietcombank\n9933808121\nDao Minh Huy' });
@@ -62,20 +62,20 @@ const placeOrder = async (req, res) => {
 
 const getOrderFromUser = async (req, res, next) => {
     try {
-      var id = req.user.id;
-      const orders = await Order.findAll({ where: { userId: id } });
-      if(orders.length === 0) return res.status(404).json({ msg: "No order found" });
-      return res.status(200).json(orders);
+        var id = req.user.id;
+        const orders = await Order.findAll({ where: { userId: id } });
+        if (orders.length === 0) return res.status(404).json({ msg: "No order found" });
+        return res.status(200).json(orders);
     } catch (error) {
-      console.log(error);
-      next(error);
+        console.log(error);
+        next(error);
     }
-  };
+};
 
 const getAllOrders = async (req, res, next) => {
-    try{
+    try {
         const orders = await Order.findAll();
-        if(orders.length === 0) return res.status(404).json({ msg: "No order found" });
+        if (orders.length === 0) return res.status(404).json({ msg: "No order found" });
         return res.status(200).json(orders);
     }
     catch (error) {
@@ -106,24 +106,27 @@ const getOrderDetails = async (req, res, next) => {
         let productList = [];
         for (let i = 0; i < products.length; i++) {
             const product = await getProduct(products[i].productId);
-            productList.push({  product: product.name,
-                                unitPrice: product.price,
-                                quantity: products[i].quantity,
-                                total: product.price * products[i].quantity,
-                            });
+            productList.push({
+                product: product.name,
+                category: product.category,
+                quantity: products[i].quantity,
+                unitPrice: Number(product.price),
+            });
         }
-        return res.status(200).json({   order: order, 
-                                        products: productList, 
-                                        totalPrice: order.total,
-                                    });
+        return res.status(200).json({
+            order: order,
+            products: productList,
+            totalPrice: order.total,
+        });
 
     } catch (error) {
         next(error);
     }
 };
 
-module.exports = {  placeOrder,
-                    getOrderFromUser,
-                    getAllOrders,
-                    getOrderDetails,
-                };
+module.exports = {
+    placeOrder,
+    getOrderFromUser,
+    getAllOrders,
+    getOrderDetails,
+};
