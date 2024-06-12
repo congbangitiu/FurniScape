@@ -1,4 +1,5 @@
 const { Product } = require('../models');
+const path = require("path");
 
 const addProduct = async (req, res, next) => {
     try {
@@ -39,9 +40,40 @@ const getProduct = async (productId) => {
     return await Product.findByPk(productId);
   };
 
+const getProductDetail = async (req, res, next) => {
+    try {
+        const id = req.query.id;
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        
+        return res.status(200).json(product);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getProductPicture = async (req, res, next) => {
+    try {
+        const id = req.query.id;
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        const image = product.image_dir;
+        // send file from directory
+        return res.status(200)
+            .sendFile(path.join(__dirname, "../../", `${image}`));
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 const updateProduct = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const id = req.query.id;
         const { name, category, price, quantity, description,status, image_dir } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
@@ -98,7 +130,7 @@ const updateProductImage = async (req, res, next) => {
 
 const searchByKeyword = async (req, res, next) => {
     try {
-        const { keyword } = req.params;
+        const { keyword } = req.query;
         const products = await Product.findAll({
             where: {
                 name: {
@@ -114,7 +146,7 @@ const searchByKeyword = async (req, res, next) => {
 
 const searchByCategory = async (req, res, next) => {
     try {
-        const { category } = req.params;
+        const { category } = req.query;
         const products = await Product.findAll({
             where: {
                 category,
@@ -127,7 +159,8 @@ const searchByCategory = async (req, res, next) => {
 };
 
 module.exports = { addProduct ,addProducts, 
-                    getProducts, getProduct,
+                    getProducts, getProduct, getProductDetail,
+                    getProductPicture,
                     updateProduct, updateProductImage,
                     searchByKeyword, searchByCategory
                 };

@@ -3,6 +3,8 @@ const express = require(`express`);
 const { addProduct,
         addProducts,
         getProducts,
+        getProductDetail,
+        getProductPicture,
         updateProduct,
         updateProductImage,
         searchByKeyword,
@@ -23,6 +25,10 @@ router.post("/addProducts", verifyAdmin, addProducts);
 
 router.get("/getProducts", getProducts);
 
+router.get("/getProductDetail", getProductDetail);
+
+router.get("/getProductPicture", getProductPicture);
+
 router.get("/updateProduct", verifyAdmin, updateProduct);
 
 router.put("/updateProductImage", 
@@ -30,8 +36,8 @@ router.put("/updateProductImage",
             product_picture_upload.single("file"), 
             updateProductImage);
 
-router.get("/searchByKeyword/:keyword", searchByKeyword);
+router.get("/searchByKeyword", searchByKeyword);
 
-router.get("/searchByCategory/:category", searchByCategory);
+router.get("/searchByCategory", searchByCategory);
 
 module.exports = router;
