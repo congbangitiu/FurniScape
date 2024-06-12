@@ -3,7 +3,7 @@ const multer = require("multer");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let destination = "Resources/";
-    if (file.mimetype === "image/jpg" || file.mimetype === "image/png") {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
       destination = "Resources/images/";
     }
     cb(null, destination);
