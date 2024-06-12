@@ -7,3 +7,18 @@ export const placeOrderAPI = (items: any, token: any) =>
             Authorization: `${token}`,
         },
     });
+
+export const getOrderDetailsAPI = (items: any, token: any) =>
+    apiClient.get('order/orderDetails', {
+        headers: {
+            authorization: token,
+        },
+        params: items,
+    });
+
+export const getUserOrdersAPI = (token: any) =>
+    apiClient.get('order/getOrderList', {
+        headers: {
+            authorization: `${token}`,
+        },
+    });

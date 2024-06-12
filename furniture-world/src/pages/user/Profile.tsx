@@ -13,6 +13,7 @@ import { IUserData } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { getUserInfo } from 'src/redux/api/authApi';
+import { getOrderDetails } from 'src/redux/order/orderSlice';
 
 const { Text } = Typography;
 
@@ -23,6 +24,7 @@ export const ProfilePage = () => {
     const userData: IUserData = useSelector((state: IRootState) => state.auth.userData);
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();
+    const userOrders = useSelector((state: IRootState) => state.order.items)
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -35,6 +37,10 @@ export const ProfilePage = () => {
     // useEffect(() => {
     //     if (isAuthenticated) dispatch(getUserInfo(isAuthenticated));
     // });
+
+    useEffect(() => {
+        dispatch(getOrderDetails());
+    })
 
     const dataSource = [
         {
