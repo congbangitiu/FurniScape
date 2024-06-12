@@ -108,7 +108,6 @@ const getOrderDetails = async (req, res, next) => {
             const product = await getProduct(products[i].productId);
             productList.push({
                 product: product.name,
-                // unitPrice: product.price,
                 category: product.category,
                 quantity: products[i].quantity,
                 unitPrice: Number(product.price),

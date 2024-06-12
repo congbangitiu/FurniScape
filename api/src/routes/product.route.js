@@ -3,10 +3,17 @@ const express = require(`express`);
 const { addProduct,
         addProducts,
         getProducts,
+        getProductDetail,
+        getProductPicture,
         updateProduct,
+        updateProductImage,
         searchByKeyword,
         searchByCategory,
-}  = require("../controllers/product.controller");
+} = require("../controllers/product.controller");
+
+const {
+        product_picture_upload,
+} = require("../utils/multerConfig");
 
 const { verifyToken, verifyAdmin } = require("../utils/verifyToken");
 
@@ -18,10 +25,19 @@ router.post("/addProducts", verifyAdmin, addProducts);
 
 router.get("/getProducts", getProducts);
 
+router.get("/getProductDetail", getProductDetail);
+
+router.get("/getProductPicture", getProductPicture);
+
 router.get("/updateProduct", verifyAdmin, updateProduct);
 
-router.get("/searchByKeyword/:keyword", searchByKeyword);
+router.put("/updateProductImage", 
+            verifyAdmin, 
+            product_picture_upload.single("file"), 
+            updateProductImage);
 
-router.get("/searchByCategory/:category", searchByCategory);
+router.get("/searchByKeyword", searchByKeyword);
+
+router.get("/searchByCategory", searchByCategory);
 
 module.exports = router;

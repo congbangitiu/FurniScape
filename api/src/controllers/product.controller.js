@@ -1,15 +1,16 @@
 const { Product } = require('../models');
+const path = require("path");
+const fs = require("fs");
 
 const addProduct = async (req, res, next) => {
     try {
-        const { name, category, price, quantity, description, image_dir } = req.body;
+        const { name, category, price, quantity, description } = req.body;
         const newProduct = await Product.create({
             name,
             category,
             price,
             quantity,
             description,
-            image_dir,
         });
         return res.status(201).json(newProduct);
     } catch (error) {
@@ -40,9 +41,40 @@ const getProduct = async (productId) => {
     return await Product.findByPk(productId);
   };
 
+const getProductDetail = async (req, res, next) => {
+    try {
+        const id = req.query.id;
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        
+        return res.status(200).json(product);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getProductPicture = async (req, res, next) => {
+    try {
+        const id = req.query.id;
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        const image = product.image_dir;
+        // send file from directory
+        return res.status(200)
+            .sendFile(path.join(__dirname, "../../", `${image}`));
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 const updateProduct = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const id = req.query.id;
         const { name, category, price, quantity, description,status, image_dir } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
@@ -62,9 +94,44 @@ const updateProduct = async (req, res, next) => {
     }
 };
 
+const updateProductImage = async (req, res, next) => {
+    try {
+        if(!req.file) return res.status(400).json({ message: 'No file uploaded' });
+        const id = req.query.id;
+        // find product by id
+        const product = await Product.findByPk(id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        // check if product has an image
+        if (product.image_dir) {
+            // delete the image
+            if(product.image_dir === req.file.path){
+                return res.status(409).json({ message: 'Image Overwrited' });
+            }
+            // delete old image
+            const originalFilePath = path.join(
+                __dirname,
+                "../../",
+                `${product.image_dir}`
+              );
+            fs.unlink(originalFilePath, async (err) => {
+                if (err) console.error(err);
+            });
+        }
+        //update preview directory in database
+        product.image_dir = req.file.path;
+        await product.save();
+        // console.log("Update Preview successfully");
+        return res.status(200).json({ message: 'Image uploaded successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const searchByKeyword = async (req, res, next) => {
     try {
-        const { keyword } = req.params;
+        const { keyword } = req.query;
         const products = await Product.findAll({
             where: {
                 name: {
@@ -80,7 +147,7 @@ const searchByKeyword = async (req, res, next) => {
 
 const searchByCategory = async (req, res, next) => {
     try {
-        const { category } = req.params;
+        const { category } = req.query;
         const products = await Product.findAll({
             where: {
                 category,
@@ -93,7 +160,8 @@ const searchByCategory = async (req, res, next) => {
 };
 
 module.exports = { addProduct ,addProducts, 
-                    getProducts, getProduct,
-                    updateProduct,
+                    getProducts, getProduct, getProductDetail,
+                    getProductPicture,
+                    updateProduct, updateProductImage,
                     searchByKeyword, searchByCategory
                 };
