@@ -42,7 +42,7 @@ export const NavbarAdmin = () => {
     }, [location.pathname, dispatch]);
 
     const handleUserSignOut = () => {
-        console.log('out')
+        console.log('out');
         dispatch(signOut());
         navigate('/');
     };
@@ -63,7 +63,7 @@ export const NavbarAdmin = () => {
                 }}
             >
                 <Col className="navbar_logo" span={12}>
-                    <Link to="/">
+                    <Link to="/" >
                         <img src={assets.logo} alt="logo" width={180} style={{ padding: '0 0 4px 20px' }} />
                     </Link>
                 </Col>

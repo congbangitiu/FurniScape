@@ -26,6 +26,7 @@ import { Outlet, useNavigate } from 'react-router';
 import { signOut } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
 import { IAppDispatch } from 'src/redux/store';
+import { Link } from 'react-router-dom';
 const { Footer, Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -129,7 +130,9 @@ export const LayoutAdmin = () => {
                     borderBottom: '1px solid',
                 }}
             >
-                <img src={assets.logo} alt="logo" width={180} style={{ padding: '2px 0 ' }} />
+                <Link to='/admin'>
+                    <img src={assets.logo} alt="logo" width={180} style={{ padding: '26px 0 0 0 ' }} />
+                </Link>
                 {/* <Menu
                     theme="dark"
                     mode="horizontal"
@@ -144,7 +147,7 @@ export const LayoutAdmin = () => {
                                 icon={<UserOutlined style={{ fontSize: '18px' }} />}
                                 style={{ background: 'transparent', border: 0, boxShadow: 'none' }}
                                 size="large"
-                                onClick={() => navigate('/profile')}
+                                onClick={() => navigate('/admin/profile')}
                             />
                         </Badge>
 

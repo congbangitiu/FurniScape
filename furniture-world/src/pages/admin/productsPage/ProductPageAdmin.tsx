@@ -26,6 +26,12 @@ export const ProductPageAdmin = () => {
 
     const columns: TableColumnsType<IProductsTableType> = [
         {
+            title: 'Product Image',
+            dataIndex: 'image_dir',
+            key: 'image_dir',
+            width: '150',
+        },
+        {
             title: 'Product Id',
             dataIndex: 'id',
             key: 'id',
@@ -124,5 +130,13 @@ export const ProductPageAdmin = () => {
         });
     });
 
-    return <Table columns={columns} dataSource={data} loading={loading} />;
+    return (
+        <Table
+            columns={columns}
+            dataSource={data}
+            loading={loading}
+            expandable={{ expandedRowRender: (record) => <p style={{ margin: '0 0 0 48px' }}>{record.description}</p> }}
+            scroll={{x: 400}}
+        />
+    );
 };
