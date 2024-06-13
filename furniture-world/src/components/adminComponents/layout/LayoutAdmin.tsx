@@ -23,6 +23,9 @@ import type { MenuProps } from 'antd';
 import { Badge, Breadcrumb, Button, ConfigProvider, Flex, Layout, Menu, theme } from 'antd';
 import { assets } from 'src/assets';
 import { Outlet, useNavigate } from 'react-router';
+import { signOut } from 'src/redux/api/authSlice';
+import { useDispatch } from 'react-redux';
+import { IAppDispatch } from 'src/redux/store';
 const { Footer, Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -88,7 +91,7 @@ export const LayoutAdmin = () => {
     } = theme.useToken();
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
-    const handleUserSignOut = () => {};
+    const dispatch = useDispatch<IAppDispatch>();
 
     const handleNavigate: MenuProps['onClick'] = (e) => {
         switch (e.key) {
@@ -102,16 +105,18 @@ export const LayoutAdmin = () => {
                 navigate('users');
                 break;
             case '4':
-                navigate('products');
-                break;
-            case '5':
                 navigate('orders');
                 break;
-            default:
-                navigate('/');
+            case '5':
+                navigate('products');
+                break;
         }
     };
 
+    const handleUserSignOut = () => {
+        dispatch(signOut());
+        navigate('/');
+    };
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header
@@ -148,7 +153,7 @@ export const LayoutAdmin = () => {
                                 icon={<LogoutOutlined style={{ fontSize: '18px' }} />}
                                 style={{ background: 'transparent', border: 0, boxShadow: 'none' }}
                                 size="large"
-                                onClick={() => handleUserSignOut()}
+                                onClick={handleUserSignOut}
                             />
                         </Badge>
                     </ConfigProvider>
@@ -190,7 +195,7 @@ export const LayoutAdmin = () => {
                         <Outlet />
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>
-                        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                        Design ©{new Date().getFullYear()} Created by Gia Bao
                     </Footer>
                 </Layout>
             </Layout>

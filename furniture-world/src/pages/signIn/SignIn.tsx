@@ -4,12 +4,13 @@ import { UserOutlined, LockOutlined, LoadingOutlined, GoogleOutlined, FacebookFi
 import { Spin } from 'antd';
 import { assets } from '../../assets';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IAppDispatch, IRootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { userSignIn } from 'src/redux/api/authApi';
 import './signIn.scss';
 import { IUserData } from 'src/redux/api/authSlice';
+import { setSelectedPath } from 'src/redux/navbar';
 
 export interface IUserSignInData {
     email: string;
@@ -19,16 +20,33 @@ export interface IUserSignInData {
 
 export const SignInPage = () => {
     const dispatch = useDispatch<IAppDispatch>();
-    const { loading, error, userData } = useSelector((state: IRootState) => state.auth);
+    const { loading, error, userData, role } = useSelector((state: IRootState) => state.auth);
     const navigate = useNavigate();
-
+    const location = useLocation();
+    console.log(role);
     const onSubmit = (data: IUserData) => {
         dispatch(userSignIn(data));
     };
 
+    // useEffect(() => {
+    //     if (userData) navigate('/');
+    // }, [userData]);
+
+    // navigate with pathname
     useEffect(() => {
-        if (userData) navigate('/');
-    }, [userData]);
+        console.log('run');
+        if (role === 'user') {
+            // dispatch(setSelectedPath('/'));
+            navigate('/');
+        }
+
+        if (role === 'admin') {
+            // dispatch(setSelectedPath('admin'));
+            navigate('/admin');
+        }
+    }, [role]);
+
+    // reload getUserInfo by token
 
     return (
         <Row gutter={16} style={{ height: '100vh' }}>

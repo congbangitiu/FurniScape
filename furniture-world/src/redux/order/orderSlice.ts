@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/toolkit';
-import { ICartItems, IProduct } from '../userApi/cart/cartSlice';
+import { ICartItems } from '../userApi/cart/cartSlice';
 import Cookies from 'js-cookie';
-import { getUserOrderDetailsAPI, getUserOrdersAPI, placeOrderAPI } from 'src/constant/api/orderAPI';
+import {
+    getAllOrdersOfAllUsersAPI,
+    getUserOrderDetailsAPI,
+    getUserOrdersAPI,
+    placeOrderAPI,
+} from 'src/constant/api/orderAPI';
 import { IRootState } from '../store';
 import { useSelector } from 'react-redux';
 import { IProductListPlaceOrder } from 'src/pages/user/Checkout/Checkout';
@@ -22,6 +27,7 @@ export interface IOrder {
     total: number;
     payment: string;
     createdAt: string;
+    userId: string;
     products: IProductOrder[];
 }
 
@@ -68,6 +74,7 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
             const formattedDateTime = `${hours}:${minutes} - ${day}/${month}/${year}`;
             return {
                 id: order.id,
+                userId: order.userId,
                 status: order.status,
                 total: `${order.total}$`,
                 payment: order.payment,
@@ -76,6 +83,7 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
             };
         });
 
+        //check
         for (let order of orders) {
             const { data } = await getUserOrderDetailsAPI(order.id, token);
             order.products = data.products;
@@ -89,6 +97,49 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
         return rejectWithValue(error.message);
     }
 });
+
+export const getAllOrdersOfAllUsers = createAsyncThunk(
+    'order/getAllOrdersOfAllUsers',
+    async (_, { rejectWithValue }) => {
+        try {
+            const token = Cookies.get('accessToken');
+            const { data } = await getAllOrdersOfAllUsersAPI(token);
+
+            const orders: IOrder[] = data.map((order: any) => {
+                const dateObject = new Date(order.createdAt);
+
+                const hours = dateObject.getHours().toString().padStart(2, '0');
+                const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+                const day = dateObject.getDate().toString().padStart(2, '0');
+                const month = (dateObject.getMonth() + 1).toString().padStart(2, '0'); // Month starts from 0
+                const year = dateObject.getFullYear();
+
+                const formattedDateTime = `${hours}:${minutes} - ${day}/${month}/${year}`;
+                return {
+                    id: order.id,
+                    userId: order.userId,
+                    status: order.status,
+                    total: `${order.total}$`,
+                    payment: order.payment,
+                    createdAt: formattedDateTime,
+                    products: null,
+                };
+            });
+
+            for (let order of orders) {
+                const { data } = await getUserOrderDetailsAPI(order.id, token);
+                order.products = data.products;
+                order.products.forEach((product) => {
+                    product.unitPrice = `${product.unitPrice}$`;
+                });
+            }
+
+            return orders;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    },
+);
 
 export const getUserOrderDetails = createAsyncThunk(
     'order/getUserOrderDetails',
@@ -142,6 +193,19 @@ export const orderSlice = createSlice({
                 state.message = payload ?? null;
             })
             .addCase(getUserOrders.rejected, (state, { payload }) => {
+                state.status = 'failed';
+                state.message = payload ?? null;
+            })
+            // admin
+            .addCase(getAllOrdersOfAllUsers.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getAllOrdersOfAllUsers.fulfilled, (state, { payload }) => {
+                state.status = 'succeed';
+                state.orderList = payload;
+                state.message = payload ?? null;
+            })
+            .addCase(getAllOrdersOfAllUsers.rejected, (state, { payload }) => {
                 state.status = 'failed';
                 state.message = payload ?? null;
             });

@@ -41,15 +41,12 @@ export const SignUpPage = () => {
 
     const onSubmit = (data: IUserSignUpFormData) => {
         const { confirmPassword, ...dataToSubmit } = data;
-        console.log(dataToSubmit);
+        console.log(dataToSubmit)
         dispatch(userSignUp(dataToSubmit));
-        // .then((action)=> {
-        //     localStorage.setItem('accessToken', action.payload.token);
-        //     navigate('/')
-        // })
     };
 
     useEffect(() => {
+        console.log(userData)
         if (userData) navigate('/');
     }, [userData]);
 

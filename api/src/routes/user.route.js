@@ -16,3 +16,5 @@ router.post("/testpost", async (req, res) => {
 router.patch("/patch", verifyToken, updateUser);
 
 module.exports = router;
+
+// get all users Info verify admin

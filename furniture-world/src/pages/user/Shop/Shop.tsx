@@ -5,16 +5,17 @@ import { Products } from '../../../components/userComponents/products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './style.scss';
-import { IProduct } from 'src/redux/userApi/cart/cartSlice';
 import { navBarHeight } from 'src/theme';
 import { IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
+import { IProduct } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 
 export const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(8);
+    const [searchValue, setSearchValue] = useState('');
     const productFetch = useSelector((state: IRootState) => state.products.items);
     const [products, setProducts] = useState(productFetch);
     const handlePageChange: PaginationProps['onChange'] = (page: number) => {
@@ -50,6 +51,19 @@ export const ShopPage = () => {
         setProducts(categoryProducts);
     };
 
+    const handleSearchProduct = (value: string) => {
+        let categoryProducts = [...productFetch];
+        categoryProducts = categoryProducts.filter((product) =>
+            product.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()),
+        );
+        console.log(categoryProducts);
+        setProducts(categoryProducts);
+        setSearchValue(value);
+    };
+
+    const handleSearchProductReset = () => {
+        setSearchValue('');
+    };
     // run when products fetch change to update products
     useEffect(() => setProducts(productFetch), [productFetch]);
 
@@ -117,7 +131,17 @@ export const ShopPage = () => {
                     </Flex>
                     <Flex style={{ alignItems: 'center', gap: '10px' }}>
                         <Text style={{ fontSize: '18px', fontWeight: '500' }}>Search</Text>
-                        <Input.Search size="large" placeholder="Enter product" allowClear style={{ width: '80%' }} />
+                        <Input.Search
+                            size="large"
+                            placeholder="Enter product"
+                            value={searchValue}
+                            allowClear
+                            style={{ width: '80%' }}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            onSearch={handleSearchProduct}
+                            onReset={handleSearchProductReset}
+                            // enterButton
+                        />
                     </Flex>
                 </Row>
             </Row>

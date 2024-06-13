@@ -1,6 +1,9 @@
 import { Card, Col, Row } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { TopDeals } from 'src/components/adminComponents/topDeals/topDeals';
+import { getAllOrdersOfAllUsers } from 'src/redux/order/orderSlice';
+import { IRootState, IAppDispatch } from 'src/redux/store';
 
 type Props = {};
 

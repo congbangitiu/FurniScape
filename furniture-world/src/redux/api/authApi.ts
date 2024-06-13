@@ -7,12 +7,24 @@ import Cookies from 'js-cookie';
 import { IUserData } from './authSlice';
 import { getUserInfoApi } from 'src/constant/api/userAuthentication';
 
+interface IUserDataSignIn {
+    validUser: IUserData;
+    accessToken: string;
+    role: string;
+}
+
+interface IUserDataSignUp {
+    newUser: IUserData;
+    accessToken: string;
+    role: string;
+}
+
 export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: string, { rejectWithValue }) => {
     try {
         // const response = await getUserInfoApi(token);
         const response = await axios.get(`${backendURL}/user/getuser`, {
             headers: {
-                'authorization': `${token}`,
+                authorization: `${token}`,
             },
         });
         return response.data;
@@ -29,7 +41,15 @@ export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUser
             },
         });
         Cookies.set('accessToken', data.cookie, { expires: 7 });
-        return data;
+
+        const { role, ...userDataTemp } = data.validUser;
+
+        const finalData: IUserDataSignIn = {
+            role: data.validUser.role,
+            validUser: userDataTemp,
+            accessToken: data.cookie,
+        };
+        return finalData;
     } catch (err: any) {
         if (err.response && err.response.message) {
             return rejectWithValue(err.response.message);
@@ -47,9 +67,18 @@ export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUser
             },
         });
 
-        return data.user;
-        // const response = await axios.post(`${backendURL}/auth/signup`, userData);
-        // return response.data;
+        Cookies.set('accessToken', data.cookie, { expires: 7 });
+
+        const { role, ...userDataTemp } = data.newUser;
+
+        const finalData: IUserDataSignUp = {
+            role: data.newUser.role,
+            newUser: userDataTemp,
+            accessToken: data.cookie,
+        };
+
+        console.log(finalData);
+        return finalData;
     } catch (error: any) {
         if (error.response && error.response.message) return rejectWithValue(error.response.message);
         else return rejectWithValue(error.response);

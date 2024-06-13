@@ -31,8 +31,18 @@ export const NavbarAdmin = () => {
     useEffect(() => {
         if (productsStatus == 'idle') dispatch(fetchProducts());
     });
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/':
+                dispatch(setSelectedPath('home'));
+                break;
+            default:
+                dispatch(setSelectedPath(''));
+        }
+    }, [location.pathname, dispatch]);
 
     const handleUserSignOut = () => {
+        console.log('out')
         dispatch(signOut());
         navigate('/');
     };

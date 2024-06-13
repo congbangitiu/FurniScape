@@ -1,16 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IProduct } from 'src/redux/products/productsSlice';
 
-export interface IProduct {
-    id: string;
-    name: string;
-    price: number;
-    category: string;
-    image_dir: any;
-    description: string;
-    discount?: number;
-    status?: string;
-    quantity: number;
-}
+
 
 export interface ICartItems {
     items: IProduct[];

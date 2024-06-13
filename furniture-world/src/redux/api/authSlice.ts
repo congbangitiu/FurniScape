@@ -20,6 +20,7 @@ interface IUserState {
     accessToken: string | null;
     loading: boolean;
     error: Object | null;
+    role: string;
 }
 
 const initialState: IUserState = {
@@ -27,6 +28,7 @@ const initialState: IUserState = {
     accessToken: null,
     loading: false,
     error: null,
+    role: 'unknown',
 };
 
 const authSlice = createSlice({
@@ -39,6 +41,7 @@ const authSlice = createSlice({
             state.error = null;
             state.userData = null;
             state.accessToken = null;
+            state.role = 'unknown'
         },
         setCredentials: (state, { payload }) => {
             state.userData = payload;
@@ -54,7 +57,8 @@ const authSlice = createSlice({
             .addCase(userSignIn.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.userData = payload.validUser;
-                state.accessToken = payload.cookie;
+                state.role = payload.role;
+                state.accessToken = payload.accessToken;
             })
             .addCase(userSignIn.rejected, (state, { payload }) => {
                 state.loading = false;
@@ -66,7 +70,9 @@ const authSlice = createSlice({
             })
             .addCase(userSignUp.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.userData = payload;
+                state.userData = payload.newUser;
+                state.role = payload.role;
+                state.accessToken = payload.accessToken;
                 state.error = null;
             })
             .addCase(userSignUp.rejected, (state, { payload }) => {

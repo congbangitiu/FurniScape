@@ -8,13 +8,14 @@ import { Description } from '../../../components/userComponents/description';
 
 import './style.scss';
 import { HomeOutlined } from '@ant-design/icons';
-import { IProduct, updateItemQuantity } from 'src/redux/userApi/cart/cartSlice';
+import { updateItemQuantity } from 'src/redux/userApi/cart/cartSlice';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'src/redux/store';
 import { useDispatch } from 'react-redux';
 import { RatingForm } from 'src/components/userComponents/rating-form';
 import { Reviews } from 'src/components/userComponents/reviews';
+import { IProduct } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 

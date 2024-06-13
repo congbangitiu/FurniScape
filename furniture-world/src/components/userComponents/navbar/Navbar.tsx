@@ -17,6 +17,7 @@ import Cookies from 'js-cookie';
 import { fetchProducts } from 'src/redux/products/productsSlice';
 import { Footer } from '../footer';
 import { getUserInfo } from 'src/redux/api/authApi';
+import { resetCartItems } from 'src/redux/userApi/cart/cartSlice';
 
 export const Navbar = () => {
     const location = useLocation();
@@ -24,44 +25,51 @@ export const Navbar = () => {
     const selectedPath = useSelector((state: IRootState) => state.navbarPath.path);
     const isAuthenticated = Cookies.get('accessToken');
     const products = useSelector((state: IRootState) => state.cart.items) ?? null;
+    const userInfoRole = useSelector((state: IRootState) => state.auth.role);
+
     const cartProductCount = products.reduce((total, product) => {
         return total + product.quantity;
     }, 0);
     const navigate = useNavigate();
+
     // fetch Products
     const productsStatus = useSelector((state: IRootState) => state.products.status);
+
+    // get user information
     useEffect(() => {
         if (productsStatus == 'idle') dispatch(fetchProducts());
         if (isAuthenticated) {
             dispatch(getUserInfo(isAuthenticated));
-
         }
     });
+
     // navigate with pathname
     useEffect(() => {
-        switch (location.pathname) {
-            case '/':
-                dispatch(setSelectedPath('home'));
-                break;
-            case '/shop':
-                dispatch(setSelectedPath('shop'));
-                break;
-            case '/about':
-                dispatch(setSelectedPath('about'));
-                break;
-            case '/contact':
-                dispatch(setSelectedPath('contact'));
-                break;
-            default:
-                dispatch(setSelectedPath(''));
-        }
+        if (userInfoRole === 'user' || userInfoRole === 'unknown')
+            switch (location.pathname) {
+                case '/':
+                    dispatch(setSelectedPath('home'));
+                    break;
+                case '/shop':
+                    dispatch(setSelectedPath('shop'));
+                    break;
+                case '/about':
+                    dispatch(setSelectedPath('about'));
+                    break;
+                case '/contact':
+                    dispatch(setSelectedPath('contact'));
+                    break;
+                default:
+                    dispatch(setSelectedPath(''));
+            }
+        if (userInfoRole === 'admin') dispatch(setSelectedPath('admin'));
     }, [location.pathname, dispatch]);
 
     // reload getUserInfo by token
-    useEffect;
 
     const handleUserSignOut = () => {
         dispatch(signOut());
+        dispatch(resetCartItems());
         navigate('/');
     };
 

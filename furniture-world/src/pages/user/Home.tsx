@@ -4,11 +4,9 @@ import { Image, Button, Flex, Row, Col, Typography, theme } from 'antd';
 import { assets } from '../../assets';
 import { customColors, navBarHeight } from '../../theme';
 import { Products } from '../../components/userComponents/products';
-import { products } from 'src/assets/data/productData_temp';
 import Marquee from 'react-fast-marquee';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppDispatch, IRootState } from 'src/redux/store';
-import { fetchProducts } from 'src/redux/products/productsSlice';
 
 const { Text } = Typography;
 

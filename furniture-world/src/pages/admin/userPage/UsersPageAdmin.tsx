@@ -7,18 +7,11 @@ type ColumnsType<T> = TableProps<T>['columns'];
 type TablePaginationConfig = Exclude<GetProp<TableProps, 'pagination'>, boolean>;
 
 interface DataType {
-    name: {
-        first: string;
-        last: string;
-    };
-    gender: string;
+    name: string;
     email: string;
     phone: string;
     address: string;
     country: string;
-    login: {
-        uuid: string;
-    };
 }
 
 interface TableParams {
@@ -30,8 +23,14 @@ interface TableParams {
 
 const columns: ColumnsType<DataType> = [
     {
+        title: 'User ID',
+        dataIndex: 'userId',
+        key: 'userId',
+    },
+    {
         title: 'Name',
-        dataIndex: 'name',
+        dataIndex: 'fullname',
+        key: 'fullname',
         sorter: true,
         render: (name) => `${name.first} ${name.last}`,
         width: '20%',
@@ -48,18 +47,27 @@ const columns: ColumnsType<DataType> = [
     {
         title: 'Email',
         dataIndex: 'email',
+        key: 'email',
     },
     {
         title: 'Phone Number',
-        dataIndex: 'phone_number',
+        dataIndex: 'phone',
+        key: 'phone',
     },
     {
         title: 'Address',
         dataIndex: 'address',
+        key: 'address',
     },
     {
         title: 'City',
         dataIndex: 'city',
+        key: 'city',
+    },
+    {
+        title: 'Created Date',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
     },
 ];
 
@@ -116,13 +124,15 @@ export const UsersPageAdmin = () => {
     };
 
     return (
-        <Table
-            columns={columns}
-            rowKey={(record) => record.login.uuid}
-            dataSource={data}
-            pagination={tableParams.pagination}
-            loading={loading}
-            onChange={handleTableChange}
-        />
+        // <Table
+        //     columns={columns}
+        //     dataSource={data}
+        //     pagination={tableParams.pagination}
+        //     loading={loading}
+        //     onChange={handleTableChange}
+        // />
+        <></>
     );
 };
+
+// userId name email phone address country createdAt

@@ -1,25 +1,15 @@
-import { TableColumnsType, Table, Badge } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { Props } from 'react-infinite-scroll-component';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { OrdersDataTable } from 'src/components/adminComponents/dataTable/orderTable/OrdersDataTable';
+import { Badge, Table, TableColumnsType } from 'antd';
+import React from 'react';
 import { sortedDate } from 'src/components/sortDate/sortDate';
-import { IOrder, IProductOrder, getAllOrdersOfAllUsers } from 'src/redux/order/orderSlice';
-import { IAppDispatch, IRootState } from 'src/redux/store';
+import { IOrder, IProductOrder } from 'src/redux/order/orderSlice';
+
+type Props = {};
 
 interface IOrdersDataAttributesAdmin extends Omit<IOrder, 'products'> {
     key: number;
 }
 
-export const OrderListPageAdmin = () => {
-    const [loading, setLoading] = useState(false);
-    const orderList = useSelector((state: IRootState) => state.order.orderList) || [];
-    const dispatch = useDispatch<IAppDispatch>();
-
-    useEffect(() => {
-        dispatch(getAllOrdersOfAllUsers());
-    }, []);
+export const OrdersDataTable = ({ orderData }: { orderData: IOrder[] }) => {
     const expandedRowRender = (row: IOrdersDataAttributesAdmin) => {
         const columns: TableColumnsType<IProductOrder> = [
             { title: 'Image', dataIndex: 'img', key: 'image', width: '30%' },
@@ -69,7 +59,7 @@ export const OrderListPageAdmin = () => {
             },
         ];
 
-        const data: IProductOrder[] = orderList[row.key].products;
+        const data: IProductOrder[] = orderData[row.key].products;
 
         return <Table bordered columns={columns} dataSource={data} pagination={false} />;
     };
@@ -143,7 +133,7 @@ export const OrderListPageAdmin = () => {
 
     const data: IOrdersDataAttributesAdmin[] = [];
 
-    orderList.map((order, index) => {
+    orderData.map((order, index) => {
         data.push({
             key: index,
             id: order.id,
@@ -155,5 +145,5 @@ export const OrderListPageAdmin = () => {
         });
     });
 
-    return <Table bordered columns={columns} loading={loading} expandable={{ expandedRowRender }} dataSource={data} />;
+    return <Table bordered columns={columns} expandable={{ expandedRowRender }} dataSource={data} />;
 };

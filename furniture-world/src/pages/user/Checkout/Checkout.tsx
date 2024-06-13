@@ -100,28 +100,28 @@ export const CheckoutPage = () => {
             <Flex style={{ marginTop: '40px', width: '70%' }}>
                 {isAuthenticated && (
                     <Flex vertical style={{ width: '50%' }}>
-                        <Flex>
-                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Full Name:</Typography>
-                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                        <Flex style={{ marginBottom: '10px' }}>
+                            <Typography style={{ fontSize: '23px', fontWeight: '600' }}>Full Name:</Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '22px', marginLeft: '14px' }}>
                                 {userInfo.fullname}
                                 {/* Bao Pham */}
                             </Typography>
                         </Flex>
-                        <Flex>
-                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Phone Number: </Typography>
-                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                        <Flex style={{ marginBottom: '10px' }}>
+                            <Typography style={{ fontSize: '23px', fontWeight: '600' }}>Phone Number: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '22px', marginLeft: '14px' }}>
                                 {userInfo.phone}
                             </Typography>
                         </Flex>
-                        <Flex>
-                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Address: </Typography>
-                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                        <Flex style={{ marginBottom: '10px' }}>
+                            <Typography style={{ fontSize: '23px', fontWeight: '600' }}>Address: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '22px', marginLeft: '14px' }}>
                                 {userInfo.address}
                             </Typography>
                         </Flex>
-                        <Flex>
-                            <Typography style={{ fontSize: '25px', fontWeight: '600' }}>Country: </Typography>
-                            <Typography style={{ fontWeight: '400', fontSize: '25px', marginLeft: '14px' }}>
+                        <Flex style={{ marginBottom: '10px' }}>
+                            <Typography style={{ fontSize: '23px', fontWeight: '600' }}>Country: </Typography>
+                            <Typography style={{ fontWeight: '400', fontSize: '22px', marginLeft: '14px' }}>
                                 {userInfo.country}
                             </Typography>
                         </Flex>

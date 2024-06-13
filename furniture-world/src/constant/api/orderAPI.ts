@@ -24,3 +24,10 @@ export const getUserOrdersAPI = (token: any) =>
             authorization: `${token}`,
         },
     });
+
+export const getAllOrdersOfAllUsersAPI = (token: any) =>
+    apiClient.get('order/getAllOrders', {
+        headers: {
+            authorization: `${token}`,
+        },
+    });
