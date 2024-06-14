@@ -1,18 +1,16 @@
 const express = require(`express`);
 const {updateUser, 
         getUser,
+        getAllUser,
 } = require("../controllers/user.controller");
-const { verifyToken } = require("../utils/verifyToken");
+const { verifyToken, verifyAdmin } = require("../utils/verifyToken");
 const router = express.Router();
 
 
 router.get("/getuser", verifyToken, getUser);
 
-router.post("/testpost", async (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
+router.get("/getalluser", verifyAdmin, getAllUser);
 
-router.patch("/patch", verifyToken, updateUser);
+router.patch("/updateUser", verifyToken, updateUser);
 
 module.exports = router;
