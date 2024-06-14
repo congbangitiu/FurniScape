@@ -22,11 +22,10 @@ export const ProfilePage = () => {
     const { token } = theme.useToken();
     const [query, setQuery] = useState('');
     const [isChangeInfo, setIsChangeInfo] = useState(false);
-    const userData: IUserData = useSelector((state: IRootState) => state.auth.userData);
+    const userData: IUserData = useSelector((state: IRootState) => state.auth.userData) ?? {};
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();
     const userOrders: IOrder[] | null = useSelector((state: IRootState) => state.order.orderList);
-    console.log(userOrders);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -36,24 +35,9 @@ export const ProfilePage = () => {
         setQuery('');
     };
 
-    // useEffect(() => {
-    //     if (isAuthenticated) dispatch(getUserInfo(isAuthenticated));
-    // });
-
-    // useEffect(() => {
-    //     dispatch(getUserOrders());
-    // }, [userOrders]);
-
     // get all details of each order
     useEffect(() => {
         dispatch(getUserOrders());
-        // if (userOrders) {
-        //     console.log('run');
-        //     dispatch(getUserOrderDetails(userOrders[0].id));
-        // }
-        // userOrders.map((order) => {
-        //     dispatch(getUserOrderDetails(order.id));
-        // });
     }, [isChangeInfo]);
 
     const dataSource = [

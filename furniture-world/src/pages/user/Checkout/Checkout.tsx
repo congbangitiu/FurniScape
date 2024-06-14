@@ -43,7 +43,7 @@ export interface IProductListPlaceOrder {
 export const CheckoutPage = () => {
     const { token } = theme.useToken();
     const cartItems = useSelector((state: IRootState) => state.cart);
-    const userInfo: IUserData = useSelector((state: IRootState) => state.auth.userData);
+    const userInfo: IUserData = useSelector((state: IRootState) => state.auth.userData) ?? {};
     const [paymentMethod, setPaymentMethod] = useState('cash');
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();

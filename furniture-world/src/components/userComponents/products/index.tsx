@@ -67,7 +67,7 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
                         <div onClick={() => navigate(`/products/${productDetail.id}`)}>
                             <Card.Meta title={productDetail.name} description={productDetail.description} />
                             <Typography.Title level={5} style={{ margin: '8px 0 0 0' }}>
-                                {productDetail.price}
+                                ${productDetail.price}
                             </Typography.Title>
                         </div>
                     </Card>

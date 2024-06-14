@@ -1,4 +1,4 @@
-import { Badge, Table, TableColumnsType } from 'antd';
+import { Badge, Spin, Table, TableColumnsType } from 'antd';
 import React from 'react';
 import { IOrder, IProductOrder } from 'src/redux/order/orderSlice';
 
@@ -16,7 +16,17 @@ interface IOrderTableAttribute {
 export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
     const expandedRowRender = (row: IOrderTableAttribute) => {
         const columns: TableColumnsType<IProductOrder> = [
-            { title: 'Image', dataIndex: 'img', key: 'image' },
+            {
+                title: 'Image',
+                dataIndex: 'img',
+                key: 'image',
+                render: (text, record) =>
+                    record.image_dir ? (
+                        <img src={record.image_dir} alt={record.product} style={{ width: '50px', height: '50px' }} />
+                    ) : (
+                        <Spin />
+                    ),
+            },
             { title: 'Product', dataIndex: 'product', key: 'product' },
             {
                 title: 'Category',
@@ -51,7 +61,7 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
                 title: 'Unit Price',
                 dataIndex: 'unitPrice',
                 key: 'unitPrice',
-                sorter: (a, b) => Number(a.unitPrice.replace('$', '')) - Number(b.unitPrice.replace('$', '')),
+                sorter: (a, b) => a.unitPrice - b.unitPrice,
             },
         ];
 
@@ -107,6 +117,7 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
             title: 'Total price',
             dataIndex: 'totalPrice',
             key: 'totalPrice',
+            render: (text) => `$${text}`,
             sorter: (a, b) => Number(a.totalPrice.replace('$', '')) - Number(b.totalPrice.replace('$', '')),
         },
         {

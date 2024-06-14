@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Props } from 'react-infinite-scroll-component';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { OrdersDataTable } from 'src/components/adminComponents/dataTable/orderTable/OrdersDataTable';
 import { sortedDate } from 'src/components/sortDate/sortDate';
 import { IOrder, IProductOrder, getAllOrdersOfAllUsers } from 'src/redux/order/orderSlice';
 import { IAppDispatch, IRootState } from 'src/redux/store';
@@ -64,8 +63,9 @@ export const OrderListPageAdmin = () => {
                 title: 'Unit Price',
                 dataIndex: 'unitPrice',
                 key: 'unitPrice',
+                render: (text) => `$${text}`,
                 width: '15%',
-                sorter: (a, b) => Number(a.unitPrice.replace('$', '')) - Number(b.unitPrice.replace('$', '')),
+                sorter: (a, b) => a.unitPrice - b.unitPrice,
             },
         ];
 
@@ -126,7 +126,8 @@ export const OrderListPageAdmin = () => {
             dataIndex: 'total',
             key: 'total',
             width: '15%',
-            sorter: (a, b) => Number(a.total) - Number(b.total),
+            render: (text) => `$${text}`,
+            sorter: (a, b) => a.total - b.total,
         },
         {
             title: 'Payment',

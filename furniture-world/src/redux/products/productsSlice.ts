@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
-import { getAllProductsAPI } from 'src/constant/api/productsAPI';
+import { getAllProductsAPI, getProductImageAPI, updateProductImageAPI } from 'src/constant/api/productsAPI';
 import axios, { AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 export interface IProduct {
     id: string;
     name: string;
@@ -17,13 +18,20 @@ export interface IProduct {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface IProductImage {
+    image_dir: File;
+    id: string;
+}
+
 export const fetchProducts = createAsyncThunk<IProduct[], void>(
     'products/getAllProducts',
     async (_, { rejectWithValue }) => {
         try {
-            const { data } = await axios.get(`${backendURL}/product/getProducts`);
+            const { data } = await getAllProductsAPI();
 
-            const products: IProduct[] = data.map((product: any) => {
+            const products: IProduct[] = [];
+            for (const product of data) {
                 const formattedTime = (dateObject: Date) => {
                     const hours = dateObject.getHours().toString().padStart(2, '0');
                     const minutes = dateObject.getMinutes().toString().padStart(2, '0');
@@ -37,20 +45,23 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
                 const createdAt = formattedTime(new Date(product.createdAt));
                 const updatedAt = formattedTime(new Date(product.updatedAt));
 
-                return {
+                const productImage: any = await getProductImageAPI(product.id);
+                const productImageUrl = URL.createObjectURL(productImage.data);
+                products.push({
                     id: product.id,
                     name: product.name,
-                    price: `${product.price}$`,
+                    price: product.price,
                     quantity: product.quantity,
                     category: product.category,
-                    img_dir: product.img_dir,
+                    image_dir: productImageUrl,
                     description: product.description,
                     discount: undefined,
                     status: product.status,
                     createdAt: createdAt,
                     updatedAt: updatedAt,
-                };
-            });
+                });
+            }
+
             return products;
         } catch (error: any) {
             if (error.response && error.response.message) return rejectWithValue(error.response.message);
@@ -59,6 +70,29 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
     },
 );
 
+export const updateProductImage = createAsyncThunk(
+    'products/updateProductImage',
+    async ({ image_dir, id }: IProductImage, { rejectWithValue }) => {
+        try {
+            const token = Cookies.get('accessToken');
+            const response = await updateProductImageAPI(token, image_dir, id);
+
+            return;
+        } catch (err: any) {
+            return rejectWithValue(err.message);
+        }
+    },
+);
+
+// export const fetchProductsImages = createAsyncThunk('products/getAllProductsImages', async (_, { rejectWithValue }) => {
+//     try {
+//         const response = await getAllProductsImagesAPI();
+
+//         return response;
+//     } catch (err: any) {
+//         return rejectWithValue(err.message);
+//     }
+// });
 export interface IProductInStock {
     items: IProduct[];
     error: Object | null;
@@ -85,6 +119,16 @@ export const productsSlice = createSlice({
                 state.items = payload;
             })
             .addCase(fetchProducts.rejected, (state, { payload }) => {
+                state.status = 'failed';
+                state.error = payload ?? null;
+            })
+            .addCase(updateProductImage.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateProductImage.fulfilled, (state) => {
+                state.status = 'succeed';
+            })
+            .addCase(updateProductImage.rejected, (state, { payload }) => {
                 state.status = 'failed';
                 state.error = payload ?? null;
             });

@@ -5,7 +5,8 @@ import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
 import Cookies from 'js-cookie';
 import { IUserData } from './authSlice';
-import { getUserInfoApi } from 'src/constant/api/userAuthentication';
+import { signInAPI, signUpAPI } from 'src/constant/api/authentication';
+import { getUserInfoAPI } from 'src/constant/api/userAPI';
 
 interface IUserDataSignIn {
     validUser: IUserData;
@@ -21,12 +22,9 @@ interface IUserDataSignUp {
 
 export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: string, { rejectWithValue }) => {
     try {
-        // const response = await getUserInfoApi(token);
-        const response = await axios.get(`${backendURL}/user/getuser`, {
-            headers: {
-                authorization: `${token}`,
-            },
-        });
+        const token = Cookies.get('accessToken')
+        const response = await getUserInfoAPI(token);
+
         return response.data;
     } catch (err: any) {
         return rejectWithValue(err.message);
@@ -35,11 +33,8 @@ export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: st
 
 export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserData, { rejectWithValue }) => {
     try {
-        const { data } = await axios.post(`${backendURL}/auth/signin`, userData, {
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
+        const { data } = await signInAPI(userData);
+
         Cookies.set('accessToken', data.cookie, { expires: 7 });
 
         const { role, ...userDataTemp } = data.validUser;
@@ -61,11 +56,7 @@ export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUser
 
 export const userSignUp = createAsyncThunk('auth/signup', async (userData: IUserData, { rejectWithValue }) => {
     try {
-        const { data } = await axios.post(`${backendURL}/auth/signup`, userData, {
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
+        const { data } = await signUpAPI(userData);
 
         Cookies.set('accessToken', data.cookie, { expires: 7 });
 

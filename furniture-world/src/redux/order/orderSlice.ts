@@ -14,9 +14,9 @@ import { backendURL } from 'src/constant/api/backendURL';
 import axios from 'axios';
 
 export interface IProductOrder {
-    image: any;
+    image_dir: any;
     product: string;
-    unitPrice: string;
+    unitPrice: number;
     quantity: number;
     category: string;
 }
@@ -76,7 +76,7 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
                 id: order.id,
                 userId: order.userId,
                 status: order.status,
-                total: `${order.total}$`,
+                total: Number(order.total),
                 payment: order.payment,
                 createdAt: formattedDateTime,
                 products: null,
@@ -88,7 +88,7 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
             const { data } = await getUserOrderDetailsAPI(order.id, token);
             order.products = data.products;
             order.products.forEach((product) => {
-                product.unitPrice = `${product.unitPrice}$`;
+                product.unitPrice = product.unitPrice;
             });
         }
 
@@ -119,7 +119,7 @@ export const getAllOrdersOfAllUsers = createAsyncThunk(
                     id: order.id,
                     userId: order.userId,
                     status: order.status,
-                    total: `${order.total}$`,
+                    total: Number(order.total),
                     payment: order.payment,
                     createdAt: formattedDateTime,
                     products: null,
@@ -130,7 +130,7 @@ export const getAllOrdersOfAllUsers = createAsyncThunk(
                 const { data } = await getUserOrderDetailsAPI(order.id, token);
                 order.products = data.products;
                 order.products.forEach((product) => {
-                    product.unitPrice = `${product.unitPrice}$`;
+                    product.unitPrice = product.unitPrice;
                 });
             }
 

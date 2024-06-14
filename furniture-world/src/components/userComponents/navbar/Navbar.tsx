@@ -37,7 +37,9 @@ export const Navbar = () => {
 
     // get user information
     useEffect(() => {
-        if (productsStatus == 'idle') dispatch(fetchProducts());
+        if (productsStatus == 'idle') {
+            dispatch(fetchProducts());
+        }
         if (isAuthenticated) {
             dispatch(getUserInfo(isAuthenticated));
         }

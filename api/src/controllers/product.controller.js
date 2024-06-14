@@ -39,7 +39,7 @@ const getProducts = async (req, res, next) => {
 
 const getProduct = async (productId) => {
     return await Product.findByPk(productId);
-  };
+};
 
 const getProductDetail = async (req, res, next) => {
     try {
@@ -48,24 +48,53 @@ const getProductDetail = async (req, res, next) => {
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
-        
+
         return res.status(200).json(product);
     } catch (error) {
         next(error);
     }
 };
 
+// const getProductPicture = async (req, res, next) => {
+//     try {
+//         const id = req.query.id;
+//         const product = await Product.findByPk(id);
+//         if (!product) {
+//             return res.status(404).json({ message: 'Product not found' });
+//         }
+//         const image = product.image_dir;
+//         // send file from directory
+//         return res.status(200)
+//             .sendFile(path.join(__dirname, "../../", `${image}`));
+//     } catch (error) {
+//         next(error);
+//     }
+// };
+
 const getProductPicture = async (req, res, next) => {
     try {
         const id = req.query.id;
         const product = await Product.findByPk(id);
+
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
+
         const image = product.image_dir;
-        // send file from directory
-        return res.status(200)
-            .sendFile(path.join(__dirname, "../../", `${image}`));
+
+        if (!image) {
+            return res.status(400).json({ message: 'Image path is null or undefined' });
+        }
+
+        const imagePath = path.join(__dirname, "../../", image);
+
+        // Kiểm tra tệp có tồn tại hay không
+        if (!fs.existsSync(imagePath)) {
+            return res.status(404).json({ message: 'Image not found' });
+        }
+
+        // Gửi tệp từ đường dẫn
+        return res.status(200).sendFile(imagePath);
     } catch (error) {
         next(error);
     }
@@ -75,7 +104,7 @@ const getProductPicture = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
     try {
         const id = req.query.id;
-        const { name, category, price, quantity, description,status, image_dir } = req.body;
+        const { name, category, price, quantity, description, status, image_dir } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
@@ -96,7 +125,7 @@ const updateProduct = async (req, res, next) => {
 
 const updateProductImage = async (req, res, next) => {
     try {
-        if(!req.file) return res.status(400).json({ message: 'No file uploaded' });
+        if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
         const id = req.query.id;
         // find product by id
         const product = await Product.findByPk(id);
@@ -106,7 +135,7 @@ const updateProductImage = async (req, res, next) => {
         // check if product has an image
         if (product.image_dir) {
             // delete the image
-            if(product.image_dir === req.file.path){
+            if (product.image_dir === req.file.path) {
                 return res.status(409).json({ message: 'Image Overwrited' });
             }
             // delete old image
@@ -114,7 +143,7 @@ const updateProductImage = async (req, res, next) => {
                 __dirname,
                 "../../",
                 `${product.image_dir}`
-              );
+            );
             fs.unlink(originalFilePath, async (err) => {
                 if (err) console.error(err);
             });
@@ -159,9 +188,10 @@ const searchByCategory = async (req, res, next) => {
     }
 };
 
-module.exports = { addProduct ,addProducts, 
-                    getProducts, getProduct, getProductDetail,
-                    getProductPicture,
-                    updateProduct, updateProductImage,
-                    searchByKeyword, searchByCategory
-                };
+module.exports = {
+    addProduct, addProducts,
+    getProducts, getProduct, getProductDetail,
+    getProductPicture,
+    updateProduct, updateProductImage,
+    searchByKeyword, searchByCategory
+};
