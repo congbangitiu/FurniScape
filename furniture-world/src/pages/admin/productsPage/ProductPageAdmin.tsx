@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
     Button,
+    Form,
     Input,
     InputRef,
     Modal,
+    Select,
     Space,
     Table,
     TableColumnsType,
@@ -12,16 +14,18 @@ import {
     type GetProp,
     type TableProps,
 } from 'antd';
-import qs from 'qs';
-import axios from 'axios';
-import { FilterDropdownProps } from 'antd/es/table/interface';
-import { SearchOutlined } from '@ant-design/icons';
 import { IAppDispatch, IRootState } from 'src/redux/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { IProduct, fetchProducts, updateProductImage } from 'src/redux/products/productsSlice';
+import {
+    IProduct,
+    IUpdateProduct,
+    fetchProducts,
+    updateProduct,
+    updateProductImage,
+} from 'src/redux/products/productsSlice';
 import { sortedDate } from 'src/components/sortDate/sortDate';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, EditOutlined } from '@ant-design/icons';
 
 interface IProductsTableType extends IProduct {
     key: number;
@@ -32,27 +36,26 @@ export const ProductPageAdmin = () => {
     const productsList = useSelector((state: IRootState) => state.products.items) || [];
 
     const [loading, setLoading] = useState(false);
-
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [currentKey, setCurrentKey] = useState<React.Key | null>(null);
-    const [currentId, setCurrentId] = useState('');
+    const [form] = Form.useForm();
+    const [isModalUpdateImageVisible, setIsModalUpdateImageVisible] = useState(false);
+    const [isModalUpdateInfoVisible, setIsModalUpdateInfoVisible] = useState(false);
+    const [currentId, setCurrentId] = useState<string | null>('');
+    const [currentProductData, setCurrentProductData] = useState<IProductsTableType | null>();
     const [uploadImage, setUpLoadImage] = useState<any>();
     const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
 
-    const handleOpenModal = (key: React.Key, id: string) => {
-        setCurrentKey(key);
+    // Update Product Image
+    const handleOpenUpdateImageModal = (key: React.Key, id: string) => {
         setCurrentId(id);
-        setIsModalVisible(true);
+        setIsModalUpdateImageVisible(true);
     };
 
-    const handleCloseModal = () => {
-        setIsModalVisible(false);
-        setCurrentKey(null);
+    const handleCloseUpdateImageModal = () => {
+        setIsModalUpdateImageVisible(false);
+        setCurrentId(null);
+        setUpLoadImage(null);
+        setImageUrl(undefined);
     };
-
-    // const handleUpload = (image: any) => {
-    //     setUpLoadImage(image);
-    // };
 
     const handleUpload = (image: File) => {
         // Perform any necessary validations here
@@ -81,11 +84,51 @@ export const ProductPageAdmin = () => {
     };
 
     const handleSaveButtonClick = () => {
-        if (uploadImage !== undefined) {
+        if (uploadImage !== undefined && currentId !== null) {
             dispatch(updateProductImage({ image_dir: uploadImage, id: currentId }));
         }
         setImageUrl(undefined);
-        handleCloseModal();
+        handleCloseUpdateImageModal();
+    };
+
+    // Update Product Information
+    const handleOpenUpdateInfoModal = (data: IProductsTableType) => {
+        setCurrentId(data.id);
+        form.setFieldsValue(data);
+        setCurrentProductData(data);
+        setIsModalUpdateInfoVisible(true);
+    };
+
+    const handleCloseUpdateInfoModal = () => {
+        form.resetFields();
+        setCurrentProductData(null);
+        setIsModalUpdateInfoVisible(false);
+    };
+
+    const handleSave = async () => {
+        try {
+            if (currentId !== null) {
+                // Logic to update product information (replace with actual implementation)
+                const values: any = await form.validateFields(); // Validate and get form values
+                const data: IUpdateProduct = {
+                    id: currentId,
+                    name: values.name,
+                    price: values.price,
+                    category: values.category,
+                    description: values.description,
+                    discount: undefined,
+                    status: values.status,
+                    quantity: Number(values.quantity),
+                    updatedAt: undefined,
+                };
+                dispatch(updateProduct(data));
+            }
+            message.success('Product information updated successfully');
+            setIsModalUpdateInfoVisible(false);
+            setCurrentProductData(null);
+        } catch (error) {
+            console.error('Validation error:', error);
+        }
     };
 
     useEffect(() => {
@@ -97,22 +140,27 @@ export const ProductPageAdmin = () => {
             title: 'Product Image',
             dataIndex: 'image_dir',
             key: 'image_dir',
-            width: '150',
-        },
-        {
-            title: 'Product Id',
-            dataIndex: 'id',
-            key: 'id',
+            fixed: 'left',
+            width: 150,
         },
         {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            fixed: 'left',
+            width: 150,
+        },
+        {
+            title: 'Product Id',
+            dataIndex: 'id',
+            key: 'id',
+            width: 200,
         },
         {
             title: 'Category',
             dataIndex: 'category',
             key: 'category',
+            width: 150,
             filters: [
                 {
                     text: 'Dining Room',
@@ -141,6 +189,7 @@ export const ProductPageAdmin = () => {
             title: 'Price',
             dataIndex: 'price',
             key: 'price',
+            width: 150,
             render: (text) => `$${text}`,
             sorter: (a, b) => Number(a.price) - Number(b.price),
         },
@@ -148,12 +197,14 @@ export const ProductPageAdmin = () => {
             title: 'Quantity',
             dataIndex: 'quantity',
             key: 'quantity',
+            width: 100,
             sorter: (a, b) => a.quantity - b.quantity,
         },
         {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
+            width: 100,
             filters: [
                 {
                     text: 'New',
@@ -171,19 +222,26 @@ export const ProductPageAdmin = () => {
             dataIndex: 'createdAt',
             key: 'createdAt',
             sorter: (a, b) => sortedDate(a.createdAt, b.createdAt),
+            width: 150,
         },
         {
             title: 'Update At',
             dataIndex: 'updatedAt',
             key: 'updatedAt',
             sorter: (a, b) => sortedDate(a.updatedAt, b.updatedAt),
+            width: 150,
         },
         {
             title: 'Action',
             key: 'operation',
             fixed: 'right',
-            width: 100,
-            render: (_, record) => <a onClick={() => handleOpenModal(record.key, record.id)}>Update Product Image</a>,
+            width: 150,
+            render: (_, record) => (
+                <Space>
+                    <a onClick={() => handleOpenUpdateImageModal(record.key, record.id)}>Update Image</a>
+                    <a onClick={() => handleOpenUpdateInfoModal(record)}>Update Information</a>
+                </Space>
+            ),
         },
     ];
 
@@ -212,17 +270,18 @@ export const ProductPageAdmin = () => {
                 columns={columns}
                 dataSource={data}
                 loading={loading}
+                bordered
                 expandable={{
                     expandedRowRender: (record) => <p style={{ margin: '0 0 0 48px' }}>{record.description}</p>,
                 }}
-                scroll={{ x: 400 }}
+                scroll={{ y: 550, x: 1800 }}
             />
             <Modal
                 title="Upload Image"
-                visible={isModalVisible}
-                onCancel={handleCloseModal}
+                visible={isModalUpdateImageVisible}
+                onCancel={handleCloseUpdateImageModal}
                 footer={[
-                    <Button key="back" onClick={handleCloseModal}>
+                    <Button key="back" onClick={handleCloseUpdateImageModal}>
                         Cancel
                     </Button>,
                     <Button key="save" type="primary" onClick={handleSaveButtonClick}>
@@ -240,6 +299,57 @@ export const ProductPageAdmin = () => {
                     >
                         <Button icon={<UploadOutlined />}>Click to Upload</Button>
                     </Upload>
+                )}
+            </Modal>
+
+            <Modal
+                title="Update Product Information"
+                visible={isModalUpdateInfoVisible}
+                onCancel={handleCloseUpdateInfoModal}
+                footer={[
+                    <Button key="back" onClick={handleCloseUpdateImageModal}>
+                        Cancel
+                    </Button>,
+                    <Button key="save" type="primary" onClick={handleSave}>
+                        Save
+                    </Button>,
+                ]}
+            >
+                {currentProductData && (
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        // onFinish={(values) => handleSave({ ...currentProductData, ...values })}
+                        onFinish={handleSave}
+                    >
+                        <Form.Item label="Name" name="name">
+                            <Input suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Price" name="price">
+                            <Input type="number" suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Category" name="category">
+                            <Select>
+                                <Select.Option value="Dining Room">Dining Room</Select.Option>
+                                <Select.Option value="Kitchen">Kitchen</Select.Option>
+                                <Select.Option value="Bedroom">Bedroom</Select.Option>
+                                <Select.Option value="Office">Office</Select.Option>
+                                <Select.Option value="Living Room">Living Room</Select.Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item label="Quantity" name="quantity">
+                            <Input type="number" suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Description" name="description">
+                            <Input suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Status" name="status">
+                            <Select>
+                                <Select.Option value="new">New</Select.Option>
+                                <Select.Option value="discount">Discount</Select.Option>
+                            </Select>
+                        </Form.Item>
+                    </Form>
                 )}
             </Modal>
         </>

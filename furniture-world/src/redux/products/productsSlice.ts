@@ -2,9 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
-import { getAllProductsAPI, getProductImageAPI, updateProductImageAPI } from 'src/constant/api/productsAPI';
+import {
+    getAllProductsAPI,
+    getProductImageAPI,
+    updateProductAPI,
+    updateProductImageAPI,
+} from 'src/constant/api/productsAPI';
 import axios, { AxiosResponse } from 'axios';
 import Cookies from 'js-cookie';
+
 export interface IProduct {
     id: string;
     name: string;
@@ -19,9 +25,28 @@ export interface IProduct {
     updatedAt: string;
 }
 
+// backend update new UpdatedAt
+export interface IUpdateProduct {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+    description: string;
+    discount?: number;
+    status: string;
+    quantity: number;
+    updatedAt?: string;
+}
+
 export interface IProductImage {
     image_dir: File;
     id: string;
+}
+
+export interface IProductInStock {
+    items: IProduct[];
+    error: Object | null;
+    status: string;
 }
 
 export const fetchProducts = createAsyncThunk<IProduct[], void>(
@@ -84,6 +109,29 @@ export const updateProductImage = createAsyncThunk(
     },
 );
 
+export const updateProduct = createAsyncThunk(
+    'products/productUpdate',
+    async (product: IUpdateProduct, { rejectWithValue }) => {
+        try {
+            const adminToken = Cookies.get('accessToken');
+            const { data } = await updateProductAPI(product, adminToken);
+
+            return {
+                id: data.id,
+                name: data.name,
+                price: data.price,
+                quantity: data.quantity,
+                category: data.category,
+                description: data.description,
+                discount: undefined,
+                status: data.status,
+            };
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    },
+);
+
 // export const fetchProductsImages = createAsyncThunk('products/getAllProductsImages', async (_, { rejectWithValue }) => {
 //     try {
 //         const response = await getAllProductsImagesAPI();
@@ -93,11 +141,6 @@ export const updateProductImage = createAsyncThunk(
 //         return rejectWithValue(err.message);
 //     }
 // });
-export interface IProductInStock {
-    items: IProduct[];
-    error: Object | null;
-    status: string;
-}
 
 const initialState: IProductInStock = {
     items: [],
@@ -129,6 +172,42 @@ export const productsSlice = createSlice({
                 state.status = 'succeed';
             })
             .addCase(updateProductImage.rejected, (state, { payload }) => {
+                state.status = 'failed';
+                state.error = payload ?? null;
+            })
+            .addCase(updateProduct.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updateProduct.fulfilled, (state, { payload }) => {
+                state.status = 'succeed';
+
+                // -- first way --
+                const index = state.items.findIndex((item) => item.id === payload.id);
+                if (index !== -1) {
+                    state.items[index] = {
+                        ...state.items[index],
+                        ...payload,
+                    };
+                }
+
+                // -- Second way --
+                // const temp = [...state.items];
+                // temp.forEach((item) => {
+                //     if (item.id === payload.id) {
+                //         item = {
+                //             ...item,
+                //             name: payload.name,
+                //             price: payload.price,
+                //             description: payload.description,
+                //             status: payload.status,
+                //             quantity: payload.quantity,
+                //             category: payload.category,
+                //         };
+                //     }
+                // });
+                // state.items = temp;
+            })
+            .addCase(updateProduct.rejected, (state, { payload }) => {
                 state.status = 'failed';
                 state.error = payload ?? null;
             });

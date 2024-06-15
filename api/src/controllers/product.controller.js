@@ -104,7 +104,7 @@ const getProductPicture = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
     try {
         const id = req.query.id;
-        const { name, category, price, quantity, description, status, image_dir } = req.body;
+        const { name, category, price, quantity, description, status } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
@@ -115,7 +115,7 @@ const updateProduct = async (req, res, next) => {
         product.quantity = quantity;
         product.description = description;
         product.status = status;
-        product.image_dir = image_dir;
+        // product.image_dir = image_dir;
         await product.save();
         return res.status(200).json(product);
     } catch (error) {

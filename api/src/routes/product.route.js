@@ -29,7 +29,7 @@ router.get("/getProductDetail", getProductDetail);
 
 router.get("/getProductPicture", getProductPicture);
 
-router.get("/updateProduct", verifyAdmin, updateProduct);
+router.post("/updateProduct", verifyAdmin, updateProduct);
 
 router.put("/updateProductImage", 
             verifyAdmin, 
