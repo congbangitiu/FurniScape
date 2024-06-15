@@ -59,8 +59,17 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+const getAllUser = (req, res, next) => {
+  User.findAll()
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
 
 
-module.exports = { updateUser, getUser, };
+module.exports = { updateUser, getUser, getAllUser };
 //fsmegasale15
 //sieutuyet20
