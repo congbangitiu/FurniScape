@@ -41,7 +41,7 @@ export const Navbar = () => {
             dispatch(fetchProducts());
         }
         if (isAuthenticated) {
-            dispatch(getUserInfo(isAuthenticated));
+            dispatch(getUserInfo());
         }
     });
 

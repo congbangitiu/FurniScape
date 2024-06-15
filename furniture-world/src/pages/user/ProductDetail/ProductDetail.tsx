@@ -154,7 +154,7 @@ export const ProductDetailsPage = () => {
                             <Image preview={false} src={assets.asgaardSofa5} />
                         </Row>
                     </Flex>
-                    <Image preview={{ mask: null }} src={assets.asgaardSofa1} />
+                    <Image preview={{ mask: null }} src={productDetail?.image_dir} />
                 </Row>
                 <Flex style={{ flexDirection: 'column', width: '50%' }}>
                     <Text
@@ -218,9 +218,7 @@ export const ProductDetailsPage = () => {
                             textAlign: 'justify',
                         }}
                     >
-                        Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact,
-                        stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs
-                        for a sound.
+                        {productDetail?.description}
                     </Text>
                     <Row style={{ alignItems: 'center', gap: '100px' }}>
                         <Col style={{ marginTop: '20px' }}>

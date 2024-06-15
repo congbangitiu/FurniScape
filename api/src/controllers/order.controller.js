@@ -107,6 +107,7 @@ const getOrderDetails = async (req, res, next) => {
         for (let i = 0; i < products.length; i++) {
             const product = await getProduct(products[i].productId);
             productList.push({
+                id: product.id,
                 product: product.name,
                 category: product.category,
                 quantity: products[i].quantity,

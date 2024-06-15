@@ -12,9 +12,11 @@ import { useSelector } from 'react-redux';
 import { IProductListPlaceOrder } from 'src/pages/user/Checkout/Checkout';
 import { backendURL } from 'src/constant/api/backendURL';
 import axios from 'axios';
+import { getProductImageAPI } from 'src/constant/api/productsAPI';
 
 export interface IProductOrder {
     image_dir: any;
+    id: string;
     product: string;
     unitPrice: number;
     quantity: number;
@@ -87,9 +89,15 @@ export const getUserOrders = createAsyncThunk<IOrder[], void>('order/getUserOrde
         for (let order of orders) {
             const { data } = await getUserOrderDetailsAPI(order.id, token);
             order.products = data.products;
-            order.products.forEach((product) => {
-                product.unitPrice = product.unitPrice;
-            });
+            // order.products.forEach((product) => {
+            //     product.unitPrice = product.unitPrice;
+            // });
+
+            for (const product of order.products) {
+                const productImage: any = await getProductImageAPI(product.id);
+                const productImageUrl = URL.createObjectURL(productImage.data);
+                product.image_dir = productImageUrl;
+            }
         }
 
         return orders;
@@ -129,9 +137,11 @@ export const getAllOrdersOfAllUsers = createAsyncThunk(
             for (let order of orders) {
                 const { data } = await getUserOrderDetailsAPI(order.id, token);
                 order.products = data.products;
-                order.products.forEach((product) => {
-                    product.unitPrice = product.unitPrice;
-                });
+                for (const product of order.products) {
+                    const productImage: any = await getProductImageAPI(product.id);
+                    const productImageUrl = URL.createObjectURL(productImage.data);
+                    product.image_dir = productImageUrl;
+                }
             }
 
             return orders;

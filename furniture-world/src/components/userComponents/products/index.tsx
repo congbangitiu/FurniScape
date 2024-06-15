@@ -40,7 +40,7 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
             {productsDetailList.map((productDetail, index) => (
                 <Badge.Ribbon
                     text={productDetail.status}
-                    color={productDetail.status !== 'New' ? 'red' : 'green'}
+                    color={productDetail.status !== 'new' ? 'red' : 'green'}
                     style={{ fontSize: '15px' }}
                 >
                     <Card

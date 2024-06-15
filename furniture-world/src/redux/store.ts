@@ -4,6 +4,7 @@ import { navbarPathSlice } from './navbar';
 import { cartSlice } from './userApi/cart/cartSlice';
 import { productsSlice } from './products/productsSlice';
 import { orderSlice } from './order/orderSlice';
+import { userSlice } from './user/userSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         navbarPath: navbarPathSlice.reducer,
         products: productsSlice.reducer,
         order: orderSlice.reducer,
+        user: userSlice.reducer,
     },
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });

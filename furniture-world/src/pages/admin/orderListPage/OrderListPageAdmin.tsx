@@ -1,4 +1,4 @@
-import { TableColumnsType, Table, Badge } from 'antd';
+import { TableColumnsType, Table, Badge, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Props } from 'react-infinite-scroll-component';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,18 @@ export const OrderListPageAdmin = () => {
     }, []);
     const expandedRowRender = (row: IOrdersDataAttributesAdmin) => {
         const columns: TableColumnsType<IProductOrder> = [
-            { title: 'Image', dataIndex: 'img', key: 'image', width: '30%' },
+            {
+                title: 'Image',
+                dataIndex: 'img',
+                key: 'image',
+                width: '30%',
+                render: (text, record) =>
+                    record.image_dir ? (
+                        <img src={record.image_dir} alt={record.product} style={{ width: '50px', height: '50px' }} />
+                    ) : (
+                        <Spin />
+                    ),
+            },
             { title: 'Product', dataIndex: 'product', key: 'product', width: '25%' },
             {
                 title: 'Category',

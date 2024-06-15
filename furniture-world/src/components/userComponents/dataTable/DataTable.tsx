@@ -26,12 +26,14 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
                     ) : (
                         <Spin />
                     ),
+                width: 200,
             },
-            { title: 'Product', dataIndex: 'product', key: 'product' },
+            { title: 'Product', dataIndex: 'product', key: 'product', width: 200 },
             {
                 title: 'Category',
                 dataIndex: 'category',
                 key: 'category',
+                width: 150,
                 filters: [
                     {
                         text: 'Dining Room',
@@ -56,40 +58,34 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
                 ],
                 onFilter: (value, record) => record.category.indexOf(value as string) === 0,
             },
-            { title: 'Quantity', dataIndex: 'quantity', key: 'quantity', sorter: (a, b) => a.quantity - b.quantity },
+            {
+                title: 'Quantity',
+                width: 150,
+                dataIndex: 'quantity',
+                key: 'quantity',
+                sorter: (a, b) => a.quantity - b.quantity,
+            },
             {
                 title: 'Unit Price',
                 dataIndex: 'unitPrice',
                 key: 'unitPrice',
+                width: 150,
+                render: (text) => `$${text}`,
                 sorter: (a, b) => a.unitPrice - b.unitPrice,
             },
         ];
 
         const data: IProductOrder[] = orderData[row.key].products;
-
         return <Table columns={columns} dataSource={data} pagination={false} />;
     };
 
     const columns: TableColumnsType<IOrderTableAttribute> = [
-        { title: 'Id', dataIndex: 'id', key: 'id' },
-        {
-            title: 'Date',
-            dataIndex: 'createdAt',
-            key: 'date',
-            sorter: (a, b) => {
-                const convertToDate = (y: string) => {
-                    const [time, date] = y.split(' - ');
-                    const [hour, minute] = time.split(':').map(Number);
-                    const [day, month, year] = date.split('/').map(Number);
-                    return new Date(year, month - 1, day, hour, minute).getTime();
-                };
+        { title: 'Id', dataIndex: 'id', key: 'id', width: 200 },
 
-                return convertToDate(a.createdAt) - convertToDate(b.createdAt);
-            },
-        },
         {
             title: 'Status',
             dataIndex: 'status',
+            width: 100,
             key: 'status',
             render: (record) => {
                 let statusText = '';
@@ -117,6 +113,7 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
             title: 'Total price',
             dataIndex: 'totalPrice',
             key: 'totalPrice',
+            width: 150,
             render: (text) => `$${text}`,
             sorter: (a, b) => Number(a.totalPrice.replace('$', '')) - Number(b.totalPrice.replace('$', '')),
         },
@@ -124,11 +121,28 @@ export const OrderDataTable = ({ orderData }: { orderData: IOrder[] }) => {
             title: 'Payment',
             dataIndex: 'payment',
             key: 'payment',
+            width: 150,
             filters: [
                 { text: 'cash', value: 'cash' },
                 { text: 'banking', value: 'banking' },
             ],
             onFilter: (value, record) => record.payment.indexOf(value as string) === 0,
+        },
+        {
+            title: 'Date',
+            dataIndex: 'createdAt',
+            width: 200,
+            key: 'date',
+            sorter: (a, b) => {
+                const convertToDate = (y: string) => {
+                    const [time, date] = y.split(' - ');
+                    const [hour, minute] = time.split(':').map(Number);
+                    const [day, month, year] = date.split('/').map(Number);
+                    return new Date(year, month - 1, day, hour, minute).getTime();
+                };
+
+                return convertToDate(a.createdAt) - convertToDate(b.createdAt);
+            },
         },
     ];
 

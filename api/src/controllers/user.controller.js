@@ -1,4 +1,4 @@
-const { User} = require("../models");
+const { User } = require("../models");
 const { getUserId } = require("../utils/verifyToken");
 const jwt = require("jsonwebtoken");
 
@@ -19,33 +19,39 @@ const updateUser = async (req, res, next) => {
   try {
     var id = req.user.id;
     const {
-      firstname,
-      surname,
+      // firstname,
+      // surname,
+      // phone,
+      // email,
+      // jobTitle,
+      // employer,
+      // citymunicipality,
+      // country,
+      fullname,
       phone,
       email,
-      jobTitle,
-      employer,
-      citymunicipality,
-      country,
+      address,
+      country
     } = req.body;
 
     const finduser = await User.findByPk(id);
     if (!finduser) return res.status(404).json({ msg: "User not found" });
 
-    var fullName = null;
-    if(surname && firstname){
-      fullName = firstname + " " + surname;
-    }
+    // var fullName = null;
+    // if (surname && firstname) {
+    //   fullName = firstname + " " + surname;
+    // }
 
     finduser.set({
-      fullname: fullName || finduser.fullname,
-      firstname: firstname || finduser.firstname,
-      surname: surname || finduser.surname,
+      fullname: fullname || finduser.fullname,
+      // firstname: firstname || finduser.firstname,
+      // surname: surname || finduser.surname,
       phone: phone || finduser.phone,
       email: email || finduser.email,
-      jobTitle: jobTitle || finduser.jobTitle,
-      employer: employer || finduser.employer,
-      citymunicipality: citymunicipality || finduser.citymunicipality,
+      address: address || finduser.address,
+      // jobTitle: jobTitle || finduser.jobTitle,
+      // employer: employer || finduser.employer,
+      // citymunicipality: citymunicipality || finduser.citymunicipality,
       country: country || finduser.country,
     });
     await finduser.save();
@@ -59,8 +65,17 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+const getAllUsers = (req, res, next) => {
+  User.findAll()
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((error) => {
+      next(error);
+    });
+}
 
 
-module.exports = { updateUser, getUser, };
+module.exports = { updateUser, getUser, getAllUsers };
 //fsmegasale15
 //sieutuyet20

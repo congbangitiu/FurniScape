@@ -7,6 +7,7 @@ import {
     Modal,
     Select,
     Space,
+    Spin,
     Table,
     TableColumnsType,
     Upload,
@@ -131,15 +132,17 @@ export const ProductPageAdmin = () => {
         }
     };
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, []);
-
     const columns: TableColumnsType<IProductsTableType> = [
         {
             title: 'Product Image',
             dataIndex: 'image_dir',
             key: 'image_dir',
+            render: (text, record) =>
+                record.image_dir ? (
+                    <img src={record.image_dir} alt={record.name} style={{ width: '50px', height: '50px' }} />
+                ) : (
+                    <Spin />
+                ),
             fixed: 'left',
             width: 150,
         },
@@ -254,7 +257,7 @@ export const ProductPageAdmin = () => {
             name: product.name,
             price: product.price,
             category: product.category,
-            image_dir: null,
+            image_dir: product.image_dir,
             description: product.description,
             discount: undefined,
             status: product.status,
@@ -263,6 +266,10 @@ export const ProductPageAdmin = () => {
             updatedAt: product.updatedAt,
         });
     });
+
+    useEffect(() => {
+        dispatch(fetchProducts());
+    }, []);
 
     return (
         <>
@@ -307,7 +314,7 @@ export const ProductPageAdmin = () => {
                 visible={isModalUpdateInfoVisible}
                 onCancel={handleCloseUpdateInfoModal}
                 footer={[
-                    <Button key="back" onClick={handleCloseUpdateImageModal}>
+                    <Button key="back" onClick={handleCloseUpdateInfoModal}>
                         Cancel
                     </Button>,
                     <Button key="save" type="primary" onClick={handleSave}>

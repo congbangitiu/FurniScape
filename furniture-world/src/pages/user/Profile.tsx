@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, useEffect } from 'react';
-import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme } from 'antd';
+import { Image, Button, Flex, Row, Col, Typography, Input, Table, theme, Form, Modal, Select, message } from 'antd';
 import type { ThHTMLAttributes, TdHTMLAttributes } from 'react';
 import type { TableColumnsType } from 'antd';
 import { customColors, navBarHeight } from '../../theme';
@@ -12,9 +12,10 @@ import { IAppDispatch, IRootState } from 'src/redux/store';
 import { IUserData } from 'src/redux/api/authSlice';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { getUserInfo } from 'src/redux/api/authApi';
+import { IUserUpdateInfo, getUserInfo, updateUserInfo } from 'src/redux/api/authApi';
 import { getUserOrders, getUserOrderDetails, IOrder } from 'src/redux/order/orderSlice';
 import { OrderDataTable } from 'src/components/userComponents/dataTable/DataTable';
+import { EditOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -26,6 +27,7 @@ export const ProfilePage = () => {
     const isAuthenticated = Cookies.get('accessToken');
     const dispatch = useDispatch<IAppDispatch>();
     const userOrders: IOrder[] | null = useSelector((state: IRootState) => state.order.orderList);
+    const [form] = Form.useForm();
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -38,66 +40,9 @@ export const ProfilePage = () => {
     // get all details of each order
     useEffect(() => {
         dispatch(getUserOrders());
-    }, [isChangeInfo]);
+        dispatch(getUserInfo());
+    }, []);
 
-    const dataSource = [
-        {
-            key: '1',
-            image: (
-                <Image
-                    preview={{ mask: null }}
-                    src={assets.image1}
-                    style={{ width: '80px', height: '80px', borderRadius: '10px' }}
-                />
-            ),
-            name: 'Product 1',
-            category: 'Category A',
-            quantity: 2,
-            price: '$50.00',
-        },
-        {
-            key: '2',
-            image: (
-                <Image
-                    preview={{ mask: null }}
-                    src={assets.image1}
-                    style={{ width: '80px', height: '80px', borderRadius: '10px' }}
-                />
-            ),
-            name: 'Product 2',
-            category: 'Category B',
-            quantity: 3,
-            price: '$70.00',
-        },
-        {
-            key: '3',
-            image: (
-                <Image
-                    preview={{ mask: null }}
-                    src={assets.image1}
-                    style={{ width: '80px', height: '80px', borderRadius: '10px' }}
-                />
-            ),
-            name: 'Product 3',
-            category: 'Category C',
-            quantity: 1,
-            price: '$40.00',
-        },
-        {
-            key: '4',
-            image: (
-                <Image
-                    preview={{ mask: null }}
-                    src={assets.image1}
-                    style={{ width: '80px', height: '80px', borderRadius: '10px' }}
-                />
-            ),
-            name: 'Product 4',
-            category: 'Category D',
-            quantity: 4,
-            price: '$90.00',
-        },
-    ];
 
     interface DataType {
         key: string;
@@ -107,38 +52,38 @@ export const ProfilePage = () => {
         price: string;
     }
 
-    const columns: TableColumnsType<DataType> = [
-        {
-            title: 'Image',
-            dataIndex: 'image',
-            key: 'image',
-            align: 'center',
-        },
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            align: 'center',
-        },
-        {
-            title: 'Category',
-            dataIndex: 'category',
-            key: 'category',
-            align: 'center',
-        },
-        {
-            title: 'Quantity',
-            dataIndex: 'quantity',
-            key: 'quantity',
-            align: 'center',
-        },
-        {
-            title: 'Price',
-            dataIndex: 'price',
-            key: 'price',
-            align: 'center',
-        },
-    ];
+    // Change information
+    const handleOpenChangeInfo = () => {
+        form.setFieldsValue(userData);
+        setIsChangeInfo(true);
+    };
+
+    const handleCloseChangeInfoModal = () => {
+        form.resetFields();
+        setIsChangeInfo(false);
+    };
+
+    const handleSave = async () => {
+        try {
+            if (userData !== null) {
+                // Logic to update product information (replace with actual implementation)
+                const values: any = await form.validateFields(); // Validate and get form values
+                const data: IUserUpdateInfo = {
+                    id: userData.id,
+                    fullname: userData.fullname,
+                    phone: userData.phone,
+                    email: userData.email,
+                    address: userData.address,
+                    country: userData.country,
+                };
+                dispatch(updateUserInfo(data));
+            }
+            message.success('Product information updated successfully');
+            setIsChangeInfo(false);
+        } catch (error) {
+            console.error('Validation error:', error);
+        }
+    };
 
     return (
         <Flex
@@ -174,7 +119,7 @@ export const ProfilePage = () => {
                     style={{
                         fontWeight: '600',
                     }}
-                    onClick={() => setIsChangeInfo(true)}
+                    onClick={handleOpenChangeInfo}
                 >
                     Change Information
                 </Button>
@@ -194,7 +139,7 @@ export const ProfilePage = () => {
                 <OrderDataTable orderData={userOrders || []} />
             </Flex>
 
-            {isChangeInfo && (
+            {/* {isChangeInfo && (
                 <Flex
                     style={{
                         position: 'fixed',
@@ -244,7 +189,44 @@ export const ProfilePage = () => {
                         `}
                     </style>
                 </Flex>
-            )}
+)} */}
+
+            <Modal
+                title="Change Information"
+                visible={isChangeInfo}
+                onCancel={handleCloseChangeInfoModal}
+                footer={[
+                    <Button key="back" onClick={handleCloseChangeInfoModal}>
+                        Cancel
+                    </Button>,
+                    <Button key="save" type="primary" onClick={handleSave}>
+                        Save
+                    </Button>,
+                ]}
+            >
+                {userData && (
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        // onFinish={(values) => handleSave({ ...currentProductData, ...values })}
+                        onFinish={handleSave}
+                    >
+                        <Form.Item label="Full Name" name="fullname">
+                            <Input suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Phone" name="phone">
+                            <Input type="number" suffix={<EditOutlined />} />
+                        </Form.Item>
+
+                        <Form.Item label="Address" name="address">
+                            <Input suffix={<EditOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="Country" name="country">
+                            <Input suffix={<EditOutlined />} />
+                        </Form.Item>
+                    </Form>
+                )}
+            </Modal>
         </Flex>
     );
 };

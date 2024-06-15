@@ -6,7 +6,7 @@ import { IRootState } from '../store';
 import Cookies from 'js-cookie';
 import { IUserData } from './authSlice';
 import { signInAPI, signUpAPI } from 'src/constant/api/authentication';
-import { getUserInfoAPI } from 'src/constant/api/userAPI';
+import { getUserInfoAPI, updateUserInfoAPI } from 'src/constant/api/userAPI';
 
 interface IUserDataSignIn {
     validUser: IUserData;
@@ -20,9 +20,11 @@ interface IUserDataSignUp {
     role: string;
 }
 
-export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: string, { rejectWithValue }) => {
+export interface IUserUpdateInfo extends Omit<IUserData, 'password'> {}
+
+export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (_, { rejectWithValue }) => {
     try {
-        const token = Cookies.get('accessToken')
+        const token = Cookies.get('accessToken');
         const response = await getUserInfoAPI(token);
 
         return response.data;
@@ -30,6 +32,19 @@ export const getUserInfo = createAsyncThunk('auth/getUserInfo', async (token: st
         return rejectWithValue(err.message);
     }
 });
+
+export const updateUserInfo = createAsyncThunk(
+    'auth/updateUserInfo',
+    async (userUpdateInfo: IUserUpdateInfo, { rejectWithValue }) => {
+        try {
+            const token = Cookies.get('accessToken');
+            const response = await updateUserInfoAPI(token, userUpdateInfo);
+            return response;
+        } catch (err) {
+            return rejectWithValue(err);
+        }
+    },
+);
 
 export const userSignIn = createAsyncThunk('auth/signin', async (userData: IUserData, { rejectWithValue }) => {
     try {
