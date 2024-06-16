@@ -342,7 +342,7 @@ Sample of the program screenshots that demo the project's current build:
 - **Product management page**
 
 <p align="center">
-<img src="images/furniScreenshots/admin/productPage/products1.png" width="500" alt="Product management page">
+<img src="images/furniScreenshots/admin/productsPage/products1.png" width="500" alt="Product management page">
 </p>
 
 - **Order management page**
@@ -405,13 +405,14 @@ goals:
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/congbangitiu/FurniScape.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
 
 [contributors-url]: https://github.com/congbangitiu/FurniScape/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/congbangitiu/FurniScape.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
 
-[forks-url]: https://github.com/congbangitiu/FurniScape/network/members
+[forks-url]: https://github.com/congbangitiu/FurniScape/forks
 
-[issues-shield]: https://img.shields.io/github/issues/congbangiti
+[issues-shield]: https://img.shields.io/github/issues/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
 
+[issues-url]: https://github.com/congbangitiu/FurniScape/issues
