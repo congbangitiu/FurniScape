@@ -286,10 +286,10 @@ Sample of the program screenshots that demo the project's current build:
 - **Home page**
 
 <p align="center">
-<img src="images/furniScreenshots/user/homePage/home1.png" width="500" alt="Home page">
-<img src="images/furniScreenshots/user/homePage/home2.png" width="500" alt="Home page">
-<img src="images/furniScreenshots/user/homePage/home3.png" width="500" alt="Home page">
-<img src="images/furniScreenshots/user/homePage/home4.png" width="500" alt="Home page">
+<img src="images/furniScreenshots/user/homepage/home1.png" width="500" alt="Home page">
+<img src="images/furniScreenshots/user/homepage/home2.png" width="500" alt="Home page">
+<img src="images/furniScreenshots/user/homepage/home3.png" width="500" alt="Home page">
+<img src="images/furniScreenshots/user/homepage/home4.png" width="500" alt="Home page">
 </p>
 
 - **About page**
