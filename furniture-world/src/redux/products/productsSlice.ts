@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { backendURL } from 'src/constant/api/backendURL';
 import { IRootState } from '../store';
 import {
+    addNewProductAPI,
     getAllProductsAPI,
     getProductImageAPI,
     updateProductAPI,
@@ -36,6 +37,14 @@ export interface IUpdateProduct {
     status: string;
     quantity: number;
     updatedAt?: string;
+}
+
+export interface IAddNewProduct {
+    name: string;
+    category: string;
+    price: number;
+    quantity: number;
+    description: string;
 }
 
 export interface IProductImage {
@@ -78,19 +87,18 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
                 // if (productImage !== null) productImageUrl = URL.createObjectURL(productImage.data);
 
                 let productImageUrl;
+                // getProductImage and handle case image null
                 try {
                     const productImage: any = await getProductImageAPI(product.id);
 
                     if (productImage.status === 200) {
                         productImageUrl = URL.createObjectURL(productImage.data);
-                        // Tiếp tục xử lý với productImageUrl
                     } else {
                         throw new Error('Failed to fetch image');
                     }
                 } catch (error) {
                     console.error('Error fetching product image:', error);
                     productImageUrl = null;
-                    // Xử lý tiếp khi productImageUrl là null
                 }
 
                 products.push({
@@ -153,15 +161,19 @@ export const updateProduct = createAsyncThunk(
     },
 );
 
-// export const fetchProductsImages = createAsyncThunk('products/getAllProductsImages', async (_, { rejectWithValue }) => {
-//     try {
-//         const response = await getAllProductsImagesAPI();
+export const addNewProduct = createAsyncThunk(
+    'products/addNewProduct',
+    async (productData: IAddNewProduct, { rejectWithValue }) => {
+        try {
+            const adminToken = Cookies.get('accessToken');
+            const { data } = await addNewProductAPI(productData, adminToken);
 
-//         return response;
-//     } catch (err: any) {
-//         return rejectWithValue(err.message);
-//     }
-// });
+            return data;
+        } catch (err: any) {
+            return rejectWithValue(err);
+        }
+    },
+);
 
 const initialState: IProductInStock = {
     items: [],

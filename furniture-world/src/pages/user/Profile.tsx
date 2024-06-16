@@ -43,7 +43,6 @@ export const ProfilePage = () => {
         dispatch(getUserInfo());
     }, []);
 
-
     interface DataType {
         key: string;
         name: string;
@@ -70,11 +69,11 @@ export const ProfilePage = () => {
                 const values: any = await form.validateFields(); // Validate and get form values
                 const data: IUserUpdateInfo = {
                     id: userData.id,
-                    fullname: userData.fullname,
-                    phone: userData.phone,
-                    email: userData.email,
-                    address: userData.address,
-                    country: userData.country,
+                    fullname: values.fullname,
+                    phone: values.phone,
+                    email: values.email,
+                    address: values.address,
+                    country: values.country,
                 };
                 dispatch(updateUserInfo(data));
             }

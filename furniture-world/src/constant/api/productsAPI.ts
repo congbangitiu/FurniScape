@@ -1,4 +1,4 @@
-import { IProduct, IUpdateProduct } from 'src/redux/products/productsSlice';
+import { IAddNewProduct, IUpdateProduct } from 'src/redux/products/productsSlice';
 import { apiClient } from './backendURL';
 
 export const getAllProductsAPI = () => apiClient.get('product/getProducts');
@@ -33,5 +33,12 @@ export const updateProductAPI = (data: IUpdateProduct, token: any) =>
         },
         params: {
             id: data.id,
+        },
+    });
+
+export const addNewProductAPI = (data: IAddNewProduct, token: any) =>
+    apiClient.post('product/addProduct', data, {
+        headers: {
+            Authorization: token,
         },
     });

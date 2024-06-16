@@ -33,6 +33,9 @@ export const theme: ThemeConfig = {
             itemSize: 38,
             itemActiveBg: '#FFF3E3',
         },
+        Layout: {
+            colorBgTrigger: '#BC933A',
+        },
     },
 };
 

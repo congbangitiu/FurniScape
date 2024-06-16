@@ -11,6 +11,7 @@ import { addItem } from 'src/redux/userApi/cart/cartSlice';
 import { PlusOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { IProduct } from 'src/redux/products/productsSlice';
+import './style.scss';
 
 const { Text } = Typography;
 
@@ -65,7 +66,10 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
                         ]}
                     >
                         <div onClick={() => navigate(`/products/${productDetail.id}`)}>
-                            <Card.Meta title={productDetail.name} description={productDetail.description} />
+                            <Card.Meta
+                                title={productDetail.name}
+                                description={<span className="ellipsis">{productDetail.description}</span>}
+                            />
                             <Typography.Title level={5} style={{ margin: '8px 0 0 0' }}>
                                 ${productDetail.price}
                             </Typography.Title>
