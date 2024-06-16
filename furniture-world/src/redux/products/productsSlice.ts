@@ -70,8 +70,29 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
                 const createdAt = formattedTime(new Date(product.createdAt));
                 const updatedAt = formattedTime(new Date(product.updatedAt));
 
-                const productImage: any = await getProductImageAPI(product.id);
-                const productImageUrl = URL.createObjectURL(productImage.data);
+                // const productImage: any = (await getProductImageAPI(product.id)) ;
+                // const productImageUrl = URL.createObjectURL(productImage.data);
+                // else productImageUrl = null;
+                // console.log(productImage);
+                // let productImageUrl = null;
+                // if (productImage !== null) productImageUrl = URL.createObjectURL(productImage.data);
+
+                let productImageUrl;
+                try {
+                    const productImage: any = await getProductImageAPI(product.id);
+
+                    if (productImage.status === 200) {
+                        productImageUrl = URL.createObjectURL(productImage.data);
+                        // Tiếp tục xử lý với productImageUrl
+                    } else {
+                        throw new Error('Failed to fetch image');
+                    }
+                } catch (error) {
+                    console.error('Error fetching product image:', error);
+                    productImageUrl = null;
+                    // Xử lý tiếp khi productImageUrl là null
+                }
+
                 products.push({
                     id: product.id,
                     name: product.name,

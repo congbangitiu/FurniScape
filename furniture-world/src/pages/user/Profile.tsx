@@ -78,7 +78,7 @@ export const ProfilePage = () => {
                 };
                 dispatch(updateUserInfo(data));
             }
-            message.success('Product information updated successfully');
+            message.success('User information updated successfully');
             setIsChangeInfo(false);
         } catch (error) {
             console.error('Validation error:', error);

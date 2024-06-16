@@ -103,8 +103,8 @@ export const ProductDetailsPage = () => {
                     boxSizing: 'border-box',
                 }}
             >
-                <Row style={{ gap: '20px', width: '50%' }}>
-                    <Flex style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Row style={{ gap: '20px', width: '50%', display:'flex', justifyContent: 'center' }}>
+                    {/* <Flex style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Row
                             style={{
                                 width: '80px',
@@ -153,7 +153,7 @@ export const ProductDetailsPage = () => {
                         >
                             <Image preview={false} src={assets.asgaardSofa5} />
                         </Row>
-                    </Flex>
+                    </Flex> */}
                     <Image preview={{ mask: null }} src={productDetail?.image_dir} />
                 </Row>
                 <Flex style={{ flexDirection: 'column', width: '50%' }}>

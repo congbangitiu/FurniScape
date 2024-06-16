@@ -46,7 +46,7 @@ export const Products: React.FC<IProductList> = ({ productsDetailList }) => {
                     <Card
                         hoverable
                         style={{ width: 300 }}
-                        cover={<Image alt="img" src={productDetail.image_dir} />}
+                        cover={<Image alt="img" width={300} height={300} src={productDetail.image_dir} />}
                         actions={[
                             <Tooltip placement="bottom" title="Share">
                                 <ShareAltOutlined
