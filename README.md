@@ -77,13 +77,13 @@ To be short, the project aims achieve these goals:
 
 - **Backend Development:** Utilize Node.js to create a secure and scalable server-side infrastructure, managing user authentication, product data, and transactions.
 
-- **Frontend Development:** Implement a dynamic and responsive user interface using React.js, with Redu✔ for efficient state management and A✔ios for seamless data fetching.
+- **Frontend Development:** Implement a dynamic and responsive user interface using React.js, with Redux for efficient state management and Axios for seamless data fetching.
 
 - **Architecture:** Adhere to the MVVM (Model-View-ViewModel) architectural pattern to separate the development of the graphical user interface from the business logic, enhancing code maintainability and scalability.
 
 - **Database Management:** Ensure data integrity and security with a robust database solution, efficiently handling large volumes of product and user information.
 
-- **API Integration:** Develop and integrate RESTful APIs to facilitate communication between the frontend and backend, ensuring a smooth and responsive user e✔perience.
+- **API Integration:** Develop and integrate RESTful APIs to facilitate communication between the frontend and backend, ensuring a smooth and responsive user experience.
 
 <!-- REASON -->
 
@@ -92,7 +92,7 @@ To be short, the project aims achieve these goals:
 ## 1. Motivation
 
 The FurniScape project was conceived to address the growing need for a streamlined digital platform that simplifies and 
-enhances the furniture trading e✔perience. By leveraging the latest web technologies, the team aims to empower both buyers and sellers with convenient search tools, seamless booking capabilities, and secure transaction processes. The ultimate goal is to create a one-stop destination that modernizes the furniture marketplace, driving greater accessibility and economic opportunities for all participants in the industry.
+enhances the furniture trading experience. By leveraging the latest web technologies, the team aims to empower both buyers and sellers with convenient search tools, seamless booking capabilities, and secure transaction processes. The ultimate goal is to create a one-stop destination that modernizes the furniture marketplace, driving greater accessibility and economic opportunities for all participants in the industry.
 
 ## 2. Idea
 
@@ -115,9 +115,9 @@ and known issues).
 
 # 🛠 TECHNOLOGY
 
-* **Backend:** Node.js, E✔press.js
+* **Backend:** Node.js, Express.js
 
-* **Frontend:** React.js, Redu✔, A✔ios
+* **Frontend:** React.js, Redux, Axios
 
 * **Database:** MySQL
 
@@ -160,13 +160,13 @@ and known issues).
 
 - **Component:** Create components for various parts of the application, such as product, listings, dashboard...
 
-- **User Interface:** Design the layout and appearance of the application using JS✔ and CSS, ensuring a responsive and user-friendly interface.
+- **User Interface:** Design the layout and appearance of the application using Javascript and CSS, ensuring a responsive and user-friendly interface.
 
-**ViewModel(Redu✔ & A✔ios):** The ViewModel acts as an intermediary between the View and the Model. It provides data from the Model to the View and processes user interactions before sending them to the Model.
+**ViewModel(Redux & Axios):** The ViewModel acts as an intermediary between the View and the Model. It provides data from the Model to the View and processes user interactions before sending them to the Model.
 
-- **State Management with Redu✔:** Define actions, handle state changes and provide a way for components to access specific pieces of the state.
+- **State Management with Redux:** Define actions, handle state changes and provide a way for components to access specific pieces of the state.
 
-- **Data Fetching with A✔ios:** Use A✔ios to make HTTP requests to Backend, retrieving data and dispatch action based on the results of these API calls to update the state.
+- **Data Fetching with Axios:** Use Axios to make HTTP requests to Backend, retrieving data and dispatch action based on the results of these API calls to update the state.
 
 ## 3. Integrating MVVM pattern in FurniScape
 
@@ -176,7 +176,7 @@ and known issues).
 
 * The frontend (React.js) manages the user interface (View).
 
-* Redu✔ and A✔ios bridge the gap between the two, handling state management and data fetching (ViewModel).
+* Redux and Axios bridge the gap between the two, handling state management and data fetching (ViewModel).
 
 **Maintainability:**
 
@@ -225,7 +225,7 @@ and known issues).
 <img src="images/Rating.png" alt="">
 </div>
 
-**User Registration:** This diagram e✔plains the user registration process, highlighting the steps for entering user information, checking username availability, and validating the form.
+**User Registration:** This diagram explains the user registration process, highlighting the steps for entering user information, checking username availability, and validating the form.
 <div align="center">
 <img src="images/Register.png" alt="">
 </div>
@@ -396,7 +396,7 @@ You can also reach out to other team members:
 
 # 🙏 ACKNOWLEDGEMENTS
 
-We want to e✔press our sincerest thanks to our lecturer and the people who have helped us to achieve this project's
+We want to express our sincerest thanks to our lecturer and the people who have helped us to achieve this project's
 goals:
 
 - []()    Assoc. Prof. Nguyen Van Sinh
