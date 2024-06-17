@@ -85,20 +85,28 @@ export const ProductsTable = ({ productsList }: IProductsTablePropsType) => {
     const handleCustomUpload = (file: File | Blob | string) => {
         // Simulate upload (replace with actual upload logic)
         if (file instanceof File) {
-            setTimeout(() => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    setImageUrl(reader.result as string);
-                };
-                reader.readAsDataURL(file);
-            }, 1000); // Simulate upload delay
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImageUrl(reader.result as string);
+            };
+            reader.readAsDataURL(file);
         }
     };
+
+    // const handleSaveButtonClick = () => {
+    //     if (uploadImage !== undefined && currentId !== null) {
+    //         dispatch(updateProductImage({ image_dir: uploadImage, id: currentId }));
+    //     }
+    //     setImageUrl(undefined);
+    //     handleCloseUpdateImageModal();
+    // };
 
     const handleSaveButtonClick = () => {
         if (uploadImage !== undefined && currentId !== null) {
             dispatch(updateProductImage({ image_dir: uploadImage, id: currentId }));
         }
+
+        message.success('Product Image updated successfully');
         setImageUrl(undefined);
         handleCloseUpdateImageModal();
     };
@@ -154,7 +162,7 @@ export const ProductsTable = ({ productsList }: IProductsTablePropsType) => {
         clearFilters();
         setSearchText('');
         setSearchedColumn('');
-        confirm()
+        confirm();
     };
 
     const getColumnSearchProps = (dataIndex: DataIndex): TableColumnType<IProductsTableType> => ({
@@ -241,8 +249,14 @@ export const ProductsTable = ({ productsList }: IProductsTablePropsType) => {
             key: 'image_dir',
             render: (text, record) =>
                 record.image_dir ? (
-                    <img src={record.image_dir} alt={record.name} style={{ width: '50px', height: '50px' }} />
+                    <img
+                        src={record.image_dir}
+                        key={record.image_dir}
+                        alt={record.name}
+                        style={{ width: '50px', height: '50px' }}
+                    />
                 ) : (
+                    // <a>{record.image_dir}</a>
                     <Spin />
                 ),
             fixed: 'left',

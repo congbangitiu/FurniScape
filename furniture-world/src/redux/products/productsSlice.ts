@@ -48,7 +48,7 @@ export interface IAddNewProduct {
 }
 
 export interface IProductImage {
-    image_dir: File;
+    image_dir: any;
     id: string;
 }
 
@@ -88,6 +88,7 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
 
                 let productImageUrl;
                 // getProductImage and handle case image null
+                // if (product.image_dir === undefined) {
                 try {
                     const productImage: any = await getProductImageAPI(product.id);
 
@@ -100,6 +101,7 @@ export const fetchProducts = createAsyncThunk<IProduct[], void>(
                     console.error('Error fetching product image:', error);
                     productImageUrl = null;
                 }
+                // } else productImageUrl = product.imageUrl;
 
                 products.push({
                     id: product.id,
@@ -131,7 +133,12 @@ export const updateProductImage = createAsyncThunk(
             const token = Cookies.get('accessToken');
             const response = await updateProductImageAPI(token, image_dir, id);
 
-            return;
+            // const productImage: any = await getProductImageAPI(id);
+            // const productImageUrl = URL.createObjectURL(productImage.data);
+            // const imageData: IProductImage = { image_dir: productImageUrl, id: id };
+            // console.log(imageData);
+            // return imageData;
+            return ;
         } catch (err: any) {
             return rejectWithValue(err.message);
         }
@@ -201,8 +208,13 @@ export const productsSlice = createSlice({
             .addCase(updateProductImage.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(updateProductImage.fulfilled, (state) => {
+            .addCase(updateProductImage.fulfilled, (state, { payload }) => {
                 state.status = 'succeed';
+                // const temp = [...state.items];
+                // temp.forEach((item) => {
+                //     if (item.id === payload.id) item.image_dir = payload.image_dir;
+                // });
+                // state.items = temp;
             })
             .addCase(updateProductImage.rejected, (state, { payload }) => {
                 state.status = 'failed';

@@ -11,8 +11,11 @@ function App() {
     return (
         <Routes>
             <Route path="/*" element={<UserRoutes />} />
-            {/* <Route path="/admin/*" element={<AdminRoutes />} /> */}
-            <Route path="/admin/*" element={role === 'admin' ? <AdminRoutes /> : <Navigate to="/" />} />
+            <Route path="/admin/*" element={<AdminRoutes />} />
+            {/* <Route
+                path="/admin/*"
+                element={role === 'admin' ? <AdminRoutes /> : <Navigate to="/" />}
+            /> */}
         </Routes>
     );
 }
