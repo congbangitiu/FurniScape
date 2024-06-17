@@ -38,7 +38,7 @@
   - [🔍 Feature Analysis](#1-feature-analysis)
   - [🏗 MVVM Modern Architectural Pattern](#2-mvvm-modern-architectural-pattern)
   - [🔗 Integrating MVVM Pattern in FurniScape](#3-integrating-mvvm-pattern-in-furniscape)
-- [📊 DIAGRAMS](#-diagrams)
+- [📊 DIAGRAM](#-diagram)
   - [🔄 Sequence Diagrams](#1-sequence-diagrams)
   - [📐 Class Diagram](#2-class-diagram)
   - [🔧 User Interaction Diagrams](#3-user-interaction-diagrams)
@@ -49,7 +49,7 @@
   - [⚙️ Admin Mode](#2-admin)
 - [🤝 CONTRIBUTING](#-contributing)
 - [📄 LICENSE](#-license)
-- [📧 Contact](#-contact)
+- [📧 CONTACT](#-contact)
 - [🙏 ACKNOWLEDGEMENTS](#-acknowledgements)
 
 <!-- About -->
@@ -400,7 +400,7 @@ We want to express our sincerest thanks to our lecturer and the people who have 
 goals:
 
 - []()    Assoc. Prof. Nguyen Van Sinh
-- []()    MSc. Nghia
+- []()    MSc. Nguyen Trung Nghia
 - []()    The README.md template from **[othneildrew](https://github.com/othneildrew/Best-README-Template)**
 
 <!-- MARKDOWN LINKS & IMAGES -->
