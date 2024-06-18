@@ -424,15 +424,3 @@ goals:
 - []() MSc. Nguyen Trung Nghia
 - []() The README.md template from **[othneildrew](https://github.com/othneildrew/Best-README-Template)**
 
-<!-- MARKDOWN LINKS & IMAGES -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
-[contributors-url]: https://github.com/congbangitiu/FurniScape/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
-[forks-url]: https://github.com/congbangitiu/FurniScape/forks
-[issues-shield]: https://img.shields.io/github/issues/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
-<<<<<<< HEAD
-=======
-
->>>>>>> 9017349c30c609f7582865d79d03da52ca90b0a0
-[issues-url]: https://github.com/congbangitiu/FurniScape/issues
