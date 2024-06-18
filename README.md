@@ -1,13 +1,14 @@
 <div id="top" align="center">
 
-<img src="images/Thumbnail.png" alt="Banner">
+<img src="./images/Thumbnail.png" alt="Banner">
 
 </div>
 <!-- PROJECT LOGO -->
 <div align="center">
 <h1 align="center">FurniScape</h1>
+  <img src="./images/Logo.png" alt="Banner">
   <h3 align="center">
-    Mental healthcare services. For PDM course at International University - VNU
+    World of Furniture<br /><br /> Web Application Development <br />International University - VNU
     <br />
     <br />
     <a href="https://github.com/congbangitiu/FurniScape">Report Bug</a>
@@ -25,32 +26,32 @@
 
 # Table of Contents
 
-- [📚 ABOUT](#-about)
+- [📚 About](#about)
   - [👥 The Team Behind It](#1-the-team-behind-it)
   - [📈 The Project We Are Working On](#2-the-project-we-are-working-on)
   - [🎯 Goal](#3-goal)
-- [🚀 REASON](#-reason)
+- [🚀 Reason](#reason)
   - [💡 Motivation](#1-motivation)
   - [💭 Idea](#2-idea)
   - [🛤 Roadmap](#3-roadmap)
-- [🛠 TECHNOLOGY](#-technology)
-- [🧩 METHODOLOGY](#-methodology)
+- [🛠 Technologies Used](#technologies)
+- [🧩 Methodology](#methodology)
   - [🔍 Feature Analysis](#1-feature-analysis)
   - [🏗 MVVM Modern Architectural Pattern](#2-mvvm-modern-architectural-pattern)
   - [🔗 Integrating MVVM Pattern in FurniScape](#3-integrating-mvvm-pattern-in-furniscape)
-- [📊 DIAGRAM](#-diagram)
+- [📊 Diagrams](#diagrams)
   - [🔄 Sequence Diagrams](#1-sequence-diagrams)
   - [📐 Class Diagram](#2-class-diagram)
   - [🔧 User Interaction Diagrams](#3-user-interaction-diagrams)
   - [📜 Use Case Diagram](#4-use-case-diagram)
-- [🔧 INSTALLATION](#-installation)
-- [📸 DEMO - RESULT](#-demo---result)
+- [🔧 Installation](#installation)
+- [📸 Demo - Result](#demo---result)
   - [🔄 User Mode](#1-user)
-  - [⚙️ Admin Mode](#2-admin)
-- [🤝 CONTRIBUTING](#-contributing)
-- [📄 LICENSE](#-license)
-- [📧 CONTACT](#-contact)
-- [🙏 ACKNOWLEDGEMENTS](#-acknowledgements)
+  - [📐 Admin Mode](#2-admin)
+- [🤝 Contributing](#contributing)
+- [📄 License](#license)
+- [📧 Contact](#contact)
+- [🙏 Acknowledgements](#acknowledgements)
 
 <!-- About -->
 
@@ -58,18 +59,18 @@
 
 ## 1. The team behind it
 
-| No. |       Full Name       | Student's ID |              Email               |                      Github account                      |                      Roles                       | Contribution |
-|:---:|:---------------------:|:------------:|:--------------------------------:|:--------------------------------------------------------:|:------------------------------------------------:|:------------:|
-|  1  |  Pham Gia Bao  | ITITIU20166  | ITITIU20166@student.hcmiu.edu.vn |        [giabao18](https://github.com/giabao18)         | **TEAM LEADER** Back-end, Database Developer |     25%      |
-|  2  |   Dao Minh Huy   | ITCSIU21132  | ITCSIU21132@student.hcmiu.edu.vn |       [meowie2k3](https://github.com/meowie2k3)        |        Back-end, Database Developer         |     25%      |
-|  3  | Nguyen Luan Cong Bang | ITITIU20163  | ITITIU20163@student.hcmiu.edu.vn |     [congbangitiu](https://github.com/congbangitiu)      |               Frond-end Developer                |     25%      |
-|  4  |     Pham Minh Vu      | ITITIU20354  | ITITIU20354@student.hcmiu.edu.vn |          [PMinhVu](https://github.com/PMinhVu)           |               Frond-end Developer                |     25%      |
+| No. |       Full Name       | Student's ID |              Email               |                 Github account                  |                 Roles                  | Contribution |
+| :-: | :-------------------: | :----------: | :------------------------------: | :---------------------------------------------: | :------------------------------------: | :----------: |
+|  1  |     Pham Gia Bao      | ITITIU20166  | ITITIU20166@student.hcmiu.edu.vn |     [giabao18](https://github.com/giabao18)     | **PROJECT MANAGER** Back-end Developer |     25%      |
+|  2  |     Dao Minh Huy      | ITCSIU21132  | ITCSIU21132@student.hcmiu.edu.vn |    [meowie2k3](https://github.com/meowie2k3)    |           Back-end Developer           |     25%      |
+|  3  | Nguyen Luan Cong Bang | ITITIU20163  | ITITIU20163@student.hcmiu.edu.vn | [congbangitiu](https://github.com/congbangitiu) |          Frond-end Developer           |     25%      |
+|  4  |     Pham Minh Vu      | ITITIU20354  | ITITIU20354@student.hcmiu.edu.vn |      [PMinhVu](https://github.com/PMinhVu)      |          Frond-end Developer           |     25%      |
 
 ## 2. The project we are working on
 
 The furniture trading platform **FurniScape** provides a comprehensive digital marketplace for individuals to buy and sell a wide range of furniture items. It includes various services such as product search, product listings, and online transactions between buyers and sellers.
 
-The **FurniScape** project offered a valuable opportunity to leverage modern web development techniques and technologies to address real-world challenges in the furniture trade industry. The team has adopted a robust Model – View – ViewModel (MVVM)  architectural pattern, utilizing leading web frameworks to create a comprehensive and user-friendly e-commerce solution for the furniture marketplace. 
+The **FurniScape** project offered a valuable opportunity to leverage modern web development techniques and technologies to address real-world challenges in the furniture trade industry. The team has adopted a robust Model – View – ViewModel (MVVM) architectural pattern, utilizing leading web frameworks to create a comprehensive and user-friendly e-commerce solution for the furniture marketplace.
 
 ## 3. Goal
 
@@ -91,7 +92,7 @@ To be short, the project aims achieve these goals:
 
 ## 1. Motivation
 
-The FurniScape project was conceived to address the growing need for a streamlined digital platform that simplifies and 
+The FurniScape project was conceived to address the growing need for a streamlined digital platform that simplifies and
 enhances the furniture trading experience. By leveraging the latest web technologies, the team aims to empower both buyers and sellers with convenient search tools, seamless booking capabilities, and secure transaction processes. The ultimate goal is to create a one-stop destination that modernizes the furniture marketplace, driving greater accessibility and economic opportunities for all participants in the industry.
 
 ## 2. Idea
@@ -115,17 +116,17 @@ and known issues).
 
 # 🛠 TECHNOLOGY
 
-* **Backend:** Node.js, Express.js
+- **Backend:** NodeJS, ExpressJS
 
-* **Frontend:** React.js, Redux, Axios
+- **Frontend:** ReactJS, Redux, Axios
 
-* **Database:** MySQL
+- **Database:** MySQL
 
-* **Styling:** CSS, Antd
+- **Styling:** CSS, Antd
 
-* **Version Control:** Github
+- **Version Control:** Github
 
-* **Ide:** Vscode
+- **Ide:** Visual Studio Code
 
 <!-- METHODOLOGY -->
 
@@ -137,8 +138,8 @@ and known issues).
 
 - **Product Listing and Details:** Users can browse and view detailed information about products.
 
-- **Customer Dashboard**: When the customer logs in with the their account, this page will appear to show all the
-  operations related to them, including their information and histor order.
+- **Patient Dashboard**: When the user logs in with the patient's account, this page will appear to show all the
+  operations related to them, including their recent healing sessions.
 
 - **Add to Cart and Checkout:** Users can add products to their cart and complete the purchase process.
 
@@ -172,69 +173,90 @@ and known issues).
 
 **Separation of Concerns:**
 
-* The backend( Node.js) handles the data and business logic (Model).
+- The backend( Node.js) handles the data and business logic (Model).
 
-* The frontend (React.js) manages the user interface (View).
+- The frontend (React.js) manages the user interface (View).
 
-* Redux and Axios bridge the gap between the two, handling state management and data fetching (ViewModel).
+- Redux and Axios bridge the gap between the two, handling state management and data fetching (ViewModel).
 
 **Maintainability:**
 
-* By separating the application into distinct layers (Model, View, ViewModel), each part can be developed, tested, and maintained independently.
+- By separating the application into distinct layers (Model, View, ViewModel), each part can be developed, tested, and maintained independently.
 
-* This separation allows for easier updates and scalability.
+- This separation allows for easier updates and scalability.
 
 **Scalability:**
 
-* As the application grows, new features can be added to each layer without impacting the others.
+- As the application grows, new features can be added to each layer without impacting the others.
 
-* The MVVM pattern facilitates adding new components, state management logic, and data handling capabilities.
+- The MVVM pattern facilitates adding new components, state management logic, and data handling capabilities.
 
 <!-- Diagrams -->
 
 # 📊 DIAGRAM
 
-## 1. Sequence Diagrams:
+## 1. Use Case Diagram
+
+**Description:** This diagram shows the interactions between different user types (e.g., user and admin) and the system, depicting various use cases such as finding products, adding products, ordering products, and managing feedback.
+
+<div align="center">
+<img src="images/UseCase.png" alt="">
+</div>
+
+## 2. Entity-Relationship Diagram (ERD)
+
+**Description:** The ERD depicts the data relationships between entities in the system, such as users, products, orders, and payments, helping to visualize how data is interconnected.
+
+<div align="center">
+<img src="images/ERD.png" alt="">
+</div>
+
+## 3. Class Diagram
+
+**Description:** This class diagram for FurniScape includes key entities: User (manages user details and links to orders and comments), Product (contains product details and links to orders and comments), Cart (handles shopping cart functionalities), Order (details order information and links to payments), OrderDetail (provides order specifics), Comment (holds product comments), and Payment (manages payment details).
+
+<div align="center">
+<img src="images/ClassDiagram.png" alt="">
+</div>
+
+## 4. MVVM model
+
+**Description:** The MVVM model for FurniScape has three layers. The Model manages data and business logic (e.g., Order.js, Product.js). The ViewModel processes this data and communicates changes to the View. The View includes user interface components and pages like Home.tsx and Shop.tsx, displaying data and handling user interactions.
+
+<div align="center">
+<img src="images/MVVM.png" alt="">
+</div>
+
+## 4. Sequence Diagrams
+
+**User Registration:** This diagram explains the user registration process, highlighting the steps for entering user information, checking username availability, and validating the form.
+
+<div align="center">
+<img src="images/Register.png" alt="">
+</div>
+
+**Login Process:** This diagram outlines the user login process, showing the interactions between the user, the login form, the controller, and the database.
+
+<div align="center">
+<img src="images/Login.png" alt="">
+</div>
 
 **Add product to Cart:** The diagram illustrates the process of adding a product to the cart.
+
 <div align="center">
 <img src="images/AddProduct.png" alt="">
 </div>
 
 **Checkout Process:** The diagram details the checkout process. It includes steps for getting items the cart, creating an order and handling payment verification
+
 <div align="center">
 <img src="images/Checkout.png" alt="">
 </div>
 
-## 2. Class Diagram:
-
-**Description:** The ERD depicts the data relationships between entities in the system, such as users, products, orders, and payments, helping to visualize how data is interconnected.
-<div align="center">
-<img src="images/ClassDiagram.png" alt="">
-</div>
-
-## 3. User Interaction Diagrams:
-
-**Login Process:** This diagram outlines the user login process, showing the interactions between the user, the login form, the controller, and the database.
-<div align="center">
-<img src="images/Login.png" alt="">
-</div>
-
 **Product Rating:** TThis diagram describes the product rating process, including checks to ensure that the product has been paid for before allowing a rating to be submitted.
+
 <div align="center">
 <img src="images/Rating.png" alt="">
-</div>
-
-**User Registration:** This diagram explains the user registration process, highlighting the steps for entering user information, checking username availability, and validating the form.
-<div align="center">
-<img src="images/Register.png" alt="">
-</div>
-
-## 3. Use Case Diagram:
-
-**Description:** This diagram shows the interactions between different user types (e.g., user and admin) and the system, depicting various use cases such as finding products, adding products, ordering products, and managing feedback.
-<div align="center">
-<img src="images/UseCase.png" alt="">
 </div>
 
 <!-- INSTALLATION -->
@@ -247,7 +269,7 @@ and known issues).
    ```sh
    git clone https://github.com/congbangitiu/FurniScape.git
    ```
-2. Open in a Vscode IDE
+2. Open in Visual Studio Code
 3. Install backend dependencies:
    ```sh
    cd api
@@ -259,16 +281,16 @@ and known issues).
     npm install
    ```
 5. Run the frontend server:
-    ```sh
-    cd ../furniture-world
-    npm start / yarn start
+   ```sh
+   cd ../furniture-world
+   npm start / yarn start
    ```
 6. Run the backend server:
-    ```sh
-    cd ../api
-    npm start / yarn start
+
+   ```sh
+   cd ../api
+   npm start / yarn start
    ```
-<!-- DEMO RESULT -->
 
 # 📸 DEMO - RESULT
 
@@ -324,14 +346,13 @@ Sample of the program screenshots that demo the project's current build:
 <img src="images/furniScreenshots/user/cartPage/cart1.png" width="500" alt="Cart page">
 </p>
 
-
 - **Checkout page**
 
 <p align="center">
 <img src="images/furniScreenshots/user/checkoutPage/checkout1.png" width="500" alt="Checkout page">
 </p>
 
-## 2. Admin 
+## 2. Admin
 
 - **User management page**
 
@@ -380,17 +401,17 @@ This project is licensed under MIT License. See the [License](https://github.com
 
 For any inquiries of feedback, please contact:
 
-* Pham Gia Bao by **[Email HERE](mailto:ITITIU20166@student.hcmiu.edu.vn)**
+- Pham Gia Bao by **[Email HERE](mailto:ITITIU20166@student.hcmiu.edu.vn)**
 
-* Project Link: [https://github.com/congbangitiu/FurniScape](https://github.com/congbangitiu/FurniScape)
+- Project Link: [https://github.com/congbangitiu/FurniScape](https://github.com/congbangitiu/FurniScape)
 
 You can also reach out to other team members:
 
-* **[Dao Minh Huy](mailto:ITCSIU21132@student.hcmiu.edu.vn)**
+- **[Dao Minh Huy](mailto:ITCSIU21132@student.hcmiu.edu.vn)**
 
-* **[Nguyen Luan Cong Bang](mailto:ITITIU20163@student.hcmiu.edu.vn)**
+- **[Nguyen Luan Cong Bang](mailto:ITITIU20163@student.hcmiu.edu.vn)**
 
-* **[Pham Minh Vu](mailto:ITITIU20354@student.hcmiu.edu.vn)**
+- **[Pham Minh Vu](mailto:ITITIU20354@student.hcmiu.edu.vn)**
 
 <!-- ACKNOWLEDGMENTS -->
 
@@ -399,663 +420,19 @@ You can also reach out to other team members:
 We want to express our sincerest thanks to our lecturer and the people who have helped us to achieve this project's
 goals:
 
-- []()    Assoc. Prof. Nguyen Van Sinh
-- []()    MSc. Nguyen Trung Nghia
-- []()    The README.md template from **[othneildrew](https://github.com/othneildrew/Best-README-Template)**
+- []() Assoc. Prof. Nguyen Van Sinh
+- []() MSc. Nguyen Trung Nghia
+- []() The README.md template from **[othneildrew](https://github.com/othneildrew/Best-README-Template)**
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
-
 [contributors-url]: https://github.com/congbangitiu/FurniScape/graphs/contributors
-
 [forks-shield]: https://img.shields.io/github/forks/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
-
 [forks-url]: https://github.com/congbangitiu/FurniScape/forks
-
 [issues-shield]: https://img.shields.io/github/issues/itzmealvin/PDM_mindfulNESS_PC.svg?style=for-the-badge
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9017349c30c609f7582865d79d03da52ca90b0a0
 [issues-url]: https://github.com/congbangitiu/FurniScape/issues
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
