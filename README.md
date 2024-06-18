@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <div align="center">
 <h1 align="center">FurniScape</h1>
-  <img src="./images/Logo.png" alt="Banner">
+  <img src="./images/Logo.png" alt="Logo">
   <h3 align="center">
     World of Furniture<br /><br /> Web Application Development <br />International University - VNU
     <br />
